@@ -1,0 +1,54 @@
+.necro-bar{
+	background-image: url("../Content/CharSheetEndSplatter.png"), url("../Content/CharSheetBarEnd.png"), url("../Content/CharSheetbarMid.png");
+	background-repeat: no-repeat, no-repeat, repeat;
+	background-position: left, right, center;
+	min-height: 56px;
+	color: white;
+	padding-top: 10px;
+	padding-left: 16px;
+	margin-top: -12px;
+	margin-left: -28px;
+	font-weight: bold;
+	text-shadow: -1px 1px 0 #000,
+				  1px 1px 0 #000,
+				 1px -1px 0 #000,
+				-1px -1px 0 #000;
+}
+.necro-bar-flat{
+	background-image: url("../Content/CharSheetBarEnd.png"), url("../Content/CharSheetbarMid.png");
+	background-repeat: no-repeat, repeat;
+	background-position: right, center;
+	min-height: 56px;
+	color: white;
+	padding-top: 10px;
+	padding-left: 4px;
+	margin-top: -12px;
+	font-weight: bold;
+	text-shadow: -1px 1px 0 #000,
+				  1px 1px 0 #000,
+				 1px -1px 0 #000,
+				-1px -1px 0 #000;
+}
+.necro-box{
+	background-image: url("../Content/CharSheetEndSplatter.png");
+	background-repeat: no-repeat;
+	padding-top: 24px;
+	padding-left: 24px;
+	min-height: 56px;
+	background-origin: border-box;
+}
+.bg-black{
+	background-color: #121212;
+}
+.text-outline{
+	text-shadow: -1px 1px 0 #000,
+				  1px 1px 0 #000,
+				 1px -1px 0 #000,
+				-1px -1px 0 #000;
+}
+.necro-table-offset{
+	margin-top: -56px;
+}
+.necro-table-head{
+	height: 20px;
+}
