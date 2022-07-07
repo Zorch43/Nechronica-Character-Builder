@@ -52,3 +52,40 @@
 .necro-table-head{
 	height: 20px;
 }
+/*bootstrap overrides*/
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #ffffff;
+  background-color: #121212;
+  font-weight: bold;
+}
+.nav-tabs .nav-link {
+  margin-bottom: -1px;
+  border: 1px solid transparent;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  background-color: #202020;
+  color: #ffffff;
+}
+
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+  border-color: #e9ecef #e9ecef #dee2e6;
+  background-color: #121212;
+}
+
+.nav-tabs .nav-link.disabled {
+  color: #a0a0a0;
+  background-color: #404040;
+  border-color: transparent;
+}
+.form-inline label {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: flex-end;
+    margin-bottom: 0;
+	text-align: right;
+	width: 160px;
+  }

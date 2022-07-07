@@ -6,19 +6,219 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<!--bootstrap via CDN-->
+		
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+		
+		<!--bootstrap via file-->
+		<!--<link rel="stylesheet" href="bootstrap-4.6.1-dist/css/bootstrap.css">-->
 		<!--custom style and scripts-->
-		<link rel="stylesheet" href="style/nechronica-stylesheet.css">
-		<script src="Scripts/CharacterList.js"></script>
-		<script src="Scripts/cookieDataManager.js"></script>
+		<link rel="stylesheet" href="css/nechronica-stylesheet.css">
+		<script src="js/CharacterList.js"></script>
+		<script src="js/cookieDataManager.js"></script>
+		<script src="js/DataTemplates.js"></script>
+		<script src = "js/CharacterCreation.js"></script>
+		
+		
 	</head>
-	<body onload="loadCharacterList()">
+	<body onload="loadCharacterList(); createTemplates()">
+	
 		<div class="container" id="mainContainer" >
 		
 		</div>
+		
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+		  <li class="nav-item col-2">
+			<a class="nav-link active" data-toggle="tab" href="#name-age" id="name-age-tab">Name & Age</a>
+		  </li>
+		  <li class="nav-item col-2">
+			<a class="nav-link" data-toggle="tab" href="#memories" id="memories-tab">Memories</a>
+		  </li>
+		  <li class="nav-item col-2">
+			<a class="nav-link" data-toggle="tab" href="#class-skills" id="class-skills-tab">Classes & Skills</a>
+		  </li>
+		  <li class="nav-item col-2">
+			<a class="nav-link" data-toggle="tab" href="#parts" id="parts-tab">Parts</a>
+		  </li>
+		  <li class="nav-item col-2">
+			<a class="nav-link" data-toggle="tab" href="#treasure" id="treasure-tab">Treasure</a>
+		  </li>
+		  <li class="nav-item col-2">
+			<a class="nav-link creation-tab" data-toggle="tab" href="#deployment" id="deployment-tab">Deployment</a>
+		  </li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div class="tab-pane container active" id="name-age">
+				<div class="mt-3 p-3 border rounded">
+					<p class="pl-3 pr-3 pt-3">
+						Your name can be a nickname, a Japanese name, a 
+						foreign name, a number, or anything you like. 
+						Since you're all made from corpses, often from 
+						who knows where, it doesn't have to make sense. 
+						Names are often bestowed upon you by the 
+						Necromancers. Don't worry yourselves over them.
+					</p>
+					<div class="pl-3 pt-3 form-inline">
+						<label for="cc-name">Name:</label>
+						<input class="form-control mr-2 ml-2" id="cc-name">
+						<button type="button" class="btn btn-secondary" onclick ="randomName('cc-name')">Random</button>
+					</div>
+					<div class="pl-3 pt-3 form-inline">
+						<label for="cc-age">Age:</label>
+						<input type="number" class="form-control mr-2 ml-2" style="width:70px" id="cc-age">
+						<button type="button" class="btn btn-secondary" onclick="randomAge('cc-age')">Random</button>
+					</div>
+					<p class="p-3">
+						"Age" refers to the age you were when you died, 
+						and is usually between 8 and 17.
+					</p>
+					<div class="d-flex justify-content-between mt-3">
+						<button type="button" class="btn btn-danger col-2">Cancel</button>
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('memories-tab')">Next</button>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane container fade" id="memories">
+				<div class="mt-3 p-3 border rounded">
+					<p class="pl-3 pr-3 pt-3">
+						Though Dolls have lost most of their memories of 
+						their previous life, they have not lost them all.
+						Just a few memories of their previous life remain.
+						These meager scraps are thus known as "Fragments 
+						of Memory."
+					</p>
+					<p class="pl-3 pr-3">
+						Dolls possess but two of these "Fragments of 
+						Memory" when they are newly awakened.
+					</p>
+					<p class="pl-3 pr-3">
+						These are the foundation of your Doll. They are 
+						the patches that hold the heart of your Doll 
+						together.
+					</p>
+					<div class="pl-3 pr-3 pt-3 form-inline">
+						<label for="cc-memory-1">Memory Fragment 1</label>
+						<div class="border rounded col ml-2 mr-2" style="height:64px" id="cc-memory-1"></div>
+						<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick ="pickMemory('cc-memory-1')">Pick</button>
+						<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-1')">Random</button>
+					</div>
+					<div class="pl-3 pr-3 pt-3 form-inline">
+						<label for="cc-memory-2">Memory Fragment 2</label>
+						<div class="border rounded col ml-2 mr-2" style="height:64px" id="cc-memory-2"></div>
+						<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick ="pickMemory('cc-memory-2')">Pick</button>
+						<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-2')">Random</button>
+					</div>
+					<div class="pl-3 pr-3 pt-3 form-inline">
+						<label for="cc-premonition">Premonition</label>
+						<div class="border rounded col ml-2 mr-2" style="height:80px" id="cc-premonition">
+							
+						</div>
+						<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#premonition-picker" onclick ="pickPremonition('cc-premonition')">Pick</button>
+						<button type="button" class="btn btn-secondary" onclick ="randomPremonition('cc-premonition')">Random</button>
+					</div>
+					<p class="p-3">
+						As game sessions take place, the Dolls will
+						reacquire their lost memories. But they can carry
+						only a vague suspicion of what these memories
+						will reveal to them. These "Premonitions" serve
+						as a guide towards their former lives.
+					</p>
+					<div class="d-flex justify-content-between mt-3">
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('name-age-tab')">Back</button>
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('class-skills-tab')">Next</button>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane container fade" id="class-skills">
+				<div class="mt-3 p-3 border rounded">
+					
+					<div class="d-flex justify-content-between mt-3">
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('memories-tab')">Back</button>
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('parts-tab')">Next</button>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane container fade" id="parts">
+				<div class="mt-3 p-3 border rounded">
+					
+					<div class="d-flex justify-content-between mt-3">
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('class-skills-tab')">Back</button>
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('treasure-tab')">Next</button>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane container fade" id="treasure">
+				<div class="mt-3 p-3 border rounded">
+					
+					<div class="d-flex justify-content-between mt-3">
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('parts-tab')">Back</button>
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('deployment-tab')">Next</button>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane container fade" id="deployment">
+				<div class="mt-3 p-3 border rounded">
+					
+					<div class="d-flex justify-content-between mt-3">
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('treasure-tab')">Back</button>
+						<button type="button" class="btn btn-success col-2">Finish</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modals -->
+		<!-- Memory Fragment picker-->
+		<div class="modal" id="memory-picker">
+		  <div class="modal-dialog modal-xl">
+			<div class="modal-content">
+
+			  <!-- Modal Header -->
+			  <div class="modal-header">
+				<h4 class="modal-title">Fragments of Memory</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			  </div>
+
+			  <!-- Modal body -->
+			  <div class="modal-body" id="memory-list">
+				Modal body..
+			  </div>
+
+			  <!-- Modal footer -->
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			  </div>
+
+			</div>
+		  </div>
+		</div>
+		<!-- Premonition picker-->
+		<div class="modal" id="premonition-picker">
+		  <div class="modal-dialog modal-xl">
+			<div class="modal-content">
+
+			  <!-- Modal Header -->
+			  <div class="modal-header">
+				<h4 class="modal-title">Premonitions</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			  </div>
+
+			  <!-- Modal body -->
+			  <div class="modal-body" id="premonition-list">
+				Modal body..
+			  </div>
+
+			  <!-- Modal footer -->
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			  </div>
+
+			</div>
+		  </div>
+		</div>
 	</body>
-	
 </html>
