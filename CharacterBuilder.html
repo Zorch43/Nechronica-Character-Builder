@@ -65,12 +65,12 @@
 					</p>
 					<div class="pl-3 pt-3 form-inline">
 						<label for="cc-name">Name:</label>
-						<input class="form-control mr-2 ml-2" id="cc-name">
+						<input class="form-control mr-2 ml-2" id="cc-name" onchange="setName(cc-name')">
 						<button type="button" class="btn btn-secondary" onclick ="randomName('cc-name')">Random</button>
 					</div>
 					<div class="pl-3 pt-3 form-inline">
 						<label for="cc-age">Age:</label>
-						<input type="number" class="form-control mr-2 ml-2" style="width:70px" id="cc-age">
+						<input type="number" class="form-control mr-2 ml-2" style="width:70px" id="cc-age" onchange="setAge('cc-age')">
 						<button type="button" class="btn btn-secondary" onclick="randomAge('cc-age')">Random</button>
 					</div>
 					<p class="p-3">
@@ -103,22 +103,22 @@
 					</p>
 					<div class="pl-3 pr-3 pt-3 form-inline">
 						<label for="cc-memory-1">Memory Fragment 1</label>
-						<div class="border rounded col ml-2 mr-2" style="height:64px" id="cc-memory-1"></div>
-						<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick ="pickMemory('cc-memory-1')">Pick</button>
-						<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-1')">Random</button>
+						<div class="border rounded col ml-2 mr-2" style="height:80px" id="cc-memory-1"></div>
+						<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick ="pickMemory('cc-memory-1', '0')">Pick</button>
+						<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-1', '0')">Random</button>
 					</div>
 					<div class="pl-3 pr-3 pt-3 form-inline">
 						<label for="cc-memory-2">Memory Fragment 2</label>
-						<div class="border rounded col ml-2 mr-2" style="height:64px" id="cc-memory-2"></div>
-						<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick ="pickMemory('cc-memory-2')">Pick</button>
-						<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-2')">Random</button>
+						<div class="border rounded col ml-2 mr-2" style="height:80px" id="cc-memory-2"></div>
+						<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick ="pickMemory('cc-memory-2', '1')">Pick</button>
+						<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-2', '1')">Random</button>
 					</div>
 					<div class="pl-3 pr-3 pt-3 form-inline">
 						<label for="cc-premonition">Premonition</label>
 						<div class="border rounded col ml-2 mr-2" style="height:80px" id="cc-premonition">
 							
 						</div>
-						<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#premonition-picker" onclick ="pickPremonition('cc-premonition')">Pick</button>
+						<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#premonition-picker" onclick ="pickPremonition('premonition-picker', 'premonition-list', 'cc-premonition')">Pick</button>
 						<button type="button" class="btn btn-secondary" onclick ="randomPremonition('cc-premonition')">Random</button>
 					</div>
 					<p class="p-3">

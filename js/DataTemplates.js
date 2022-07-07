@@ -10,7 +10,7 @@ const deployments = ["Eden", "Elysium", "Limbo"];
 const fetterTargetGroups = ["Fetters", "Savant", "Neutral"];
 //filled by template functions
 const premonitions = [];
-const fragments = [];
+const memoryFragments = [];
 const dollPositions = [];
 const dollClasses = [];
 const dollSkills = [];
@@ -161,10 +161,10 @@ function DollPosition(id, name, flavorText, flavorImage){
 }
 
 //memory fragment constructor
-function MemoryFragment(id, name, content, flavorImage){
+function MemoryFragment(id, name, description, flavorImage){
 	this.id = id;//fragment id
 	this.name = name;//fragment name
-	this.content = content;//content of memory
+	this.description = description;//content of memory
 	this.flavorImage = flavorImage;
 }
 
@@ -205,6 +205,7 @@ function createTemplates(){
 	createClasses();
 	createSkills();
 	createPremonitions();
+	createMemoryFragments();
 }
 
 //position templates
@@ -1345,3 +1346,643 @@ function createPremonitions(){
 	"../Content/Premonitions/Happiness.png"));
 	
 }
+
+//fragments of memory
+function createMemoryFragments(){
+	memoryFragments.push(new MemoryFragment(0, "Blue Sky",
+	`The sky used to be blue. Even though the one you see now is stained the color
+of lead... you know it was once a pure, bright blue. It was something you took
+for granted. But you'll never be able to see that sky again.`,
+	"../Content/Memories/BlueSky.png"));
+	
+	memoryFragments.push(new MemoryFragment(1, "Mother\'s Hands",
+	`You have a memory of warm hands embracing you. They were your mother's.
+You don't remember her name or face, but you remember that hug. Beyond
+just that memory, you wish that someday, you could embrace your mother for
+real.`,
+	"../Content/Memories/MothersHands.png"));
+	
+	memoryFragments.push(new MemoryFragment(2, "Sweet Lips",
+	`You remember the touch of soft lips upon yours. You don't remember when it
+was, or whose lips they were, but you remember that kiss. Would the sisters by
+your side have lips that sweet?`,
+	"../Content/Memories/SweetLips.png"));
+	
+	memoryFragments.push(new MemoryFragment(3, "Hidden Room",
+	`You'd locked yourself inside a cramped room. Outside, someone was
+wandering around searching for you. They mustn't find you. They mustn't find
+you. But from the other side of the door, you heard them coming. And then...`,
+	"../Content/Memories/HiddenRoom.png"));
+	
+	memoryFragments.push(new MemoryFragment(4, "Bloodbath",
+	`A metallic scent tickled your nose as you sat alone in a pool of red blood. Body
+parts were lying around you. You didn't remember whose they were. Nor why
+you were alone in such a place. Could it be...`,
+	"../Content/Memories/Bloodbath.png"));
+	
+	memoryFragments.push(new MemoryFragment(5, "In the Rain",
+	`You were standing in the pouring rain. Except for the sound of raindrops, you
+don't remember anything around you. The rain was dark, but it did not burn
+you, simply soaked your body and left you shivering. Yet you miss it terribly.`,
+	"../Content/Memories/InTheRain.png"));
+	
+	memoryFragments.push(new MemoryFragment(6, "Loneliness",
+	`Everyone kept their distance from you, giggling maliciously. You don't
+remember what you'd done, why they were laughing at you... but you never
+want to see eyes like those again. You never want to be abandoned by the
+companions you have now.`,
+	"../Content/Memories/Loneliness.png"));
+	
+	memoryFragments.push(new MemoryFragment(7, "Smile",
+	`A smile from the heart. A smile of true happiness. You don't know whose smile
+it was... someone important to you, your family, maybe even yourself reflected
+in the mirror. Yet it keeps returning to your mind.`,
+	"../Content/Memories/Smile.png"));
+	
+	memoryFragments.push(new MemoryFragment(8, "Letter",
+	`You remember taking a letter out of the mailbox. It had something to do with
+what you've become now... but you don't remember what the letter said. It must
+have come from someone important to you. Or maybe...`,
+	"../Content/Memories/Letter.png"));
+	
+	memoryFragments.push(new MemoryFragment(9, "Silhouette",
+	`A dark shadow towered over you. It did terrible things to you. The memory
+makes you want to reach inside your head and tear it away. You despise that
+shadow. It was the one who brought you back from the dead... there's no doubt
+about it.`,
+	"../Content/Memories/Silhouette.png"));
+	
+	memoryFragments.push(new MemoryFragment(10, "Flower Garden",
+	`A flower garden in full bloom. Were you making a crown of flowers, or just
+singing while you strolled through? In that place, where the flowers stretched
+on forever, you're certain you were happy. Sometimes, you can't help but
+withdraw into daydreams of it.`,
+	"../Content/Memories/FlowerGarden.png"));
+	
+	memoryFragments.push(new MemoryFragment(11, "Father\'s Arms",
+	`A father's strong arms. The rough feeling of his beard against your face. You
+remember those arms holding your delicate body closely. The owner of those
+arms is surely gone, but you still carry those warm feelings for emotional
+support.`,
+	"../Content/Memories/FathersArms.png"));
+	
+	memoryFragments.push(new MemoryFragment(12, "Blossoming Love",
+	`Bittersweet memories of pure love. You're not sure who it was you loved, but
+that feeling certainly remains, waiting quietly within you. The thought of it still
+leaves your body shaking with pain.`,
+	"../Content/Memories/BlossomingLove.png"));
+	
+	memoryFragments.push(new MemoryFragment(13, "Curse",
+	`There was a person you could never forgive, so you performed a ceremony
+charged with your hate. Always, forever, as long as you still woke, you cursed
+their name. In turn, you cursed yourself just as completely - an eye for an eye.`,
+	"../Content/Memories/Curse.png"));
+	
+	memoryFragments.push(new MemoryFragment(14, "Song",
+	`You don't know where it came from, but you remember a single song perfectly.
+It's just a song you whistled or hummed to yourself, but it's very dear to you.
+Sometimes the lyrics you think you remember change, bit by bit.`,
+	"../Content/Memories/Song.png"));
+	
+	memoryFragments.push(new MemoryFragment(15, "Cake",
+	`You gorged yourself on sweet, sweet cake. Fluffy sponge cake, with melting
+cream and brightly-colored fruit. There's none of that left in this world, though.
+If you found some, could your tongue even taste it?`,
+	"../Content/Memories/Cake.png"));
+	
+	memoryFragments.push(new MemoryFragment(16, "Flames",
+	`Brightly blazing flames engulfed your surroundings. In that flickering wave of
+heat, you felt more intoxicated than frightened. You want to feel those flames,
+that intoxication, one more time. Unfortunately, this is a world where even
+flammable things are scarce...`,
+	"../Content/Memories/Flames.png"));
+	
+	memoryFragments.push(new MemoryFragment(17, "Cut",
+	`While doing housework, you cried and panicked at the smallest cut, every time
+you pricked your finger on a needle or a knife. To the you of today, who can
+even be torn to shreds, that sort of scratch means very little…`,
+	"../Content/Memories/Cut.png"));
+	
+	memoryFragments.push(new MemoryFragment(18, "White Room",
+	`A white room. Medication, needles, people clad all in white. Were those
+emaciated limbs really yours? You couldn't move them then, but now that
+you're dead…`,
+	"../Content/Memories/WhiteRoom.png"));
+	
+	memoryFragments.push(new MemoryFragment(19, "Black House",
+	`The eerie silhouette of a ruined black mansion sometimes comes to mind. You
+remember curiosity pushing you to enter the house, though you knew you
+shouldn't. But what happened after that... you can't recall.`,
+	"../Content/Memories/BlackHouse.png"));
+	
+	memoryFragments.push(new MemoryFragment(20, "Chains",
+	`Locked behind iron bars, chained to a hard bed. Every day was misery. You
+were a butterfly with your wings plucked off. You're still chained to somebody,
+even now that you're dead. Even if you seem to be free, you're a puppet. How
+long are you fated to dance on these strings?`,
+	"../Content/Memories/Chains.png"));
+	
+	memoryFragments.push(new MemoryFragment(21, "Starry Sky",
+	`You watched the moon and stars in the sky. Back then, you thought the night
+sky was beautiful – now it's just... darkness. The eyes of the dead see pain and
+sadness clearer than anything else.`,
+	"../Content/Memories/StarrySky.png"));
+	
+	memoryFragments.push(new MemoryFragment(22, "Girl",
+	`There was one other girl beside you. You've forgotten her name, her face, even
+how you knew her. But you could never forget her smile. You loved her. You
+loved the dear friend who showed you that smile.`,
+	"../Content/Memories/Girl.png"));
+	
+	memoryFragments.push(new MemoryFragment(23, "Treasure",
+	`There was one object you treasured more than anything. What exactly was
+that item? Could it be one of the treasures you carry now? You and it are surely
+bound together by fate.`,
+	"../Content/Memories/Treasure.png"));
+	
+	memoryFragments.push(new MemoryFragment(24, "Funeral Service",
+	`Who was it that died? Everybody is crying, mourning, inconsolable. What about
+you? The face in the memorial photograph that used to loom large in your
+memory has faded, but it was certainly a funeral for someone important to you.`,
+	"../Content/Memories/FuneralService.png"));
+	
+	memoryFragments.push(new MemoryFragment(25, "Funeral Service",
+	`Who was it that died? Everybody is crying, mourning, inconsolable. What about
+you? The face in the memorial photograph that used to loom large in your
+memory has faded, but it was certainly a funeral for someone important to you.`,
+	"../Content/Memories/FuneralService.png"));
+	
+	memoryFragments.push(new MemoryFragment(26, "Party",
+	`All your friends and family gathered for a wonderfully fun party. You're certain
+that was one of your happiest times. Recalling that happiness now only
+torments you.`,
+	"../Content/Memories/Party.png"));
+	
+	memoryFragments.push(new MemoryFragment(27, "Pet Dog",
+	`It wasn't a person, but was precious family to you all the same. You remember
+its barks, its breathing, the feeling of its tongue and fur, even its name. All of 
+those still remain, untouched, in your mind.`,
+	"../Content/Memories/PetDog.png"));
+	
+	memoryFragments.push(new MemoryFragment(28, "Wings",
+	`You were high, high in the sky, looking down on the world below you, though
+you can't remember the scenery too well. You were definitely flying through
+that sky. What's happened since then? Can you fly now?`,
+	"../Content/Memories/Wings.png"));
+	
+	memoryFragments.push(new MemoryFragment(29, "Everyday Life",
+	`Your daily routine was a bit plain and tedious, yes, but you wouldn't want to
+change those happy times. You believed that life would surely last forever... but
+this body and this world don't match those days at all, do they?`,
+	"../Content/Memories/EverydayLife.png"));
+	
+	memoryFragments.push(new MemoryFragment(30, "Thrown Away",
+	`You were broken, abandoned, and buried. You screamed, raged, and cursed
+the outrageous unfairness of it all. But in the future, things would be different.
+Surely, after all this... surely your hopes will... there's no way...`,
+	"../Content/Memories/ThrownAway.png"));
+	
+	memoryFragments.push(new MemoryFragment(31, "Apology",
+	`You hurt someone important to you and never got to say a single word in
+apology. You're dead, but still exist here, so surely that person does too. You
+still need to apologize to that person. You have to`,
+	"../Content/Memories/Apology.png"));
+	
+	memoryFragments.push(new MemoryFragment(32, "Monetary Greed",
+	`Wondrous magical pieces of paper... with them, you could obtain anything you
+wanted. You remember what they were called... "Money." You used to collect
+those pieces of paper by any means necessary. A person's worth could be
+measured in how many they held. They must still be somewhere in this world,
+right?`,
+	"../Content/Memories/MonetaryGreed.png"));
+	
+	memoryFragments.push(new MemoryFragment(33, "Death",
+	`A life ended before your eyes. You don't remember how, but that life belonged
+to someone dearly important to you. Now, you've died, too, but you're still
+walking around. Could the same thing have happened to that person?`,
+	"../Content/Memories/Death.png"));
+	
+	memoryFragments.push(new MemoryFragment(34, "Birthplace",
+	`The sights of your hometown, the place where you were born, grew, and
+played. There's no longer any such place, except in your mind. But you'd never
+forget the scenery of that, your safest, most important place...`,
+	"../Content/Memories/Birthplace.png"));
+	
+	memoryFragments.push(new MemoryFragment(35, "Wish",
+	`You had an unfulfilled dream. Could that wish ever come true? It hurts your
+heart to think of it now. You don't know why, there's certainly no excuse, but...
+you can't even remember that wish.`,
+	"../Content/Memories/Wish.png"));
+	
+	memoryFragments.push(new MemoryFragment(36, "Water",
+	`You were immersed in pure, clean water. Were you swimming? Did you plunge
+in to your death? Whichever the case, you remember the experience fondly,
+and being soaked brings that happiness back.`,
+	"../Content/Memories/Water.png"));
+	
+	memoryFragments.push(new MemoryFragment(37, "Knitting",
+	`You were knitting something. Who was it for? What were you knitting? A
+muffler? Gloves? A sweater...? Your fingers still remember how to knit. If you
+had wool and needles, even now, you should be able to knit something…`,
+	"../Content/Memories/Knitting.png"));
+	
+	memoryFragments.push(new MemoryFragment(38, "Gratitude",
+	`There was a kind person you owe a debt of gratitude to. You never managed to
+thank them like you should have... when you meet again, the first thing you'll
+do is say those words. Oh, but... just who was that person? What sort of
+person were they?`,
+	"../Content/Memories/Gratitude.png"));
+	
+	memoryFragments.push(new MemoryFragment(39, "Fragrance of Soil",
+	`You enjoyed caring for flowers. Transplanting them, fertilizing them, watering
+them... Everything to do with gardening, really.You spent your life secluded with
+the fragrance of soil and flowering plants... but the flowers you remember no
+longer exist in this world.`,
+	"../Content/Memories/FragranceOfSoil.png"));
+	
+	memoryFragments.push(new MemoryFragment(40, "God",
+	`There was a being who you offered up prayers to. You believed that praying
+would bring you happiness. Are you happy as you are now? If you're not
+happy, perhaps you just didn't pray enough.`,
+	"../Content/Memories/God.png"));
+	
+	memoryFragments.push(new MemoryFragment(41, "Classroom",
+	`Blackboards, chairs, desks... everyone sat there, playing, talking, and studying.
+You want to return to that room. You wonder where everyone else went... and where you are.`,
+	"../Content/Memories/Classroom.png"));
+	
+	memoryFragments.push(new MemoryFragment(42, "Futon",
+	`Dozing on a futon in the morning sun. All the happiness you needed was right
+there, in your memories of a warm futon. But this world has long since woken
+you up.`,
+	"../Content/Memories/Futon.png"));
+	
+	memoryFragments.push(new MemoryFragment(43, "Dresser",
+	`Your face reflected in the mirror, doing your best to be pretty. Using lipstick for
+the first time, changing your hairstyles, applying makeup... Oh, but now you've
+got the face of a corpse. Can this Doll's face ever be a substitute?`,
+	"../Content/Memories/Dresser.png"));
+	
+	memoryFragments.push(new MemoryFragment(44, "Operating Table",
+	`Tied to an operating table, your eyes wide open in fear. Your mouth gagged –
+you can't even scream. Blood-drenched doctors draw ever closer. Shining
+scalpels inch closer and closer to your skin, your skin–!`,
+	"../Content/Memories/OperatingTable.png"));
+	
+	memoryFragments.push(new MemoryFragment(45, "Stalker",
+	`Something was shadowing you. Strange little phenomena piled up over time,
+and you'd often wake up horribly panicked. Who or what was following you,
+you never knew, but... there, outside the window, outside..!`,
+	"../Content/Memories/Stalker.png"));
+	
+	memoryFragments.push(new MemoryFragment(46, "Envy",
+	`Envy. Envy. Why is everyone smiling, even though you were that unhappy?
+They must be happy. Envy. Envy. More than all else, you're jealous of your own
+self, back when you were still happy`,
+	"../Content/Memories/Envy.png"));
+	
+	memoryFragments.push(new MemoryFragment(47, "Hikkikomori",
+	`The world outside was too frightening. Everyone there could only hurt you. So
+you locked yourself away in a little room. You never needed to leave.
+Nevertheless... you were dragged out. Of course, the outside world is still too
+scary. You just want to go home to your room.`,
+	"../Content/Memories/Hikkikomori.png"));
+	
+	memoryFragments.push(new MemoryFragment(48, "Shower",
+	`A nozzle that poured nice hot water over you. Humming while you bathed. The
+scent of soap. You want to feel those things again. But when you try to bathe
+now, parts of your body start to collapse, and all you can do is sigh and
+reminisce.`,
+	"../Content/Memories/Shower.png"));
+	
+	memoryFragments.push(new MemoryFragment(49, "Gunshot",
+	`Out of nowhere, you heard an explosive sound. The inside of your chest felt
+hot. You turned around right away, and you... don't remember what happened
+next. Sounds like that are part of daily life now.`,
+	"../Content/Memories/Gunshot.png"));
+	
+	memoryFragments.push(new MemoryFragment(50, "Library",
+	`Books arranged in well-organized lines. Rows and rows of titles. Reading for
+pleasure and learning for pleasure. The knowledge you found there was
+everything to you. Shut tight in that quiet place, that's where you belong`,
+	"../Content/Memories/Library.png"));
+	
+	memoryFragments.push(new MemoryFragment(51, "Mask",
+	`You were a liar. Nobody truly trusted you, and you would never trust them. Can
+you rely on any of your sisters today? You know it's absolutely necessary to
+trust somebody, somewhere. Even so, you...`,
+	"../Content/Memories/Mask.png"));
+	
+	memoryFragments.push(new MemoryFragment(52, "All Alone",
+	`You were lonely all the time, and wished for friends. Somewhere in this whole
+rotten world, there must be a friend you can confide in. There must be at least
+one wonderful thing about this time.`,
+	"../Content/Memories/AllAlone.png"));
+	
+	memoryFragments.push(new MemoryFragment(53, "Musical Performance",
+	`You played an instrument every day. You don't have it anymore, and don't
+remember the names of the songs you used to know. You can still hum some
+of them, though, and if that instrument still existed, you're sure your fingers
+would remember how to play.`,
+	"../Content/Memories/MusicalPerformance.png"));
+	
+	memoryFragments.push(new MemoryFragment(54, "Snow",
+	`Cold, white, airy fragments. You remember days when they fell from the sky
+and covered everything in pure white. All that falls in this world is black ash.
+Will there ever be a day when the snow falls again?`,
+	"../Content/Memories/Snow.png"));
+	
+	memoryFragments.push(new MemoryFragment(55, "Sports",
+	`You loved to move your body. Even in desperate conflicts, you may just be
+happy for the chance to exercise. But this body never tires, feels pain, or grows
+at all. How are you supposed to use it now?`,
+	"../Content/Memories/Sports.png"));
+	
+	memoryFragments.push(new MemoryFragment(56, "Twin",
+	`Your body was half of a whole. Another child who shared your face was born
+on the same day as you. There was a mysterious bond between the two of you
+- somehow, you always knew what the other was doing. That's why, even in
+this world, you know the other half of you is out there somewhere.`,
+	"../Content/Memories/Twin.png"));
+	
+	memoryFragments.push(new MemoryFragment(57, "Caged Bird",
+	`A poor little bird, trapped behind bars. You let that caged bird go. Now, you're
+just like that bird, imprisoned in a body that can never die. Someday, will
+someone have pity and set you free?`,
+	"../Content/Memories/CagedBird.png"));
+	
+	memoryFragments.push(new MemoryFragment(58, "Doll",
+	`A cute Doll fell over and broke. Its limbs were ripped off, bent in bizarre
+directions. What a pitiful memory. Oh, but when you think of it now... you're just
+like that pathetic broken Doll, aren't you?`,
+	"../Content/Memories/Doll.png"));
+	
+	memoryFragments.push(new MemoryFragment(59, "The View from the Window",
+	`Memories of quietly gazing out through the window. What was it that you
+watched, again? Whatever it was, it was always a beautiful view, and you
+yearned to go outside into it. At the very least, you know it wasn't this place.`,
+	"../Content/Memories/TheViewFromTheWindow.png"));
+	
+	memoryFragments.push(new MemoryFragment(60, "Fortune Telling",
+	`You remember predictions of good fortune. Someone promised you good luck.
+Those words told you that your luck would surely make you happy. That might
+have been nothing but a childish game, but those precious words still support
+you now.`,
+	"../Content/Memories/FortuneTelling.png"));
+	
+	memoryFragments.push(new MemoryFragment(61, "Holding Hands",
+	`Holding hands with somebody. You don't remember who that was - only the
+sense of security it brought. If you could feel relief by touching that hand,
+maybe you can find it again with one of your companions now. Perhaps you
+can feel that warmth again, even in cold, clammy hands.`,
+	"../Content/Memories/HoldingHands.png"));
+	
+	memoryFragments.push(new MemoryFragment(62, "Starvation",
+	`A memory of constant, aching hunger in a time when you weren't able to eat.
+Your stomach withered. You longed to bite, to chew.
+IwanttoeatIwanttoeatIwanttoeat. That's right, back then... even your own hand
+would do...`,
+	"../Content/Memories/Starvation.png"));
+	
+	memoryFragments.push(new MemoryFragment(63, "Humiliation",
+	`Recurring memories of being humiliated and disgraced. They shredded your
+pride. You played along, but even so... All you remember clearly is the feeling
+of your skin crawling and the sense of overwhelming anxiety. If you were
+resurrected in this world, then surely, people like them were too.`,
+	"../Content/Memories/Humiliation.png"));
+	
+	memoryFragments.push(new MemoryFragment(64, "Cute Clothes",
+	`A cute outfit you wore in your memories. Your face is unclear - just those
+clothes reflected in the mirror. One day, your heart was throbbing. You had to
+display them to somebody... but to who? And where are those clothes now?`,
+	"../Content/Memories/CuteClothes.png"));
+	
+	memoryFragments.push(new MemoryFragment(65, "Cooking",
+	`You made meals. Cutting vegetables, stirring a pot, cracking eggs, stir-frying
+meat. At first, you couldn't really make anything, but gradually, you became
+much better.You can't remember the taste of any of those dishes, though. Was
+what you made really that delicious?`,
+	"../Content/Memories/Cooking.png"));
+	
+	memoryFragments.push(new MemoryFragment(66, "Bully",
+	`When you got irritated, when you felt like it, you harassed weaker people.
+That's right- you had friends. And you would all surround that weakling and
+play with them. Kicking, pulling hair, putting things on their head... that sure
+was fun.`,
+	"../Content/Memories/Bully.png"));
+	
+	memoryFragments.push(new MemoryFragment(67, "Painting",
+	`There was a picture you'd started to paint. Everyone praised you as you made
+it. It was wonderful. Magnificent. But you've already forgotten just what kind of
+painting it was...`,
+	"../Content/Memories/Painting.png"));
+	
+	memoryFragments.push(new MemoryFragment(68, "Lust",
+	`The flames of desire burning inside of you. Your entire body flushed with heat,
+longing for the pleasures of love. It still aches in your mind, sometimes. Can
+your dead body ever satisfy those desires?`,
+	"../Content/Memories/Lust.png"));
+	
+	memoryFragments.push(new MemoryFragment(69, "The Living Dead",
+	`There it was. It turned to pursue you. You ran, screaming, desperately
+searching for an escape, but were torn to pieces alive by the hands of a living corpse. 
+How pitiful. That's right. The thing from back then, the thing thatravaged your body so, 
+was surely one of the Undead.`,
+	"../Content/Memories/TheLivingDead.png"));
+	
+	memoryFragments.push(new MemoryFragment(70, "Dozing",
+	`A cozy nap. You need to wake up, but don't want to get out from the futon. The
+morning sun is leaking through the window. Birds are singing. Those were the
+sensations of awakening from sleep. But not in this world...`,
+	"../Content/Memories/Dozing.png"));
+	
+	memoryFragments.push(new MemoryFragment(71, "Conversation",
+	`You remember a relaxed conversation with a friend. You talked about fashion,
+the weather, the people you liked, disliked, and loved... Whenever you have a
+good chat now, you remember that talk, and tears of envy start to fall.`,
+	"../Content/Memories/Conversation.png"));
+	
+	memoryFragments.push(new MemoryFragment(72, "The Dead Rise",
+	`You were grieving over someone's death. They died right before your eyes,
+though you can't remember who it was. But then... their corpse started moving
+again. You, who thought that that person revived, were attacked by their nails
+and teeth.`,
+	"../Content/Memories/TheDeadRise.png"));
+	
+	memoryFragments.push(new MemoryFragment(73, "Game",
+	`Day in and day out, you played the same game. What sort of game? Why were
+you playing it? You don't remember. All you remember is your unbroken gaze
+at the screen, and how you regretted every time you left that room, even to
+sleep.`,
+	"../Content/Memories/Game.png"));
+	
+	memoryFragments.push(new MemoryFragment(74, "Sold",
+	`Something was sold. What was it - blood, or hair, or organs? Or small buds or
+petals? You sold it to somebody who was very happy with it. You have the
+money for... what was it, again?`,
+	"../Content/Memories/Sold.png"));
+	
+	memoryFragments.push(new MemoryFragment(75, "Study",
+	`You have to study and get good grades. You have to show everyone that you
+excel. If you don't... Well, what redeeming qualities would you have? You're not
+sure. There must have been some, right?`,
+	"../Content/Memories/Study.png"));
+	
+	memoryFragments.push(new MemoryFragment(76, "Happy Times",
+	`Ah, happiness. Such fun, happy days. You were afraid that happiness might
+end some day. It seems now like those times could have been nothing but a
+pleasant dream. The memories inside you now are just like dreams. But... how
+can you tell where they meet?`,
+	"../Content/Memories/HappyTimes.png"));
+	
+	memoryFragments.push(new MemoryFragment(77, "Burial",
+	`Heaps of earth are falling down around you. The soil covering your limbs is
+cold, and then lukewarm, and even though you're conscious, the dirt keeps
+coming down. You can't move your body, or even your face. You are plunging
+beneath the earth.`,
+	"../Content/Memories/Burial.png"));
+	
+	memoryFragments.push(new MemoryFragment(78, "Shopping",
+	`Holding various things in your hands. Gazing into display windows. Checking
+the contents of your purse, over and over. Shopping sure was fun. You wonder
+who you were with, that time – who shared that happy day with you.`,
+	"../Content/Memories/Shopping.png"));
+	
+	memoryFragments.push(new MemoryFragment(79, "Amusement Park",
+	`Were you there with family? Friends? Someone you loved? The noisy
+amusement park in that wonderful memory was like another world. Colorful
+rides. Crowds of happy people. Where is that place now? Is there any trace of
+it left?`,
+	"../Content/Memories/AmusementPark.png"));
+	
+	memoryFragments.push(new MemoryFragment(80, "Tea Party",
+	`Birds chirping, a beautiful garden, white chairs and a white table. Black tea
+poured from a teapot. Sweet-smelling cookies. Enjoyable friendly chats. Sweet
+memories from that time you lived as a young girl. It's those memories that
+allow you to continue on as a young girl.`,
+	"../Content/Memories/TeaParty.png"));
+	
+	memoryFragments.push(new MemoryFragment(81, "Secret",
+	`You had a horrible, shameful secret, one you could never share with anybody,
+one that must never be known. Oh, but... you've forgotten what it was. Is there
+somebody else who still knows it?`,
+	"../Content/Memories/Secret.png"));
+	
+	memoryFragments.push(new MemoryFragment(82, "Flowerbed",
+	`You tended to a flowerbed – fertilized it, watered it, protected it from pests, so
+that beautiful flowers could grow there, and you could watch them blossom.
+You spent a long time working hard for that goal, but... the rest seems to have been 
+washed from your memory. How is that flowerbed faring today?`,
+	"../Content/Memories/Flowerbed.png"));
+	
+	memoryFragments.push(new MemoryFragment(83, "Ghost",
+	`You remember an encounter with something inexplicable. Strange sounds. An
+otherworldly light, casting bizarre shadows. It terrified you then... but now it just
+seems like a pleasant fairy tale. After all, now you're the very same kind of
+being you were frightened of.`,
+	"../Content/Memories/Ghost.png"));
+	
+	memoryFragments.push(new MemoryFragment(84, "Refuge",
+	`Was it an attic? A closet? A dresser? Wherever it was, you were creating your
+own tiny world inside. You locked yourself away in that world just for you. Will
+you need another refuge like that here?`,
+	"../Content/Memories/Refuge.png"));
+	
+	memoryFragments.push(new MemoryFragment(85, "Separation",
+	`There's somebody you must meet again – a treasured person you were
+separated from. You don't remember them well, but you're certain you would if
+you found them again. If only that person still exists, you won't forget them...`,
+	"../Content/Memories/Separation.png"));
+	
+	memoryFragments.push(new MemoryFragment(86, "Story",
+	`You remember writing a few of your own stories – were you a novelist or a
+poet? Will you ever write another story? Perhaps even the story of your own
+life? Maybe if you read that, you could recall everything about yourself.`,
+	"../Content/Memories/Story.png"));
+	
+	memoryFragments.push(new MemoryFragment(87, "Big Brother",
+	`You had a kind older brother. You always fawned on him. Admired him. To you,
+he was more important than anyone else. The ideal person. And you can't
+even remember his name. Even though you think you'd recognize him if you
+met up with him...`,
+	"../Content/Memories/BigBrother.png"));
+	
+	memoryFragments.push(new MemoryFragment(88, "Lost Child",
+	`You were completely lost, all on your own. You didn't understand what was
+happening – you just stumbled through that unfamiliar place, crying. All you
+saw was darkness. On and on you wandered – nothing but strangers. Still, that
+time, there was one kind person...`,
+	"../Content/Memories/LostChild.png"));
+	
+	memoryFragments.push(new MemoryFragment(89, "Beach",
+	`Crashing waves. An expanse of white sand. A sea that stretched out endlessly.
+Now and then, fish leapt up from beneath its surface. That sea still exists in
+your memories. It must be somewhere in the world. Is the ocean still as full of
+life as it used to be?`,
+	"../Content/Memories/Beach.png"));
+	
+	memoryFragments.push(new MemoryFragment(90, "War",
+	`You ran, fleeing the war. You didn't want to accept reality, and you saw the
+shell flying at you as a bird. You reached your hand out to that bird...`,
+	"../Content/Memories/War.png"));
+	
+	memoryFragments.push(new MemoryFragment(91, "Handling a Corpse",
+	`Someone important to you died. No, that's not right - they're only sleeping. You
+just had to wake them up. After all, you woke up even though you were dead,
+so they must still be sleeping out there somewhere.`,
+	"../Content/Memories/HandlingACorpse.png"));
+	
+	memoryFragments.push(new MemoryFragment(92, "Medicine",
+	`You've got to take it. You've got to take that medicine, or you'll break. You'll
+break. Your body will fall apart. Your mind will shatter. Hurry. Hurry and take it
+faster. You've got to find it now. If you don't, if, if, ififififififififif–`,
+	"../Content/Memories/Medicine.png"));
+	
+	memoryFragments.push(new MemoryFragment(93, "Insects",
+	`That's right. You hated them. You hated the insects that skittered or flitted
+about. Your hatred for those creatures was overpowering. Those disgusting,
+cursed creatures. So you spent your time in rooms where they could never
+reach you. But now...`,
+	"../Content/Memories/Insects.png"));
+	
+	memoryFragments.push(new MemoryFragment(94, "A Visit from Death",
+	`You can't recall their name or face, but someone precious to you died. Their
+death was incredibly painful, and the loss left a gaping hole in your heart. But
+now that you've died and been resurrected, you're glad that person had a
+chance to die properly, unlike you.`,
+	"../Content/Memories/AVisitFromDeath.png"));
+	
+	memoryFragments.push(new MemoryFragment(95, "Lie",
+	`You told a lie. What lie, you can't recall... but you tricked somebody, and you're
+sure that they died because of it. Is that person still deceived now? If you could
+only meet them, if you could tell the truth…`,
+	"../Content/Memories/Lie.png"));
+	
+	memoryFragments.push(new MemoryFragment(96, "The World After Death",
+	`You died, and at that moment, you saw a world different from this one. You're
+certain of it. Then something dragged you forcibly back here. But if a person
+dies in this world, you're sure they'll go to that reality.`,
+	"../Content/Memories/TheWorldAfterDeath.png"));
+	
+	memoryFragments.push(new MemoryFragment(97, "Angel of Slaughter",
+	`You were trained to kill people. Without any questions, you murdered countless
+others, and were praised only for your work. You now live in a world where you
+can never die. A world where you can keep killing forever. Perhaps if you keep
+killing, more and more and more, you'll be praised again.`,
+	"../Content/Memories/AngelOfSlaughter.png"));
+	
+	memoryFragments.push(new MemoryFragment(98, "Necromancer",
+	`You remember a few sparse details about "them," the person who made you
+this way. Do you feel grateful, I wonder? Even though you're clearly just a toy
+to them?`,
+	"../Content/Memories/Necromancer.png"));
+	
+	memoryFragments.push(new MemoryFragment(99, "The Last War",
+	`You have a bystander's knowledge of humanity's last days. From what
+perspective? However faintly... you remember those terrible events. Just how
+foolish and tragic were they?`,
+	"../Content/Memories/TheLastWar.png"));
+	
+}
+
+///

@@ -502,6 +502,12 @@ const randomNames = [
 	"Cristina Keana"
 ];
 
+let characterWIP = new Doll(-1);//current character creation data
+let premonitionsPopulated = false;
+let memoryFragmentsPopulated = false;
+let fragmentDisplayId = "";
+let memorySlot = -1;
+
 //utilities
 function clickLink(linkId){
 	document.getElementById(linkId).click();
@@ -519,38 +525,115 @@ function randomName(nameFieldId){
 	let rand = randomNames[Math.floor(randomNames.length * Math.random())];
 	document.getElementById(nameFieldId).value = rand;
 }
-
-//pick memory
-function pickMemory(){
-	
+//set name data
+function setName(nameFieldId){
+	characterWIP.name = document.getElementById(nameFieldId).value.replace(/(\r\n|\n|\r)/gm,"");
+}
+//set age data
+function setAge(ageFieldId){
+	characterWIP.age = document.getElementById(ageFieldId).value.replace(/(\r\n|\n|\r)/gm,"");
 }
 
 //random memory
-function randomMemory(){
-	
+function randomMemory(displayId, slotNumber){
+	let rand = memoryFragments[Math.floor(Math.random() * memoryFragments.length)];
+
+	//update data
+	characterWIP.fragments[slotNumber] = rand.id;
+	//update form
+	document.getElementById(displayId).innerHTML = buildMemory(rand, false);
+}
+//pick memory from list
+function pickMemory(displayId, slotNumber){
+	//populate modal list
+	populateMemoryPicker();
+	//set display target
+	fragmentDisplayId = displayId;
+	//set data target
+	memorySlot = slotNumber;
 }
 
-//pick premonition
-function pickPremonition(){
+function populateMemoryPicker(){
+	if(!memoryFragmentsPopulated){
+		let content = "";
+		for(let i = 0; i < memoryFragments.length; i++){
+			content += buildMemory(memoryFragments[i], true);
+		}
+		document.getElementById("memory-list").innerHTML = content;
+	}
+}
+function buildMemory(memory, clickable){
 	
+	let clickableCode = "";
+	if(clickable){
+		clickableCode = `role="button" onclick="setMemory(${memory.id})"`;
+	}
+	
+	let content = 
+	`
+	<div class="row" ${clickableCode}>
+		<div class="border col-3 d-flex" style="height:80px"><h4 class="my-auto mx-auto text-center font-weight-bold">${memory.name}</h4></div>
+		<div class="border pl-1 pr-1 col d-flex" style="height:80px"><p class="small font-italic my-auto">${memory.description}</p></div>
+	</div>
+	`;
+	
+	return content;
+}
+function setMemory(memoryId){
+	//get memory object
+	let memory = memoryFragments[memoryId];
+	//update data
+	characterWIP.fragments[memorySlot] = memory;
+	//update form
+	document.getElementById(fragmentDisplayId).innerHTML = buildMemory(memory, false);
+	//close modal
+	$("#memory-picker").modal('hide');
 }
 
 //random premonition
-function randomPremonition(displayId){
-	let rand = premonitions[Math.floor(Math.random() * premonitions.length)];
-	showPremonition(displayId, rand);
+function randomPremonition(){
+	let premonition = premonitions[Math.floor(Math.random() * premonitions.length)];
+	//update data
+	characterWIP.premonition = premonition;
+	//update form
+	document.getElementById("cc-premonition").innerHTML = buildPremonition(premonition, false);
 }
-
-function showPremonition(displayId, premonition){
-	document.getElementById(displayId).innerHTML = buildPremonition(premonition);
+function pickPremonition(){
+	//populate list of premonitions
+	populatePremonitionPicker();
 }
-function buildPremonition(premonition){
+//populate list of premonitions
+function populatePremonitionPicker(){
+	if(!premonitionsPopulated){
+		let content = "";
+		for(let i = 0; i < premonitions.length; i++){
+			content += buildPremonition(premonitions[i], true);
+		}
+		document.getElementById("premonition-list").innerHTML = content;
+	}
+}
+function buildPremonition(premonition, clickable){
+	let clickableCode = "";
+	if(clickable){
+		clickableCode = `role="button" onclick="setPremonition(${premonition.id})"`;
+	}
 	let code = 
 	`
-		<div class="row">
-			<div class="border text-center font-weight-bold pt-3 pb-3 pl-1 pr-1 col-3" style="height:80px"><h4>${premonition.name}</h4></div>
-			<div class="border font-italic pl-1 pr-1 col" style="height:80px">${premonition.description}</div>
-		</div>
+	<div class="row" ${clickableCode}>
+		<div class="border col-3 d-flex" style="height:80px"><h4 class="my-auto mx-auto text-center font-weight-bold">${premonition.name}</h4></div>
+		<div class="border pl-1 pr-1 col d-flex" style="height:80px"><p class="small font-italic my-auto">${premonition.description}</p></div>
+	</div>
 	`;
 	return code;
 }
+function setPremonition(premonitionId){
+	//get premonition object
+	let premonition = premonitions[premonitionId];
+	//update data
+	characterWIP.premonition = premonition;
+	//update form
+	document.getElementById("cc-premonition").innerHTML = buildPremonition(premonition, false);
+	//close modal
+	$("#premonition-picker").modal('hide');
+}
+
