@@ -52,6 +52,24 @@
 .necro-table-head{
 	height: 20px;
 }
+.necro-item{
+	background-color: #fafafa;
+}
+
+.necro-item.disabled{
+	pointer-events: none;
+	opacity: 0.65;
+}
+.necro-item.active{
+	background-color: #aaaaaa;
+}
+.necro-item:hover{
+	background-color: #dadada;
+}
+.class-preview{
+	background-repeat: no-repeat;
+	background-position: right;
+}
 /*bootstrap overrides*/
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {

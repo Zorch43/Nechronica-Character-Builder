@@ -32,7 +32,7 @@ function Doll(nextId)
 	this.classPosition = -1;//position class id
 	this.classPrimary = -1;//primary class id
 	this.classSecondary = -1;//secondary class id
-	this.skills = [];//list of all skills from position and classes
+	this.skills = [-1, -1, -1, -1];//list of all skills from position and classes
 	this.rpu = 1;//unallocated reinforcement points
 	this.rpa = 0;//allocated armament points
 	this.rpm = 0;//allocated mutation points
@@ -55,7 +55,7 @@ function DollSkill(id, classId, name, cost, timing, rangeMin, rangeMax,
 	effectText, flavorText, flavorImage)
 {
 	this.id = id;//skill catologue id
-	this.classId;//position or class that has this skill
+	this.classId = classId;//position or class that has this skill
 	this.name = name;//the name of the skill
 	
 	if(cost == -1){
@@ -76,6 +76,9 @@ function DollSkill(id, classId, name, cost, timing, rangeMin, rangeMax,
 	}
 	else if(rangeMin == -2 || rangeMax == -2){
 		this.range = "See Effect";
+	}
+	else if(rangeMin == rangeMax){
+		this.range = rangeMin;
 	}
 	else{
 		this.range = rangeMin + "-" + rangeMax;//effect range
@@ -127,6 +130,9 @@ function DollPart(id, type, tier, partLocation, name, cost,
 	else if(rangeMin == -2 || rangeMax == -2){
 		this.range = "See Effect";
 	}
+	else if(rangeMin == rangeMax){
+		this.range = rangeMin;
+	}
 	else{
 		this.range = rangeMin + "-" + rangeMax;//effect range
 	}
@@ -148,7 +154,7 @@ function DollClass(id, name, rpa, rpm, rpe, flavorText, flavorImage){
 	this.rpa = rpa;//armaments
 	this.rpm = rpm;//mutations
 	this.rpe = rpe;//enhancements
-	this.flavorText = flavorText;//class flavortext
+	this.flavorText = flavorText;//class flavortext (array)
 	this.flavorImage = flavorImage;//class image
 }
 
@@ -156,6 +162,9 @@ function DollClass(id, name, rpa, rpm, rpe, flavorText, flavorImage){
 function DollPosition(id, name, flavorText, flavorImage){
 	this.id = id;//position id
 	this.name = name;//position name
+	this.rpa = 0;
+	this.rpm = 0;
+	this.rpe = 0;
 	this.flavorText = flavorText;//position flavor text (array)
 	this.flavorImage = flavorImage;//position image;
 }
@@ -210,7 +219,7 @@ function createTemplates(){
 
 //position templates
 function createPositions(){
-	dollPositions.push(new DollPosition(0, "Alice"
+	dollPositions.push(new DollPosition(0, "Alice",
 	["There are some Dolls that are never able to get used to fighting."
 	+ "	Though their lives have been ones of unending battle for countless"
 	+ "days, countless years, the memory of tranquil times remains in their"
@@ -225,9 +234,9 @@ function createPositions(){
 	"Even if you are no help in fights, you are an important key to saving"
 	+ "	your Sisters. You mustn’t be consumed by conflict and fear. You"
 	+ "	shall continue striving for the everyday your Sisters are meant to return to."], 
-	"../Content/Positions/Alice.png"));
+	"Alice.png"));
 	
-	dollPositions.push(new DollPosition(1, "Automaton"
+	dollPositions.push(new DollPosition(1, "Automaton",
 	["Though you have a heart, you have suppressed it. In battle, you are"
 	+ "	no more than the gear of a machine. Dolls are Dolls, after all."
 	+ "	It is only proper that dead corpses should have dead hearts."
@@ -246,7 +255,7 @@ function createPositions(){
 	+ "	devote yourself to being the shield protecting them. So that they"
 	+ "	shall not become like you. So that your own heart doesn’t die off"
 	+ "	in the end."], 
-	"../Content/Positions/Automaton.png"));
+	"Automaton.png"));
 	
 	dollPositions.push(new DollPosition(2, "Court",
 	["Strength does not arise only when wielding a weapon. To think and to"
@@ -263,7 +272,7 @@ function createPositions(){
 	+ "	To create a time to cry, and to create a time to laugh afterwards."
 	+ "	Not to discard your heart, but to protect it you concentrate all"
 	+ "	your strength."],
-	"../Content/Positions/Court.png"));
+	"Court.png"));
 	
 	dollPositions.push(new DollPosition(3, "Holic",
 	["To have an ego is to embrace one's selfishness and desires. There"
@@ -283,7 +292,7 @@ function createPositions(){
 	+ "	there are things you want. And if you want, you shall act, fight,"
 	+ "	and go mad. To go mad in search of gains will become the shield"
 	+ "	protecting you from true despair and madness."],
-	"../Content/Positions/Holic.png"));
+	"Holic.png"));
 	
 	dollPositions.push(new DollPosition(4, "Junk",
 	["You have found strength in the things you have given up. But there"
@@ -301,7 +310,7 @@ function createPositions(){
 	+ "	you have. Your role is to not let your Sisters give up.",
 	"There’s no need to cleverly raise their spirits. It’s enough to show"
 	+ "	them that even so you have come to fight."],
-	"../Content/Positions/Junk.png"));
+	"Junk.png"));
 	
 	dollPositions.push(new DollPosition(5, "Sorority",
 	["That others depend upon you is not a burden. It is your strength."
@@ -319,7 +328,7 @@ function createPositions(){
 	+ "	with responsibility should make you stronger, too. Surely at some"
 	+ "	point you will acquire the strength to set aside madness and stand"
 	+ "	up to despair. For your beloved Sisters. Through your beloved Sisters."],
-	"../Content/Positions/Sorority.png"));
+	"Sorority.png"));
 }
 
 //class templates
@@ -462,19 +471,19 @@ function createSkills(){
 	+ "	transported to Eden.",
 	"This is not considered to be Movement."], 
 	"You are the inhabitants of paradise, the place where you are is the paradise.", 
-	"../Content/Skills/AngelOfEden.png"));
+	"AngelOfEden.png"));
 	
 	dollSkills.push(new DollSkill(1, 0, "Healing", -1, 0, -2, -2, 
 	["Other Sisters' Conversation Checks toward you all gain +1 to their rolls."], 
 	"A girl's smile is a glow in the dark. You have the power to shatter"
 	+ "	the mind filled with madness.", 
-	"../Content/Skills/Healing.png"));
+	"Healing.png"));
 	
 	dollSkills.push(new DollSkill(2, 0, "Maiden", 0, 2, 0, 0, 
 	["Make a Conversation Check with one of your sisters."], 
 	"Your slight words and gestures are not those of a killing machine."
 	+ "	Will they be a refreshing agent for a rough heart?", 
-	"../Content/Skills/Maiden.png"));
+	"Maiden.png"));
 	
 	dollSkills.push(new DollSkill(3, 0, "Prayer", 0, 1, -2, -2, 
 	["This Maneuver takes effect 5 Count after the time that it is announced.",
@@ -486,7 +495,7 @@ function createSkills(){
 	"No matter if they come true or not, your prayers will definitely reach"
 	+ "	everyone. Your wish will surely come true. No one will be unhappy."
 	+ " Find the way for everyone to be saved.", 
-	"../Content/Skills/Prayer.png"));
+	"Prayer.png"));
 	
 	dollSkills.push(new DollSkill(4, 0, "Princess", 0, 4, 0, 1, 
 	["This Skill can only be used when you take damage.",
@@ -494,13 +503,13 @@ function createSkills(){
 	+ "	(minimum 0.)"], 
 	"When sisters are injured, they cannot stay fair. They know that you"
 	+ "	are to be protected.",
-	"../Content/Skills/Princess.png"));
+	"Princess.png"));
 	
 	dollSkills.push(new DollSkill(5, 0, "Undefeatable Heart", -1, 0, -1, -1, 
 	["When you make a Conversation Check, you may add +1 to the die roll."], 
 	"What you have is a strong heart, no desire to lose to despair, as"
 	+ "	long as you can believe it, hope will not disappear.",
-	"../Content/Skills/UndefeatableHeart.png"));
+	"UndefeatableHeart.png"));
 	
 	dollSkills.push(new DollSkill(6, 0, "Warm Smile", -1, 0, -2, -2, 
 	["When you roll a Critical Success on a Conversation Check, the target"
@@ -510,7 +519,7 @@ function createSkills(){
 	"Your gestures, your facial expressions are sparkling. That light"
 	+ "	shines brightly within the soul of the person who talks with you."
 	+ "	They will cast away their heavily sickened feelings.",
-	"../Content/Skills/WarmSmile.png"));
+	"WarmSmile.png"));
 	
 	//Automaton skills
 	dollSkills.push(new DollSkill(7, 1, "Cover", -2, 0, 0, 1, 
@@ -519,27 +528,27 @@ function createSkills(){
 	+ "	reduced to 0 in exchange for reducing your Action value by 1."], 
 	"If you do not mistake the timing, a small amount of help will have a"
 	+ "	great effect. You are not fighting alone.",
-	"../Content/Skills/Cover.png"));
+	"Cover.png"));
 	
 	dollSkills.push(new DollSkill(8, 1, "Foes are Foes", -1, 0, -1, -1, 
 	["If a Spirit Attack is made against you, the Attack Check must have a"
 	+ "	result of 7 or higher to hit."], 
 	"You will have compassion later. You will someday apologize. But for"
 	+ "	now, everyone will be broken.",
-	"../Content/Skills/FoesAreFoes.png"));
+	"FoesAreFoes.png"));
 	
 	dollSkills.push(new DollSkill(9, 1, "Heart of Ice", -1, 0, -1, -1, 
 	["You gain +1 to the die roll on Madness Checks."], 
 	"Calm down. Be cool. Believe in yourself. Believe in a friend. Do not"
 	+ "	doubt. Do not be afraid.",
-	"../Content/Skills/HeartOfIce.png"));
+	"HeartOfIce.png"));
 	
 	dollSkills.push(new DollSkill(10, 1, "I am a Doll", -1, 0, -1, -1, 
 	["During the Battle Phase, only for one Turn, ignore all effects of"
 	+ "	the states of Madness."], 
 	"That body is a Doll. Your heart is a Doll. The Doll does not feel"
 	+ "	pain. Your heart...",
-	"../Content/Skills/IAmADoll.png"));
+	"IAmADoll.png"));
 	
 	dollSkills.push(new DollSkill(11, 1, "Prisoner in Limbo", -1, 0, -1, -1, 
 	["If you are in Limbo at the end of the turn during the Battle Phase,"
@@ -548,7 +557,7 @@ function createSkills(){
 	"Hell is right for you. Because enemies can understand you more than"
 	+ "	allies. Limbo is where the Doll belongs. Drawn to Hell, long for"
 	+ "	paradise even if it is torn apart.",
-	"../Content/Skills/PrisonerInLimbo.png"));
+	"PrisonerInLimbo.png"));
 	
 	dollSkills.push(new DollSkill(12, 1, "Reckless", -2, 0, -1, -1, 
 	["As the Cost of this Skill, damage one of your own Basic Parts of your choice.",
@@ -556,7 +565,7 @@ function createSkills(){
 	+ "	Dismemberment Check."], 
 	"The results earned by abusing your body. You are already dead, so"
 	+ "	you can do it.",
-	"../Content/Skills/Reckless.png"));
+	"Reckless.png"));
 	
 	dollSkills.push(new DollSkill(13, 1, "Tears of Blood", -2, 0, -1, -1, 
 	["When you are hit by a Spirit Attack, you may ignore the Madness"
@@ -566,14 +575,14 @@ function createSkills(){
 	"If you have no Basic Parts remaining, this Skill is no longer effective."], 
 	"All right, nothing is painful. You will not bother anything."
 	+ "	No matter how much of you breaks in the fight.",
-	"../Content/Skills/TearsOfBlood.png"));
+	"TearsOfBlood.png"));
 
 	//court skills
 	dollSkills.push(new DollSkill(14, 2, "Advice", 0, 3, 0, 2, 
 	["Support 1 or Hinder 1."], 
 	"Small words and signs will still negate large damage. It will be a"
 	+ "	small but big chance.",
-	"../Content/Skills/Advice.png"));
+	"Advice.png"));
 	
 	dollSkills.push(new DollSkill(15, 2, "Anticipate", 0, 2, 0, 3, 
 	["Target \"Rapid\", \"Damage\", or \"Check\" Maneuver.", 
@@ -581,19 +590,19 @@ function createSkills(){
 	"It is important to know about the enemy that appeared. It also helps"
 	+ "	tactics to instantly see the enemy's war potential and offensive"
 	+ "	power.",
-	"../Content/Skills/Anticipate.png"));
+	"Anticipate.png"));
 	
 	dollSkills.push(new DollSkill(16, 2, "Composure", -1, 0, -1, -1, 
 	["You can gain +1 to the die roll on Action Checks."], 
 	"Calm behavior, there are things that make things move a lot. Your"
 	+ "	calm view should be an important starting point.",
-	"../Content/Skills/Composure.png"));
+	"Composure.png"));
 	
 	dollSkills.push(new DollSkill(17, 2, "Foresight", 1, 1, 0, 1, 
 	["The Cost of the target's next Action decreases by 1 (minimum 0.)"], 
 	"By knowing the movements of enemies and ally in advance, you can act"
 	+ "	with the minimum necessary movement.",
-	"../Content/Skills/Foresight.png"));
+	"Foresight.png"));
 	
 	dollSkills.push(new DollSkill(18, 2, "Restraint", -2, 0, -1, -1, 
 	["When you fail (or critically fail) a Madness Check, you may change"
@@ -603,7 +612,7 @@ function createSkills(){
 	"Loss of, distortion of mind. Let's cheat. With loss of body and"
 	+ "	distortion of the body. Pain is proof of sanity...even such a"
 	+ "	distorted philosophy is useful for regulating you now.",
-	"../Content/Skills/Restraint.png"));
+	"Restraint.png"));
 	
 	dollSkills.push(new DollSkill(19, 2, "Scapegoat", -2, 0, -1, -1, 
 	["When one of your Sisters fails (or critically fails) a Madness Check,"
@@ -612,7 +621,7 @@ function createSkills(){
 	+ "	Fetters of your choice."], 
 	"You are sensitive to look at the world. Not only in battle, but in"
 	+ "	human relationships. You know what you should do. Brutally. Firmly.",
-	"../Content/Skills/Scapegoat.png"));
+	"Scapegoat.png"));
 	
 	dollSkills.push(new DollSkill(20, 2, "Tactics", -1, 0, -2, -2, 
 	["At the beginning of the Battle Phase, you may observe the arrangement"
@@ -620,7 +629,7 @@ function createSkills(){
 	+ "	Tartarus."], 
 	"Strategy based on position and traction. Everyone is driven by the"
 	+ "	promise of victory for a flexible team.",
-	"../Content/Skills/Tactics.png"));
+	"Tactics.png"));
 	
 	//holic skills
 	dollSkills.push(new DollSkill(21, 3, "Carnage", -2, 3, -1, -1, 
@@ -629,14 +638,14 @@ function createSkills(){
 	"Support 3."], 
 	"No, it's not like this, it should be like this. Desire, obsession,"
 	+ "	thoughts. They can distort physical laws.",
-	"../Content/Skills/Carnage.png"));
+	"Carnage.png"));
 	
 	dollSkills.push(new DollSkill(22, 3, "Drawn to Tartarus", -1, 0, -1, -1, 
 	["During the Battle Phase, when you declare a Movement Maneuver that"
 	+ "	targets yourself in the direction towards Tartarus, the Cost of"
 	+ "	the Maneuver is decreased by -1 (minimum 0.)"], 
 	"Your soul searches for darkness, for that is where you are.",
-	"../Content/Skills/DrawnToTartarus.png"));
+	"DrawnToTartarus.png"));
 	
 	dollSkills.push(new DollSkill(23, 3, "Fall Into Hades", -2, 1, -1, -1, 
 	["As the Cost of this Skill, add a Madness Point to a Fetter of your"
@@ -644,7 +653,7 @@ function createSkills(){
 	"You are instantly transported from your current position on the map"
 	+ "	to Hades. This is not considered a Movement Maneuver."], 
 	"The place where the broken girl was born. It must surely be Hell.",
-	"../Content/Skills/FallIntoHades.png"));
+	"FallIntoHades.png"));
 	
 	dollSkills.push(new DollSkill(24, 3, "Fury", -2, 4, -1, -1, 
 	["You may only use this Skill when you deal damage.",
@@ -653,13 +662,13 @@ function createSkills(){
 	"Add +2 to the damage dealt."], 
 	"Because of you. Unforgivable. Unforgivable. Absolutely not allowed."
 	+ "	You will break it apart. You will shatter it.",
-	"../Content/Skills/Fury.png"));
+	"Fury.png"));
 	
 	dollSkills.push(new DollSkill(25, 3, "Insane Swiftness", -1, 0, -1, -1, 
 	["When one of your Fetters is in a state of Madness during the Battle"
 	+ "	Phase, you gain a +1 to the die roll on Attack Checks."], 
 	"Madness. Makes. You. Strong.",
-	"../Content/Skills/InsaneSwiftness.png"));
+	"InsaneSwiftness.png"));
 	
 	dollSkills.push(new DollSkill(26, 3, "Impulse", -2, 0, -1, -1, 
 	["Once per Turn, when you declare a Maneuver, instead of paying the"
@@ -667,7 +676,7 @@ function createSkills(){
 	+ "	to a Fetter of your choice as the cost."], 
 	"Still it can move. It is not over yet. Another stroke, another step:"
 	+ "	Show yourself moving while breaking yourself.",
-	"../Content/Skills/Impulse.png"));
+	"Impulse.png"));
 	
 	dollSkills.push(new DollSkill(27, 3, "Limits of Madness", 0, 4, -1, -1, 
 	["You may remove a Madness Point from a Fetter of your choice."
@@ -676,7 +685,7 @@ function createSkills(){
 	"You will not suppress your madness. Do not mind the staring eyes"
 	+ "	around you. Spit it out! They do not have to approach it if they"
 	+ "	do not wish to see it!",
-	"../Content/Skills/LimitsOfMadness.png"));
+	"LimitsOfMadness.png"));
 
 	//junk skills
 	dollSkills.push(new DollSkill(28, 4, "Damaged Goods", -1, 0, -1, -1, 
@@ -684,7 +693,7 @@ function createSkills(){
 	+ "	is damaged, you do not add Madness Points."], 
 	"You are half broken. Because it is broken, it will not break any"
 	+ "	more. Days of fighting? You wonder what was before that...",
-	"../Content/Skills/DamagedGoods.png"));
+	"DamagedGoods.png"));
 	
 	dollSkills.push(new DollSkill(29, 4, "Defender of Eden", -1, 0, -2, -2, 
 	["When you are in Eden or Elysium, all Maneuvers used by enemies"
@@ -692,21 +701,21 @@ function createSkills(){
 	"This Skill remains in effect even if you are completely Annihilated."], 
 	"These defiled men cannot be allowed to trample this place."
 	+ "	You will not let them.",
-	"../Content/Skills/DefenderOfEden.png"));
+	"DefenderOfEden.png"));
 	
-	dollSkills.push(new DollSkill(30, 4, "Dweller in hades", -1, 0, -1, -1, 
+	dollSkills.push(new DollSkill(30, 4, "Dweller in Hades", -1, 0, -1, -1, 
 	["During the Battle Phase, if you are in Hades, you gain +1 to the"
 	+ "	die roll on Attack Checks."], 
 	"Hell is right for you. Because enemies can understand you better"
 	+ "	than allies.",
-	"../Content/Skills/DwellerInHades.png"));
+	"DwellerInHades.png"));
 	
 	dollSkills.push(new DollSkill(31, 4, "Even Unto Tartarus", -1, 0, -1, -1, 
 	["During the Battle Phase, if you are in Tartarus, all your Action"
 	+ "	Maneuver’s Costs are decreased by 1 (to a minimum of 1)."], 
 	"Your pain will not stop even if you all fall into madness."
 	+ "	You will be their strength!",
-	"../Content/Skills/EvenUntoTartarus.png"));
+	"EvenUntoTartarus.png"));
 	
 	dollSkills.push(new DollSkill(32, 4, "Follow", 0, 2, -1, -1, 
 	["This Skill can only be used when one of your Sisters uses a"
@@ -714,21 +723,21 @@ function createSkills(){
 	"Move 1."], 
 	"Behavior that has been repeated many times. It's fixed in your brain"
 	+ "	by now. Instinct.",
-	"../Content/Skills/Follow.png"));
+	"Follow.png"));
 	
 	dollSkills.push(new DollSkill(33, 4, "Lame Beast", -1, 0, -1, -1, 
 	["For every Hit Location of yours in which all Parts have been"
 	+ "	damaged, you gain +1 to Attack Checks you make."], 
 	"What is broken is nothing but a shackle. The harvest for"
 	+ "	replacements is now.",
-	"../Content/Skills/LameBeast.png"));
+	"LameBeast.png"));
 	
 	dollSkills.push(new DollSkill(34, 4, "Struggle", -1, 0, -1, -1, 
 	["When you voluntarily take a Madness Point in order to reroll a die,"
 	+ "	you gain +1 to the die roll."], 
 	"You will never fail. Even this body has given up, but you absolutely"
 	+ "	will not give up until the end!",
-	"../Content/Skills/Struggle.png"));
+	"Struggle.png"));
 	
 	//sorority skills
 	dollSkills.push(new DollSkill(35, 5, "Gathering in Elysium", 2, 2, -2, -2, 
@@ -737,7 +746,7 @@ function createSkills(){
 	"This is not considered a Movement Maneuver."], 
 	"The girl's gatherings can not be messy to anyone. It can not be"
 	+ "	disturbed. Even in battle.",
-	"../Content/Skills/GatheringInElysium.png"));
+	"GatheringInElysium.png"));
 	
 	dollSkills.push(new DollSkill(36, 5, "Grace", -1, 0, -2, -2, 
 	["When you voluntarily take a Madness Point in order to reroll a die,"
@@ -745,14 +754,14 @@ function createSkills(){
 	+ "	Check with you as the target."], 
 	"Your standing behavior is beautiful and perfect, the girls who see"
 	+ "	it will make your feelings clearer.",
-	"../Content/Skills/Grace.png"));
+	"Grace.png"));
 	
 	dollSkills.push(new DollSkill(37, 5, "Order", 2, 3, -2, -2, 
 	["All your sisters upon the Battle Map, including you, may make a"
 	+ "	single Attack Maneuver of their choice with Rapid Timing."], 
 	"You teach it to everyone. Timing is matched with the meaning of your"
 	+ "	shout and attacks fly all at once. Do not allow enemies to fight back.",
-	"../Content/Skills/Order.png"));
+	"Order.png"));
 	
 	dollSkills.push(new DollSkill(38, 5, "Secret Whisper", -1, 0, -2, -2, 
 	["At the beginning and end of the Battle Phase, one sister of your"
@@ -760,21 +769,21 @@ function createSkills(){
 	+ "	the target."], 
 	"Secret conversation of girls. A small topic. A little negativity."
 	+ "	A little friendship. But that is what makes bonds bloom.",
-	"../Content/Skills/SecretWhisper.png"));
+	"SecretWhisper.png"));
 	
 	dollSkills.push(new DollSkill(39, 5, "Self-Control", -1, 0, -1, -1, 
 	["If you are afflicted with Madness, you gain +1 to the die roll on"
 	+ "	Conversation and Madness Checks."], 
 	"You are responsible. Everyone who will not be allowed to escape,"
 	+ "	for example, will take your hand and stand up.",
-	"../Content/Skills/Self-Control.png"));
+	"Self-Control.png"));
 	
 	dollSkills.push(new DollSkill(40, 5, "Sister\'s Kiss", 1, 2, 0, 0, 
 	["This Skill is only usable against Savants.",
 	"The target Savant loses 4 Action Points."], 
 	"A distorted girl standing in front of you may also be a sister."
 	+ "	Let me cuddle and let me down the raised fist…",
-	"../Content/Skills/SistersKiss.png"));
+	"SistersKiss.png"));
 	
 	dollSkills.push(new DollSkill(41, 5, "Tough Love", -1, 0, -2, -2, 
 	["When one of your Sisters has a Part damaged by an Attack Maneuver"
@@ -782,7 +791,7 @@ function createSkills(){
 	+ "	which is in a state of Madness."], 
 	"If they have a weak heart, they will break. You have to become a"
 	+ "	demon. A scar is better than ruin.",
-	"../Content/Skills/ToughLove.png"));
+	"ToughLove.png"));
 	
 	//baroque skills
 	let dollSkill = new DollSkill(42, 6, "Mutated being", -1, 0, -1, -1, 
@@ -791,7 +800,7 @@ function createSkills(){
 	+ "	hits (unless you have lost all Parts from that Location.)"], 
 	"That body no longer has the shape of a person. Therefore it will not"
 	+ "	accept attacks against people.",
-	"../Content/Skills/MutatedBeing.png");
+	"MutatedBeing.png");
 	dollSkill.special = true;
 	dollSkills.push(dollSkill);
 	
@@ -803,7 +812,7 @@ function createSkills(){
 	+ "	the outside air it will crystallize and harden. It will be cut"
 	+ "	and it will absorb the explosion. Indeed the body of a monster,"
 	+ "	but it is a useful body",
-	"../Content/Skills/Crystallization.png");
+	"Crystallization.png");
 	dollSkill.usable = false;
 	dollSkills.push(dollSkill);
 	
@@ -814,7 +823,7 @@ function createSkills(){
 	+ "	regenerate it as normal."], 
 	"The irregular curse that you have been put in is beyond the limits"
 	+ "	of the body. It is a miracle that you keep your mind.",
-	"../Content/Skills/ExtremeMutation.png");
+	"ExtremeMutation.png");
 	dollSkill.extremeMutation = true;
 	dollSkills.push(dollSkill);
 	
@@ -827,7 +836,7 @@ function createSkills(){
 	+ " organs and express it as a more violent weapon. The power of" 
 	+ " destruction would have increased, but its awkwardness is not an" 
 	+ " essential ratio.",
-	"../Content/Skills/InstrumentOfEvil.png"));
+	"InstrumentOfEvil.png"));
 	
 	dollSkills.push(new DollSkill(46, 6, "Karmic Corpe", -1, 0, -1, -1, 
 	["At the end of the Battle Phase, you may regenerate two Parts of" 
@@ -835,7 +844,7 @@ function createSkills(){
 	"It was cut off repeatedly, shot, destroyed and destroyed. It is" 
 	+ " engraved and you wonder what has been done since it broke down a" 
 	+ " little bit now",
-	"../Content/Skills/KarmicCorpse.png"));
+	"KarmicCorpse.png"));
 	
 	dollSkills.push(new DollSkill(47, 6, "Mad Demon", -1, 0, -1, -1, 
 	["When you make an Attack Check for an Unarmed Attack Maneuver, you" 
@@ -843,28 +852,28 @@ function createSkills(){
 	"Your body is dominated by its own combat instinct, the world" 
 	+ " fighting is dyed incrimson, fighting with nails, tearing with" 
 	+ " fangs.",
-	"../Content/Skills/MadDemon.png"));
+	"MadDemon.png"));
 	
 	dollSkills.push(new DollSkill(48, 6, "Regeneration", 1, 4, -1, -1, 
 	["Defend 1. You may use this Skill any number of times per Turn," 
 	+ " but only once per Attack."], 
 	"Your body will return to its original state by itself. Any attack" 
 	+ " will only slow the movement.",
-	"../Content/Skills/Regeneration.png"));
+	"Regeneration.png"));
 	
 	dollSkills.push(new DollSkill(49, 6, "Super Strength", -1, 0, -1, -1, 
 	["Your Unarmed and Melee Attacks deal +1 damage."], 
 	"The muscular strength of the deceased which is unlikely to be human," 
 	+ " it is further enhanced and raised. A monster put in a narrow arm" 
 	+ " is always waiting for the time of liberation.",
-	"../Content/Skills/SuperStrength.png"));
+	"SuperStrength.png"));
 	
 	//gothic skills
 	dollSkill = new DollSkill(50, 7, "Voracity", 0, 2, -1, -1, 
 	["Regenerate a Reinforcement Part of yours that was damaged."], 
 	"Eating corpses, you will recover even an unusual feature, even from" 
 	+ " the original body.",
-	"../Content/Skills/Voracity.png");
+	"Voracity.png");
 	dollSkill.special = true;
 	dollSkills.push(dollSkill);
 	
@@ -873,33 +882,33 @@ function createSkills(){
 	+ " have already used one more time."], 
 	"When someone is hurt, including even yourself, you do not think you" 
 	+ " will gain a sense of amnestic uplifting.",
-	"../Content/Skills/DelightInCorruption.png"));
+	"DelightInCorruption.png"));
 	
 	dollSkills.push(new DollSkill(52, 7, "Feast of Flesh", 1, 1, -1, -1, 
 	["Regenerate a Basic Part of yours that was damaged."], 
 	"You eat dead flesh. Ingested meat will be self contained. That is a" 
 	+ " sight that many dead people will feel awkwardness about.",
-	"../Content/Skills/FeastOfFlesh.png"));
+	"FeastOfFlesh.png"));
 	
 	dollSkills.push(new DollSkill(53, 7, "Lick Jowls", 0, 2, 0, 1, 
 	["Hinder Move 1."], 
 	"Awkward appetite eyes, tongue crawling the lips, dripping saliva." 
 	+ " Any deceased person has to stop his or her feet moving from that" 
 	+ " aspect.",
-	"../Content/Skills/LickJowls.png"));
+	"LickJowls.png"));
 	
 	dollSkills.push(new DollSkill(54, 7, "Predator", 2, 4, 0, 0, 
 	["Stagger all enemies in the same Area as you."], 
 	"The horrors who eat the dead who the enemies instinctively fear." 
 	+ " Even deadly weapons without ego can not stop fearing you.",
-	"../Content/Skills/Predator.png"));
+	"Predator.png"));
 	
 	dollSkills.push(new DollSkill(55, 7, "Rip and Tear", -1, 0, -1, -1, 
 	["The effect of your Jaws and Fists changes to " 
 	+ "\"Unarmed Attack 1 + Dismember.\""], 
 	"Your body specialized in predation is a body to capture the prey," 
 	+ " to rip it, to eat it. Not to strengthen but have a deadly effect.",
-	"../Content/Skills/RipAndTear.png"));
+	"RipAndTear.png"));
 	
 	dollSkills.push(new DollSkill(56, 7, "Ultimate Predator", -1, 0, 0, 0, 
 	["When you succeed with a Range 0 Unarmed Attack, if the number of" 
@@ -908,14 +917,14 @@ function createSkills(){
 	+ " instantly broken (however, Legions are not affected.)"], 
 	"Regardless of size, eating that can crush the swallowed body inside." 
 	+ " Sometimes digestion can not catch up, but it is not a big deal.",
-	"../Content/Skills/UltimatePredator.png"));
+	"UltimatePredator.png"));
 	
 	dollSkills.push(new DollSkill(57, 7, "Vile Repast", -1, 0, -2, -2, 
 	["When you cause the target of your Attack to make a Dismemberment" 
 	+ " Check, they receive a penalty of -2 to the die roll."], 
 	"Your blade is a knife that cuts meals. Your claws are tearing." 
 	+ " Your teeth are eating. None escape.",
-	"../Content/Skills/VileRepast.png"));
+	"VileRepast.png"));
 	
 	//Requiem skills
 	dollSkill = new DollSkill(58, 8, "Magic Bullet", -1, 0, -1, -1, 
@@ -923,7 +932,7 @@ function createSkills(){
 	+ " its maximum range increases by +1."], 
 	"The dead are not suitable for shooting guns, but you are special" 
 	+ " made.To the enemies far away from usual, the bullet pierces.",
-	"../Content/Skills/MagicBullet.png");
+	"MagicBullet.png");
 	dollSkill.special = true;
 	dollSkills.push(dollSkill);
 	
@@ -932,28 +941,28 @@ function createSkills(){
 	+ " die roll."], 
 	"Sharpen the senses and aim for the opponent's weakness. Aimed shots" 
 	+ " will probably set off enemies.",
-	"../Content/Skills/Concentration.png"));
+	"Concentration.png"));
 	
 	dollSkills.push(new DollSkill(60, 8, "Gun God", -1, 0, -1, -1, 
 	["When you make an Attack Check for a Ranged Attack Maneuver, you" 
 	+ " may add +1 to the die roll."], 
 	"Your eyes and gun are connected. It is different from the shambling" 
 	+ " zombie soldiers. It surely penetrates what you want.",
-	"../Content/Skills/GunGod.png"));
+	"GunGod.png"));
 	
 	dollSkills.push(new DollSkill(61, 8, "Gun Kata", 2, 3, 0, 1, 
 	["Hinder 2. Afterwards, you may make a Ranged Attack 1 against the" 
 	+ " same target."], 
 	"Combat fighting strategy using guns. The basics are two pistols, but" 
 	+ " the dead can use this fighting technique for every gun battle.",
-	"../Content/Skills/GunKata.png"));
+	"GunKata.png"));
 	
 	dollSkills.push(new DollSkill(62, 8, "Hand of Death", 0, 2, -1, -1, 
 	["You may use an Attack Maneuver of your choice as if its Timing were" 
 	+ " \"Rapid\"."], 
 	"Your blow is always the prince of death. The enemies who shoot and" 
 	+ " show at exquisite times are always after you.",
-	"../Content/Skills/HandOfDeath.png"));
+	"HandOfDeath.png"));
 	
 	dollSkills.push(new DollSkill(63, 8, "Lullaby", -1, 0, -1, -1, 
 	["During the Battle Phase, you may take a penalty of -1 to the" 
@@ -961,7 +970,7 @@ function createSkills(){
 	+ " Maneuver is decreased by 1 (minimum 1.)"], 
 	"It will not stop. Especially in the battlefield. There is no song if" 
 	+ " the voice is interrupted. Continuously, heavy, let the guns sing.",
-	"../Content/Skills/Lullaby.png"));
+	"Lullaby.png"));
 	
 	dollSkills.push(new DollSkill(64, 8, "Rear Guard\'s Pride", -1, 0, -1, -1, 
 	["When you roll a Critical Failure on a Ranged or Blast Attack,"
@@ -969,21 +978,21 @@ function createSkills(){
 	"Shoot enemies from behind a friend. Because you believe in them," 
 	+ " you can concentrate on the spirit of the Rear Guard. You cannot" 
 	+ " disapprove such trust with just a mistake.",
-	"../Content/Skills/RearGuardsPride.png"));
+	"RearGuardsPride.png"));
 	
 	dollSkills.push(new DollSkill(65, 8, "Trusted Compainion", 1, 2, -1, -1, 
 	["You may regenerate a single damaged Part that can perform a Melee " 
 	+ " Attack or Ranged Attack Maneuver."], 
 	"There is a weapon that you believe in. No matter how it breaks or" 
 	+ " bends, it can not betray you, it will respond to you.",
-	"../Content/Skills/TrustedCompanion.png"));
+	"TrustedCompanion.png"));
 	
 	//Romanesque skills
 	dollSkill = new DollSkill(66, 9, "Battle Maiden", -1, 0, -1, -1, 
 	["Your Maximum Action Points increase by +2."], 
 	"Your dance is as fast as the dead. The surroundings are all so late" 
 	+ " that this blur can barely be seen.",
-	"../Content/Skills/BattleMaiden.png");
+	"BattleMaiden.png");
 	dollSkill.special = true;
 	dollSkills.push(dollSkill);
 	
@@ -992,7 +1001,7 @@ function createSkills(){
 	"Tickling of sensuality. If maiden's fingers crawl, the flesh of the" 
 	+ " dead will also be crankless and will tremble from the pleasure" 
 	+ " of the moment.",
-	"../Content/Skills/Caress.png"));
+	"Caress.png"));
 	
 	dollSkill = new DollSkill(68, 9, "Clockwork", -1, 5, -1, -1, 
 	["When you learn this skill, you may acquire an additional Tier 3" 
@@ -1001,7 +1010,7 @@ function createSkills(){
 	+ " regenerate it as normal."], 
 	"The body is made up of gears and screws. There is little blood and" 
 	+ " meat to move you.",
-	"../Content/Skills/Clockwork.png");
+	"Clockwork.png");
 	dollSkill.clockwork = true;
 	dollSkills.push(dollSkill);
 	
@@ -1010,7 +1019,7 @@ function createSkills(){
 	"Because it is a body that enables precise movement, shoot down the" 
 	+ " place where it can be done. Ensure weaknesses of enemies with" 
 	+ " fine applications.",
-	"../Content/Skills/DanceOfDeath.png"));
+	"DanceOfDeath.png"));
 	
 	dollSkills.push(new DollSkill(70, 9, "Deranged Gears", -1, 0, -2, -2, 
 	["All enemies that roll a Critical Failure within the same Area as" 
@@ -1018,14 +1027,14 @@ function createSkills(){
 	"Unbelievable dance is an appropriate comedy. You can not forgive" 
 	+ " halfway abominations. You have to change it to the clown of clown" 
 	+ " that can be laughed at least.",
-	"../Content/Skills/DerangedGears.png"));
+	"DerangedGears.png"));
 	
 	dollSkills.push(new DollSkill(71, 9, "One\'s Many Charms", -1, 0, -1, -1, 
 	["The cost of your Basic Parts \"Forearm\" and \"Foot\" decreases by 1" 
 	+ " (to a minimum of 0.)"], 
 	"Your limbs dance swiftly. If you are ready to dance together, you" 
 	+ " will have a polite ball in the middle of battle.",
-	"../Content/Skills/OnesManyCharms.png"));
+	"OnesManyCharms.png"));
 	
 	dollSkills.push(new DollSkill(72, 9, "Tuning", 0, 2, 0, 0, 
 	["Choose a damaged Part on the target. Until the end of the Turn, the" 
@@ -1034,7 +1043,7 @@ function createSkills(){
 	+ " that were used up or are not repeatable.)"], 
 	"It is comforting to be danced even if it does not clear. You know" 
 	+ " the art of forcibly moving a broken one.",
-	"../Content/Skills/Tuning.png"));
+	"Tuning.png"));
 	
 	dollSkills.push(new DollSkill(73, 9, "Waltz", 1, 2, -1, -1, 
 	["Until the end of the Turn, every Attack which targets you receives" 
@@ -1045,7 +1054,7 @@ function createSkills(){
 	"Dance princess on the battlefield. The dancing flying attacks that" 
 	+ " are driven into you will be forgotten. It is difficult to stop" 
 	+ " dancing figures.",
-	"../Content/Skills/Waltz.png"));
+	"Waltz.png"));
 	
 	//Stacy Skills
 	dollSkill = new DollSkill(74, 10, "Crawling Flesh", 0, 3, 0, 2, 
@@ -1053,7 +1062,7 @@ function createSkills(){
 	"Hinder 3."], 
 	"Cut off, blown away, even torn off pieces of meat. They will" 
 	+ " wiggle at your will and stop enemies.",
-	"../Content/Skills/CrawlingFlesh.png");
+	"CrawlingFlesh.png");
 	dollSkill.special = true;
 	dollSkills.push(dollSkill);
 	
@@ -1062,7 +1071,7 @@ function createSkills(){
 	"Support 2 or Hinder 2."], 
 	"Grab the opponent with his own arms. If you are dead and throw your" 
 	+ " jaw to bite people from afar, it's a natural tactic.",
-	"../Content/Skills/CorpseStyle.png"));
+	"CorpseStyle.png"));
 	
 	dollSkills.push(new DollSkill(76, 10, "Made to be Broken", -1, 0, -1, -1, 
 	["Add +1 to all die rolls for Attack Checks and Dismemberment" 
@@ -1071,7 +1080,7 @@ function createSkills(){
 	"This cannot be manipulated by Maneuvers that affect Costs."], 
 	"You are excellent, but a clear failed work. The body will collapse" 
 	+ " as battle rages on.",
-	"../Content/Skills/MadeToBeBroken.png"));
+	"MadeToBeBroken.png"));
 	
 	dollSkills.push(new DollSkill(77, 10, "Meat Shield", 0, 4, 0, 1, 
 	["If the damage received by the target is caused by an Attack" 
@@ -1081,7 +1090,7 @@ function createSkills(){
 	+ " included)."], 
 	"Instantly use yourself as a shield and counter the aftermath. Is it" 
 	+ " because of your preparation or is it a dull sense of despair?",
-	"../Content/Skills/MeatShield.png"));
+	"MeatShield.png"));
 	
 	dollSkills.push(new DollSkill(78, 10, "Organ Donor", -1, 0, -2, -2, 
 	["At the end of the Battle Phase, you and all of your Sisters can" 
@@ -1089,7 +1098,7 @@ function createSkills(){
 	"You do not want to imagine what kind of body this is. Your body" 
 	+ " will regenerate only the organs in a short time. Even if it" 
 	+ " hollowed out, baked or eaten.",
-	"../Content/Skills/OrganDonor.png"));
+	"OrganDonor.png"));
 	
 	dollSkills.push(new DollSkill(79, 10, "Protect", 0, 4, 0, 1, 
 	["When the target takes damage, you may take that damage in her" 
@@ -1099,20 +1108,20 @@ function createSkills(){
 	+ " \"Area\" attack effect."], 
 	"You are always a shield for everyone without hesitation. You can" 
 	+ " defend your sisters.",
-	"../Content/Skills/Protect.png"));
+	"Protect.png"));
 	
 	dollSkills.push(new DollSkill(80, 10, "Remain Dead", 0, 2, -1, -1, 
 	["Regenerate a Basic Part of yours that was damaged."], 
 	"Wherever there is a lost part, by reconnecting it is restored." 
 	+ " Your body will not stop being you. Surely, forever.",
-	"../Content/Skills/RemainDead.png"));
+	"RemainDead.png"));
 	
 	dollSkills.push(new DollSkill(81, 10, "Unfazed", -1, 0, -1, -1, 
 	["During the Battle Phase, if your Parts are damaged, you may" 
 	+ " continue to use Maneuvers they enable until the end of the Turn."], 
 	"Your body keeps on functioning even if it becomes disjointed." 
 	+ " This does not hinder it from killing in battle.",
-	"../Content/Skills/Unfazed.png"));
+	"Unfazed.png"));
 	
 	//Thanatos Skills
 	dollSkill = new DollSkill(82, 11, "Unlimited Destruction", 0, 4, -1, -1, 
@@ -1125,7 +1134,7 @@ function createSkills(){
 	+ " and the Count)."], 
 	"An undead technique of throwing all your strikes upon an enemy to" 
 	+ " destroy them completely.",
-	"../Content/Skills/UnlimitedDestruction.png");
+	"UnlimitedDestruction.png");
 	dollSkill.special = true;
 	dollSkills.push(dollSkill);
 	
@@ -1137,14 +1146,14 @@ function createSkills(){
 	"Your existence is a tornado of death. Weapons and madness raging in" 
 	+ " places where you cut and you'll be drawn into a whirlpool of" 
 	+ " destruction.",
-	"../Content/Skills/Calamity.png"));
+	"Calamity.png"));
 	
 	dollSkills.push(new DollSkill(84, 11, "Dead on Target", -1, 0, -1, -1, 
 	["During the Battle Phase, if you roll 6 on an Attack Check, you may" 
 	+ " choose which Location to deal damage to."], 
 	"The blow that always gives a fatal injury to the enemy. It is an" 
 	+ " inevitability rather than a coincidence.",
-	"../Content/Skills/DeadOnTarget.png"));
+	"DeadOnTarget.png"));
 	
 	dollSkills.push(new DollSkill(85, 11, "Drama of Death", -1, 0, -1, -1, 
 	["During the Battle Phase, when you and another Sister target an" 
@@ -1153,21 +1162,21 @@ function createSkills(){
 	"Even with breathing stopped, bodies that observe timing and" 
 	+ " maximize effect with simultaneous attacks. It is meaningful" 
 	+ " to breathe together.",
-	"../Content/Skills/DramaOfDeath.png"));
+	"DramaOfDeath.png"));
 	
 	dollSkills.push(new DollSkill(86, 11, "Instantaneous", -1, 0, -1, -1, 
 	["During the Battle Phase, when you declare an Attack Maneuver, no" 
 	+ " one other than you can perform Maneuvers at the 'Check' and" 
 	+ " 'Rapid' timings in response."], 
 	"Ultra high speed blow. It is impossible for anyone to prevent it.",
-	"../Content/Skills/Instantaneous.png"));
+	"Instantaneous.png"));
 	
 	dollSkills.push(new DollSkill(87, 11, "God of Death", -1, 0, -1, -1, 
 	["When making an Attack Check with a Melee Attack Maneuver, you may" 
 	+ " add +1 to the die roll."], 
 	"Sprint and hit. Your arms, eyes and brain were scrutinized and" 
 	+ " polished to bring about death and destruction.",
-	"../Content/Skills/GodOfDeath.png"));
+	"GodOfDeath.png"));
 	
 	dollSkills.push(new DollSkill(88, 11, "Judgment", -1, 3, -1, -1, 
 	["Use this Skill only during your own Melee Attack Maneuver\'s" 
@@ -1175,7 +1184,7 @@ function createSkills(){
 	+ " and no effect can change this result."], 
 	"There is a blow that cannot be stopped. Liberated from bad luck, it" 
 	+ " will bring an ending.",
-	"../Content/Skills/Judgment.png"));
+	"Judgment.png"));
 	
 	dollSkills.push(new DollSkill(89, 11, "Quenn of the Underworld", -1, 0, -1, -1, 
 	["Hinder Move' Maneuvers used by Legions have no effect on you.",
@@ -1183,7 +1192,7 @@ function createSkills(){
 	+ " against you to hit."], 
 	"No matter how many they arrange, their dead fingers cannot even" 
 	+ " touch you.",
-	"../Content/Skills/QueenOfTheUnderworld.png"));
+	"QueenOfTheUnderworld.png"));
 	
 	//Pychedelic Skills
 	dollSkill = new DollSkill(90, 12, "Vortex of Destruction", -2, 2, -2, -2, 
@@ -1195,7 +1204,7 @@ function createSkills(){
 	"\"The most Terrible Thing\" that was suppressed inside you will" 
 	+ " overflow and destroy everything that is visible to you." 
 	+ " Even yourself.",
-	"../Content/Skills/VortexOfDestruction.png");
+	"VortexOfDestruction.png");
 	dollSkill.special = true;
 	dollSkill.restricted = true;
 	dollSkills.push(dollSkill);
@@ -1208,7 +1217,7 @@ function createSkills(){
 	+ " we have seen with the power of will, twisting, invisible" 
 	+ " violence of splitting overrun the enemy and turn it into meat" 
 	+ " blocks or scraps.",
-	"../Content/Skills/DistortedPower.png");
+	"DistortedPower.png");
 	dollSkill.restricted = true;
 	dollSkills.push(dollSkill);
 	
@@ -1220,7 +1229,7 @@ function createSkills(){
 	"Your soul cannot be caught in the cage of flesh. Gently slip out, you" 
 	+ " can touch the soul of the precious person directly. Cuddling to" 
 	+ " share that suffering.",
-	"../Content/Skills/EmbraceOfSouls.png");
+	"EmbraceOfSouls.png");
 	dollSkill.restricted = true;
 	dollSkills.push(dollSkill);
 	
@@ -1232,7 +1241,7 @@ function createSkills(){
 	"Power of strong will, blow away the target opponent that has a special" 
 	+ " influence even to gravity with a gust of force. Beat on it, even" 
 	+ " miserable sense of upside down shows a big gap?",
-	"../Content/Skills/PawnsGambit.png");
+	"PawnsGambit.png");
 	dollSkill.restricted = true;
 	dollSkills.push(dollSkill);
 	
@@ -1244,7 +1253,7 @@ function createSkills(){
 	"The destruction that you received is projected onto the enemy\'s" 
 	+ " ego and misunderstood... Effective attacks only for those with" 
 	+ " only a very low self are not destroyed and they can not be used.",
-	"../Content/Skills/SharedLoss.png");
+	"SharedLoss.png");
 	dollSkill.restricted = true;
 	dollSkills.push(dollSkill);
 	
@@ -1254,7 +1263,7 @@ function createSkills(){
 	"Slightly, but your body is always floating, making sure that your" 
 	+ " body does not get caught out in movements, such as undocumented" 
 	+ " handouts.",
-	"../Content/Skills/ThroneOfTheVoid.png");
+	"ThroneOfTheVoid.png");
 	dollSkill.restricted = true;
 	dollSkills.push(dollSkill);
 	
@@ -1266,7 +1275,7 @@ function createSkills(){
 	"Eyes to see the future. Power too heavy for the mind in one's heart." 
 	+ " At the price of pain to the soul, the power to avoid only the worst" 
 	+ " crisis.",
-	"../Content/Skills/TwistOfFate.png");
+	"TwistOfFate.png");
 	dollSkill.restricted = true;
 	dollSkills.push(dollSkill);
 	
@@ -1277,7 +1286,7 @@ function createSkills(){
 	+ " per Attack."], 
 	"You can bounce off the unexpected future that produces results just by" 
 	+ " thinking. Do not let the blade ease your important things to bullets.",
-	"../Content/Skills/WillToRefuse.png");
+	"WillToRefuse.png");
 	dollSkill.restricted = true;
 	dollSkills.push(dollSkill);
 	

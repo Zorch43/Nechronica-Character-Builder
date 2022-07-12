@@ -5,15 +5,19 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<!--bootstrap via CDN-->
-		
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		
 		<!--bootstrap via file-->
 		<!--<link rel="stylesheet" href="bootstrap-4.6.1-dist/css/bootstrap.css">-->
+		<!--<script src="js/jquery-3.6.0.js"></script>-->
+		
+		<!--bootstrap via CDN-->
+		
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+		
+		
 		<!--custom style and scripts-->
 		<link rel="stylesheet" href="css/nechronica-stylesheet.css">
 		<script src="js/CharacterList.js"></script>
@@ -30,23 +34,29 @@
 		</div>
 		
 		<!-- Nav tabs -->
-		<ul class="nav nav-tabs">
-		  <li class="nav-item col-2">
+		<ul class="nav nav-tabs d-flex ml-3 mr-3">
+		  <li class="nav-item flex-fill">
 			<a class="nav-link active" data-toggle="tab" href="#name-age" id="name-age-tab">Name & Age</a>
 		  </li>
-		  <li class="nav-item col-2">
+		  <li class="nav-item flex-fill">
 			<a class="nav-link" data-toggle="tab" href="#memories" id="memories-tab">Memories</a>
 		  </li>
-		  <li class="nav-item col-2">
-			<a class="nav-link" data-toggle="tab" href="#class-skills" id="class-skills-tab">Classes & Skills</a>
+		  <li class="nav-item flex-fill">
+			<a class="nav-link" data-toggle="tab" href="#position" id="position-tab" onclick="populatePositions('position-picker')">Position</a>
 		  </li>
-		  <li class="nav-item col-2">
+		  <li class="nav-item flex-fill">
+			<a class="nav-link" data-toggle="tab" href="#classes" id="classes-tab">Classes</a>
+		  </li>
+		  <li class="nav-item flex-fill">
+			<a class="nav-link" data-toggle="tab" href="#r-points" id="r-points-tab">Reinforcement</a>
+		  </li>
+		  <li class="nav-item flex-fill">
 			<a class="nav-link" data-toggle="tab" href="#parts" id="parts-tab">Parts</a>
 		  </li>
-		  <li class="nav-item col-2">
+		  <li class="nav-item flex-fill">
 			<a class="nav-link" data-toggle="tab" href="#treasure" id="treasure-tab">Treasure</a>
 		  </li>
-		  <li class="nav-item col-2">
+		  <li class="nav-item flex-fill">
 			<a class="nav-link creation-tab" data-toggle="tab" href="#deployment" id="deployment-tab">Deployment</a>
 		  </li>
 		</ul>
@@ -130,15 +140,56 @@
 					</p>
 					<div class="d-flex justify-content-between mt-3">
 						<button type="button" class="btn btn-dark col-2" onclick="clickLink('name-age-tab')">Back</button>
-						<button type="button" class="btn btn-dark col-2" onclick="clickLink('class-skills-tab')">Next</button>
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('position-tab')">Next</button>
 					</div>
 				</div>
 			</div>
-			<div class="tab-pane container fade" id="class-skills">
+			<div class="tab-pane container fade" id="position">
+				<div class="mt-3 p-3 border rounded">
+					<p>Dolls do not wander the world on their own; they have sisters with them. Amongst their
+						fellow sisters, each of the Dolls fills a spiritual role- this is known as their Position.</p>
+					<p>Select a skill from any of the positions below to set your doll's position.</p>
+					<div class="row">
+						<div class="col-3">
+							<table class="table table-borderless table-dark sticky-top">
+								<thead>
+									<tr>
+										<th style="width:64px">Position:</th>
+										<th style="">Skill:</th>
+									<tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td id="selectedPosition">None</td>
+										<td id="selectedPositionSkill">None</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="col" id="position-picker">
+							
+						</div>
+					</div>
+					<div class="d-flex justify-content-between mt-3">
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('memories-tab')">Back</button>
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('classes-tab')">Next</button>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane container fade" id="classes">
 				<div class="mt-3 p-3 border rounded">
 					
 					<div class="d-flex justify-content-between mt-3">
-						<button type="button" class="btn btn-dark col-2" onclick="clickLink('memories-tab')">Back</button>
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('position-tab')">Back</button>
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('r-points-tab')">Next</button>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane container fade" id="r-points">
+				<div class="mt-3 p-3 border rounded">
+					
+					<div class="d-flex justify-content-between mt-3">
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('classes-tab')">Back</button>
 						<button type="button" class="btn btn-dark col-2" onclick="clickLink('parts-tab')">Next</button>
 					</div>
 				</div>
@@ -147,7 +198,7 @@
 				<div class="mt-3 p-3 border rounded">
 					
 					<div class="d-flex justify-content-between mt-3">
-						<button type="button" class="btn btn-dark col-2" onclick="clickLink('class-skills-tab')">Back</button>
+						<button type="button" class="btn btn-dark col-2" onclick="clickLink('r-points-tab')">Back</button>
 						<button type="button" class="btn btn-dark col-2" onclick="clickLink('treasure-tab')">Next</button>
 					</div>
 				</div>

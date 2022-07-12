@@ -507,6 +507,7 @@ let premonitionsPopulated = false;
 let memoryFragmentsPopulated = false;
 let fragmentDisplayId = "";
 let memorySlot = -1;
+let positionsPopulated = false;
 
 //utilities
 function clickLink(linkId){
@@ -610,6 +611,7 @@ function populatePremonitionPicker(){
 			content += buildPremonition(premonitions[i], true);
 		}
 		document.getElementById("premonition-list").innerHTML = content;
+		
 	}
 }
 function buildPremonition(premonition, clickable){
@@ -635,5 +637,184 @@ function setPremonition(premonitionId){
 	document.getElementById("cc-premonition").innerHTML = buildPremonition(premonition, false);
 	//close modal
 	$("#premonition-picker").modal('hide');
+}
+
+function populatePositions(displayId){
+	if(!positionsPopulated){
+		let content = "";
+		for(let i = 0; i < dollPositions.length; i++){
+			content += buildClass(dollPositions[i], displayId);
+		}
+		document.getElementById(displayId).innerHTML = content;
+		positionsPopulated = true;
+		
+		$('.collapse').on('show.bs.collapse', function(e) {
+		  var $card = $(this).closest('.card');
+		  var $open = $($(this).data('parent')).find('.collapse.show');
+		  
+		  var additionalOffset = 0;
+		  if($card.prevAll().filter($open.closest('.card')).length !== 0)
+		  {
+				additionalOffset =  $open.height();
+		  }
+		  $('html,body').animate({
+			scrollTop: $card.offset().top - additionalOffset
+		  }, 500);
+		});
+	}
+}
+
+function buildClass(dollClass, displayId){
+	let collapseName = "collapse" + dollClass.name;
+	let classDescription = "";
+	for(let i = 0; i < dollClass.flavorText.length; i++){
+		classDescription += `<p>${dollClass.flavorText[i]}</p>`;
+	}
+	let classSkills = populateClassSkills(dollClass.id);
+	let imgSrc = "Content/Classes/" + dollClass.flavorImage;
+	let imgSrcPrev = "Content/Classes/" + "preview_" + dollClass.flavorImage;
+	let rPointContent = "";
+	if(dollClass.rpa > 0 || dollClass.rpm > 0 || dollClass.rpe > 0){
+		rPointContent = `
+		<table class="table table-dark">
+			<tbody>
+				<tr>
+					<th>Armaments:</th>
+					<td>${dollClass.rpa}</td>
+				</tr>
+				<tr>
+					<th>Mutations:</th>
+					<td>${dollClass.rpm}</td>
+				</tr>
+				<tr>
+					<th>Enhancements:</th>
+					<td>${dollClass.rpe}</td>
+				</tr>
+			</tbody>
+		</table>
+		`;
+	}
+	let content = 
+	`
+	<div class="card">
+	  <div class="card-header p-0">
+		<a class="btn btn-light col-12 text-left class-preview" 
+			style="background-image: url('${imgSrcPrev}')" 
+			data-toggle="collapse" href="#${collapseName}">
+		  <h4>${dollClass.name}</h4>
+		</a>
+	  </div>
+		<div id=${collapseName} class="collapse" data-parent="#${displayId}">
+			<div class="card-body row">
+				<div class="col-4">
+					<img class="card-img-top" src=${imgSrc}>
+					${rPointContent}
+					<div class="card-text">
+						${classDescription}
+					</div>
+				</div>
+				<div class="col">
+					${classSkills}
+					
+				</div>
+			</div>
+	  </div>
+	</div>
+	`;
+	return content;
+}
+
+function populateClassSkills(classId){
+	
+	let content = "";
+	for(let i = 0; i < dollSkills.length; i++){
+		let skill = dollSkills[i];
+		
+		if(skill.classId == classId){
+			content += buildSkill(skill);
+		}
+	}
+	return content;
+}
+
+function buildSkill(skill){
+	let imgSrc = "Content/Skills/" + skill.flavorImage;
+	let effectText = "";
+	for(let i = 0; i < skill.effectText.length; i++){
+		effectText += `<p>${skill.effectText[i]}</p>`;
+	}
+	content =
+	`
+	<div id="position-skill-${skill.id}" class="rounded border p-2 mb-1 text-black-50 necro-item" role="button" onclick="setPositionSkill(${skill.classId},${skill.id})">
+		<div class="d-flex">
+			<img src=${imgSrc} class="mr-2 rounded" style="width:64px; height:64px;">
+			<div class="">
+				<h5>${skill.name}</h5>
+				<p>Timing: ${skill.timing} /// Cost: ${skill.cost} /// Range: ${skill.range}</p>
+			</div>
+		</div>
+		<div class="border border-right-0 border-bottom-0 p-2 mt-1 bg-white text-black-50">
+			${effectText}
+			<p class="font-italic lighter small">
+				${skill.flavorText}
+			</p>
+		</div>
+	</div>
+	`;
+	return content;
+}
+
+function setPositionSkill(positionId, skillId){
+	if(skillId == characterWIP.skills[0]){
+		characterWIP.classPosition = -1;
+		characterWIP.skills[0] = -1;
+	}
+	else{
+		characterWIP.classPosition = positionId;
+		characterWIP.skills[0] = skillId;//position skill takes first position
+	}
+	
+	displayPositionSkill();
+}
+
+function displayPositionSkill(){
+	if(characterWIP.classPosition > -1){
+		let position = null;
+		for(let i = 0; i < dollPositions.length; i++){
+			if(characterWIP.classPosition == dollPositions[i].id){
+				position = dollPositions[i];
+				break;
+			}
+		}
+		document.getElementById("selectedPosition").innerHTML = position.name;
+	}
+	else{
+		document.getElementById("selectedPosition").innerHTML = "None";
+	}
+	
+	if(characterWIP.skills[0] > -1){
+		let skill = null;
+		for(i = 0; i < dollSkills.length; i++){
+			if(characterWIP.skills[0] == dollSkills[i].id){
+				skill = dollSkills[i];
+			}
+		}
+		document.getElementById("selectedPositionSkill").innerHTML = skill.name;
+		//disable all position skills
+		$('#position-picker .necro-item').addClass('disabled');
+		$('#position-picker .necro-item').removeClass('active');
+		//set selected skill as active
+		$('#position-skill-' + characterWIP.skills[0]).addClass('active');
+		$('#position-skill-' + characterWIP.skills[0]).removeClass('disabled');
+		
+	}
+	else{
+		document.getElementById("selectedPositionSkill").innerHTML = "None";
+		//enable all position skills
+		$('#position-picker .necro-item').removeClass('disabled');
+		//unselect last selected position skill
+		$('#position-picker .necro-item').removeClass('active');
+	}
+	
 }
 
