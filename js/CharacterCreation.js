@@ -508,6 +508,7 @@ let memoryFragmentsPopulated = false;
 let fragmentDisplayId = "";
 let memorySlot = -1;
 let positionsPopulated = false;
+let classesPopulated = false;
 
 //utilities
 function clickLink(linkId){
@@ -641,27 +642,38 @@ function setPremonition(premonitionId){
 
 function populatePositions(displayId){
 	if(!positionsPopulated){
-		let content = "";
-		for(let i = 0; i < dollPositions.length; i++){
-			content += buildClass(dollPositions[i], displayId);
-		}
-		document.getElementById(displayId).innerHTML = content;
+		populateClassSelector(displayId, dollPositions);
 		positionsPopulated = true;
-		
-		$('.collapse').on('show.bs.collapse', function(e) {
-		  var $card = $(this).closest('.card');
-		  var $open = $($(this).data('parent')).find('.collapse.show');
-		  
-		  var additionalOffset = 0;
-		  if($card.prevAll().filter($open.closest('.card')).length !== 0)
-		  {
-				additionalOffset =  $open.height();
-		  }
-		  $('html,body').animate({
-			scrollTop: $card.offset().top - additionalOffset
-		  }, 500);
-		});
 	}
+}
+
+function populateClasses(displayId){
+	if(!classesPopulated){
+		populateClassSelector(displayId, dollClasses);
+		classesPopulated = true;
+	}
+}
+
+function populateClassSelector(displayId, classList){
+	let content = "";
+	for(let i = 0; i < classList.length; i++){
+		content += buildClass(classList[i], displayId);
+	}
+	document.getElementById(displayId).innerHTML = content;
+
+	$('#' + displayId + ' .collapse').on('show.bs.collapse', function(e) {
+	  var $card = $(this).closest('.card');
+	  var $open = $($(this).data('parent')).find('.collapse.show');
+	  
+	  var additionalOffset = 0;
+	  if($card.prevAll().filter($open.closest('.card')).length !== 0)
+	  {
+			additionalOffset =  $open.height();
+	  }
+	  $('html,body').animate({
+		scrollTop: $card.offset().top - additionalOffset
+	  }, 500);
+	});
 }
 
 function buildClass(dollClass, displayId){
@@ -670,11 +682,12 @@ function buildClass(dollClass, displayId){
 	for(let i = 0; i < dollClass.flavorText.length; i++){
 		classDescription += `<p>${dollClass.flavorText[i]}</p>`;
 	}
-	let classSkills = populateClassSkills(dollClass.id);
 	let imgSrc = "Content/Classes/" + dollClass.flavorImage;
 	let imgSrcPrev = "Content/Classes/" + "preview_" + dollClass.flavorImage;
 	let rPointContent = "";
+	let isPosition = true;
 	if(dollClass.rpa > 0 || dollClass.rpm > 0 || dollClass.rpe > 0){
+		isPosition = false;
 		rPointContent = `
 		<table class="table table-dark">
 			<tbody>
@@ -694,6 +707,7 @@ function buildClass(dollClass, displayId){
 		</table>
 		`;
 	}
+	let classSkills = populateClassSkills(dollClass.id, isPosition);
 	let content = 
 	`
 	<div class="card">
@@ -724,32 +738,38 @@ function buildClass(dollClass, displayId){
 	return content;
 }
 
-function populateClassSkills(classId){
+function populateClassSkills(classId, isPosition){
 	
 	let content = "";
 	for(let i = 0; i < dollSkills.length; i++){
 		let skill = dollSkills[i];
 		
 		if(skill.classId == classId){
-			content += buildSkill(skill);
+			content += buildSkill(skill, isPosition);
 		}
 	}
 	return content;
 }
 
-function buildSkill(skill){
+function buildSkill(skill, isPosition){
 	let imgSrc = "Content/Skills/" + skill.flavorImage;
 	let effectText = "";
 	for(let i = 0; i < skill.effectText.length; i++){
 		effectText += `<p>${skill.effectText[i]}</p>`;
 	}
+	let special = "";
+	if(skill.special == true){
+		special = `
+		<span class="rounded bg-dark text-white pl-1 pr-1 mr-1">Special: </span>
+		`;
+	}
 	content =
 	`
-	<div id="position-skill-${skill.id}" class="rounded border p-2 mb-1 text-black-50 necro-item" role="button" onclick="setPositionSkill(${skill.classId},${skill.id})">
+	<div id="skill-${skill.id}" class="rounded border p-2 mb-1 text-black-50 necro-item" role="button" onclick="setSkill(${skill.classId},${skill.id},${isPosition})">
 		<div class="d-flex">
 			<img src=${imgSrc} class="mr-2 rounded" style="width:64px; height:64px;">
 			<div class="">
-				<h5>${skill.name}</h5>
+				<h5>${special}${skill.name}</h5>
 				<p>Timing: ${skill.timing} /// Cost: ${skill.cost} /// Range: ${skill.range}</p>
 			</div>
 		</div>
@@ -762,6 +782,15 @@ function buildSkill(skill){
 	</div>
 	`;
 	return content;
+}
+
+function setSkill(classId, skillId, isPosition){
+	if(isPosition){
+		setPositionSkill(classId, skillId);
+	}
+	else{
+		setClassSkill(classId, skillId);
+	}
 }
 
 function setPositionSkill(positionId, skillId){
@@ -804,8 +833,8 @@ function displayPositionSkill(){
 		$('#position-picker .necro-item').addClass('disabled');
 		$('#position-picker .necro-item').removeClass('active');
 		//set selected skill as active
-		$('#position-skill-' + characterWIP.skills[0]).addClass('active');
-		$('#position-skill-' + characterWIP.skills[0]).removeClass('disabled');
+		$('#skill-' + characterWIP.skills[0]).addClass('active');
+		$('#skill-' + characterWIP.skills[0]).removeClass('disabled');
 		
 	}
 	else{
@@ -818,3 +847,178 @@ function displayPositionSkill(){
 	
 }
 
+function setClassSkill(classId, skillId){
+	//if skillId matches any of the selected skills,
+	//clear that skill, then adjust skill array and classes
+	let fixArray = false;
+	for(let i = 1; i < 4; i++){
+		if(characterWIP.skills[i] == skillId){
+			characterWIP.skills[i] = -1;
+			fixArray = true;
+		}
+	}
+	
+	if(fixArray){
+		//if the first slot is empty, move the second skill to the first
+		if(characterWIP.skills[1] == -1){
+			characterWIP.skills[1] = characterWIP.skills[2];
+			characterWIP.skills[2] = -1;
+		}
+		//if only the second slot is empty, and the primary and secondary classes match, 
+		//move the third skill to the second slot and remove the secondary class.
+		if(characterWIP.skills[2] == -1 
+			&& characterWIP.classPrimary == characterWIP.classSecondary){
+			characterWIP.skills[2] = characterWIP.skills[3];
+			characterWIP.skills[3] = -1;
+			characterWIP.classSecondary = -1;
+		}
+		//if there is no skill in the third position, clear the secondary class
+		if(characterWIP.skills[3] == -1){
+			characterWIP.classSecondary = -1;
+		}
+		//if there are no skills in the first or second slots, 
+		//swap primary and secondary classes
+		if(characterWIP.skills[1] == -1 && characterWIP.skills[2] == -1){
+			characterWIP.classPrimary = characterWIP.classSecondary;
+			classSecondary = -1;
+			characterWIP.skills[1] = characterWIP.skills[3];
+			characterWIP.skills[3] = -1;
+		}
+	}
+	//otherwise, add skill to best place in array
+	else{
+		//if first slot is open, put skill there and set primary class
+		if(characterWIP.skills[1] == -1){
+			characterWIP.skills[1] = skillId;
+			characterWIP.classPrimary = classId;
+		}
+		//if second slot is open, and classId matches primary class,
+		//place skill in slot
+		else if(characterWIP.skills[2] == -1 
+			&& classId == characterWIP.classPrimary){
+			characterWIP.skills[2] = skillId;
+		}
+		//else if matches secondary class,
+		//place skill in slot, then swap classes and slots 1 and 3
+		else if(characterWIP.skills[2] == -1
+			&& classId == characterWIP.classSecondary){
+			characterWIP.skills[2] = skillId;
+			characterWIP.classSecondary = characterWIP.classPrimary;
+			characterWIP.classPrimary = classId;
+			let skillTemp = characterWIP.skills[1];
+			characterWIP.skills[1] = characterWIP.skills[3];
+			characterWIP.skills[3] = skillTemp;
+		}
+		//else place in third slot and set secondary class
+		else{
+			characterWIP.skills[3] = skillId;
+			characterWIP.classSecondary = classId;
+		}
+	}
+	displayClassSkills();//update display
+}
+
+function displayClassSkills(){
+	//get class and skill data objects
+	let class1 = null;
+	let class2 = null;
+	for(let i = 0; i < dollClasses.length; i++){
+		if(characterWIP.classPrimary == dollClasses[i].id){
+			class1 = dollClasses[i];
+		}
+		if(characterWIP.classSecondary == dollClasses[i].id){
+			class2 = dollClasses[i];
+		}
+		if(class1 != null && class2 != null){
+			break;
+		}
+	}
+	let skills = [null, null, null];
+	let skillsFound = 0;
+	for(let i = 0; i < dollSkills.length; i++){
+		for(let s = 0; s < skills.length; s++){
+			if(characterWIP.skills[s+1] == dollSkills[i].id){
+				skills[s] = dollSkills[i];
+				skillsFound++;
+				break;
+			}
+		}
+		if(skillsFound >= 3){
+			break;
+		}
+	}
+	
+	//update display of primary class
+	$('#selectedClass1').text(class1 != null ? class1.name : "None");
+	//update display of secondary class
+	$('#selectedClass2').text(class2 != null ? class2.name : "None");
+	//update display of skills
+	$('#selectedSkill1').text(skills[0] != null ? skills[0].name : "None");
+	$('#selectedSkill2').text(skills[1] != null ? skills[1].name : "None");
+	$('#selectedSkill3').text(skills[2] != null ? skills[2].name : "None");
+	//update total reinforcement points
+	$('#class-rpa').text((class1 != null ? class1.rpa : 0) 
+						+ (class2 != null ? class2.rpa : 0));
+	$('#class-rpm').text((class1 != null ? class1.rpm : 0) 
+						+ (class2 != null ? class2.rpm : 0));
+	$('#class-rpe').text((class1 != null ? class1.rpe : 0) 
+						+ (class2 != null ? class2.rpe : 0));
+	//update skill items
+	//enable all items
+	//deselect all items
+	$('#class-picker .necro-item').removeClass('active disabled');
+	
+	//if skill is selected, set active
+	for(let i = 0; i < skills.length; i++){
+		if(skills[i] != null){
+			$('#skill-' + skills[i].id).addClass('active');
+		}
+	}
+
+	//if all skill slots are filled,
+	if(skills[0] != null && skills[1] != null && skills[2] != null){
+		//disable all non-selected skills
+		$('#class-picker .necro-item:not(.active)').addClass('disabled');
+	}
+	//if secondary class is set,
+	else if(class2 != null){
+		//disable skills not from primary or secondary classes
+		//and both classes' special skills
+		$('#class-picker .necro-item:not('
+		+ '#collapse' + class1.name + ' .necro-item,'
+		+ '#collapse' + class2.name + ' .necro-item),' 
+		+ '#collapse' + class1.name + ' .necro-item:first-child,'
+		+ '#collapse' + class2.name + ' .necro-item:first-child')
+		.addClass('disabled');
+		
+		//if primary and secondary classes are different,
+		if(class1.id != class2.id){//note: probably unneccesary
+			//disable both classes' special skills
+			$('#collapse' + class1.name + ' .necro-item:first-child,'
+			+ '#collapse' + class1.name + ' .necro-item:first-child')
+			.addClass('disabled');
+		}
+		
+	}
+	//if special skill is selected,
+	else if((skills[0] != null && skills[0].special) 
+		|| (skills[1] != null && skills[1].special)){
+		//disable skills from other classes	
+		$('#class-picker .necro-item:not(' 
+		+ '#collapse' + class1.name + ' .necro-item)')
+		.addClass('disabled');
+	}
+	//if only a primary class is set,
+	else if(class1 != null){
+		//disable special skills from other classes
+		$('#class-picker .necro-item:first-child:not(' 
+		+ '#collapse' + class1.name + ' .necro-item)')
+		.addClass('disabled');
+	}
+	
+	
+	
+	
+	
+	
+}

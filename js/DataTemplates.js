@@ -352,7 +352,7 @@ function createClasses(){
 	+ "	front lines as a monster.",
 	"You, who wield both strong attacks and defences, shall serve well"
 	+ "	enough as both shield and sword for your Sisters."],
-	"../Content/Classes/Baroque.png"));
+	"Baroque.png"));
 	
 	dollClasses.push(new DollClass(7, "Gothic", 0, 1, 1,
 	["Heretical Dolls.",
@@ -373,7 +373,7 @@ function createClasses(){
 	"You show your true worth when you throw yourself at the enemy, make"
 	+ "	even the dead shrink back and devour them all as your bizarre"
 	+ "	hunger commands."],
-	"../Content/Classes/Gothic.png"));
+	"Gothic.png"));
 	
 	dollClasses.push(new DollClass(8, "Requiem", 2, 0, 0,
 	["Dolls that use firearms",
@@ -388,7 +388,7 @@ function createClasses(){
 	+ "	reach, not to protect yourself. Being in Elysium or Eden is fine,"
 	+ "	but you will likely need the courage to go forward into the Limbo"
 	+ "	sometimes."],
-	"../Content/Classes/Requiem.png"));
+	"Requiem.png"));
 	
 	dollClasses.push(new DollClass(9, "Romanesque", 0, 0, 2,
 	["Dancing Dolls.",
@@ -409,7 +409,7 @@ function createClasses(){
 	+ "	contain all sorts of effects (attacks, defences and control over"
 	+ "	the stage.",
 	"From this combination your place will change."],
-	"../Content/Classes/Romanesque.png"));
+	"Romanesque.png"));
 	
 	dollClasses.push(new DollClass(10, "Stacy", 1, 1, 0,
 	["The most conventional of Dolls.",
@@ -428,7 +428,7 @@ function createClasses(){
 	"Of course, you may not forget that the strongest defence is an attack."
 	+ "	You should also wield an appropriate means of attacking from what"
 	+ "	you can gather"],
-	"../Content/Classes/Stacy.png"));
+	"Stacy.png"));
 	
 	dollClasses.push(new DollClass(11, "Thanatos", 1, 0, 1,
 	["Dolls made for battle.",
@@ -448,7 +448,7 @@ function createClasses(){
 	+ "	as you can. In addition, most enemies will hold on to their means"
 	+ "	of attack until they are completely destroyed. Without forgetting"
 	+ "	to end each one, decimate the enemy one after another."],
-	"../Content/Classes/Thanatos.png"));
+	"Thanatos.png"));
 	
 	dollClasses.push(new DollClass(12, "Psychedelic", 0, 0, 1,
 	["ESPer Dolls.",
@@ -459,7 +459,7 @@ function createClasses(){
 	+ "	distort the laws of nature. Amongst all the pallor of the dead,"
 	+ "	the Psychedelics shine singularly bright... like jewels ripe for"
 	+ "	the taking."],
-	"../Content/Classes/Psychedelic.png"));
+	"Psychedelic.png"));
 }
 
 //position and class skills
@@ -1279,7 +1279,7 @@ function createSkills(){
 	dollSkill.restricted = true;
 	dollSkills.push(dollSkill);
 	
-	dollSkill = new DollSkill(97, 12, "WillToRefuse", 2, 4, 0, 1, 
+	dollSkill = new DollSkill(97, 12, "Will To Refuse", 2, 4, 0, 1, 
 	["You may use this skill even if completely Annihilated.",
 	"Defend 1.",
 	"You may use this Skill any number of times per Turn, but only once" 
