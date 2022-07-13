@@ -60,6 +60,9 @@
 	pointer-events: none;
 	opacity: 0.65;
 }
+.fade.disabled{
+	pointer-events: none;
+}
 .necro-item.active{
 	background-color: #aaaaaa;
 }

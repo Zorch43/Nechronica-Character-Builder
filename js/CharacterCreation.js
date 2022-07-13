@@ -652,6 +652,7 @@ function populateClasses(displayId){
 		populateClassSelector(displayId, dollClasses);
 		classesPopulated = true;
 	}
+	displayClassSkills();
 }
 
 function populateClassSelector(displayId, classList){
@@ -844,7 +845,11 @@ function displayPositionSkill(){
 		//unselect last selected position skill
 		$('#position-picker .necro-item').removeClass('active');
 	}
-	
+}
+function resetPosition(){
+	characterWIP.classPosition = -1;
+	characterWIP.skills[0] = -1;
+	displayPositionSkill();
 }
 
 function setClassSkill(classId, skillId){
@@ -958,11 +963,14 @@ function displayClassSkills(){
 	$('#selectedSkill3').text(skills[2] != null ? skills[2].name : "None");
 	//update total reinforcement points
 	$('#class-rpa').text((class1 != null ? class1.rpa : 0) 
-						+ (class2 != null ? class2.rpa : 0));
+						+ (class2 != null ? class2.rpa : 0)
+						+ characterWIP.rpa);
 	$('#class-rpm').text((class1 != null ? class1.rpm : 0) 
-						+ (class2 != null ? class2.rpm : 0));
+						+ (class2 != null ? class2.rpm : 0)
+						+ characterWIP.rpm);
 	$('#class-rpe').text((class1 != null ? class1.rpe : 0) 
-						+ (class2 != null ? class2.rpe : 0));
+						+ (class2 != null ? class2.rpe : 0)
+						+ characterWIP.rpe);
 	//update skill items
 	//enable all items
 	//deselect all items
@@ -1015,10 +1023,84 @@ function displayClassSkills(){
 		+ '#collapse' + class1.name + ' .necro-item)')
 		.addClass('disabled');
 	}
-	
-	
-	
-	
-	
-	
+}
+function resetClass(){
+	characterWIP.classPrimary = -1;
+	characterWIP.classSecondary = -1;
+	characterWIP.skills.splice(1,3, -1, -1, -1);
+	displayClassSkills();
+}
+
+function updateRPoints(){
+	let class1 = null;
+	let class2 = null;
+	for(let i = 0; i < dollClasses.length; i++){
+		if(characterWIP.classPrimary == dollClasses[i].id){
+			class1 = dollClasses[i];
+		}
+		if(characterWIP.classSecondary == dollClasses[i].id){
+			class2 = dollClasses[i];
+		}
+		if(class1 != null && class2 != null){
+			break;
+		}
+	}
+	//update total reinforcement points
+	$('#total-rpa').text((class1 != null ? class1.rpa : 0) 
+						+ (class2 != null ? class2.rpa : 0)
+						+ characterWIP.rpa);
+	$('#total-rpm').text((class1 != null ? class1.rpm : 0) 
+						+ (class2 != null ? class2.rpm : 0)
+						+ characterWIP.rpm);
+	$('#total-rpe').text((class1 != null ? class1.rpe : 0) 
+						+ (class2 != null ? class2.rpe : 0)
+						+ characterWIP.rpe);
+	//show and hide buttons
+	//hide all buttons
+	$('#rp-allocation-table td>span:nth-child(1), #rp-allocation-table td>span:nth-child(3)').addClass('fade disabled');
+	//if at least 1 unallocated rp, show all plus buttons
+	if(characterWIP.rpu > 0){
+		$('#rp-allocation-table td>span:nth-child(3)').removeClass('fade disabled');
+		$('#r-point-instructions').text("Assign one reinforcement point to any category:");
+	}
+	else{
+		$('#r-point-instructions').text("Reinforcement point allocated.");
+	}
+	//for each category with at least 1 point invested, show minus button
+	if(characterWIP.rpa > 0){
+		$('#rpa-minus').removeClass('fade disabled');
+	}
+	if(characterWIP.rpm > 0){
+		$('#rpm-minus').removeClass('fade disabled');
+	}
+	if(characterWIP.rpe > 0){
+		$('#rpe-minus').removeClass('fade disabled');
+	}	
+}
+function assignRPoint(category){
+	if(category == 'a'){
+		characterWIP.rpa++;
+	}
+	else if(category == 'm'){
+		characterWIP.rpm++;
+	}
+	else if(category == 'e'){
+		characterWIP.rpe++;
+	}
+	characterWIP.rpu--;
+	updateRPoints();
+}
+
+function unassignRPoint(category){
+	if(category == 'a'){
+		characterWIP.rpa--;
+	}
+	else if(category == 'm'){
+		characterWIP.rpm--;
+	}
+	else if(category == 'e'){
+		characterWIP.rpe--;
+	}
+	characterWIP.rpu++;
+	updateRPoints();
 }

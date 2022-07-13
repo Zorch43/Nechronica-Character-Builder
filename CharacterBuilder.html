@@ -25,6 +25,13 @@
 		<script src="js/DataTemplates.js"></script>
 		<script src = "js/CharacterCreation.js"></script>
 		
+		<!--other scripts-->
+		<script>
+			$(document).ready(function(){
+			  $('[data-toggle="tooltip"]').tooltip();
+			});
+		</script>
+		
 		
 	</head>
 	<body onload="loadCharacterList(); createTemplates()">
@@ -48,7 +55,7 @@
 			<a class="nav-link" data-toggle="tab" href="#classes" id="classes-tab" onclick="populateClasses('class-picker')">Classes</a>
 		  </li>
 		  <li class="nav-item flex-fill">
-			<a class="nav-link" data-toggle="tab" href="#r-points" id="r-points-tab">Reinforcement</a>
+			<a class="nav-link" data-toggle="tab" href="#r-points" id="r-points-tab" onclick="updateRPoints()">Reinforcement</a>
 		  </li>
 		  <li class="nav-item flex-fill">
 			<a class="nav-link" data-toggle="tab" href="#parts" id="parts-tab">Parts</a>
@@ -151,20 +158,23 @@
 					<p>Select a skill from any of the positions below to set your doll's position.</p>
 					<div class="row">
 						<div class="col-3">
-							<table class="table table-borderless table-dark sticky-top">
-								<thead>
-									<tr>
-										<th style="width:64px">Position:</th>
-										<th style="">Skill:</th>
-									<tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td id="selectedPosition">None</td>
-										<td id="selectedPositionSkill">None</td>
-									</tr>
-								</tbody>
-							</table>
+							<div class="sticky-top">
+								<table class="table table-borderless table-dark sticky-top">
+									<thead>
+										<tr>
+											<th style="width:64px">Position:</th>
+											<th style="">Skill:</th>
+										<tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td id="selectedPosition">None</td>
+											<td id="selectedPositionSkill">None</td>
+										</tr>
+									</tbody>
+								</table>
+								<button class="btn btn-danger" onclick="resetPosition()" style="width:100%">Reset</button>
+							</div>
 						</div>
 						<div class="col" id="position-picker">
 							
@@ -223,6 +233,7 @@
 										</tr>
 									</tbody>
 								</table>
+								<button class="btn btn-danger" onclick="resetClass()" style="width:100%">Reset</button>
 							</div>
 							
 						</div>
@@ -238,7 +249,63 @@
 			</div>
 			<div class="tab-pane container fade" id="r-points">
 				<div class="mt-3 p-3 border rounded">
-					
+					<p>
+						Classes possess point values divided among "Armaments", "Mutations", and
+						"Enhancements." These are Reinforcement Points, and determine which manner of
+						special Parts can be used to reinforce a Doll's body.
+					</p>
+					<div class="d-flex justify-content-center">
+						
+						<div class="col-6">
+						<h4 id="r-point-instructions" class="text-nowrap">Assign one reinforcement point to any category:</h4> 
+							<table id="rp-allocation-table" class="table table-dark">
+								<tbody>
+									<tr>
+										<th style="width:80%">
+											Armaments:
+											<p class="font-italic small font-weight-light">
+												Weapons, guns and other offensive equipment. 
+												Frequently attached to the arms.
+											</p>
+										</th>
+										<td class="font-weight-bolder text-outline text-white text-monospace align-middle">
+											<span id="rpa-minus" role="button" class="mr-1 disabled" onclick="unassignRPoint('a')">-</span>
+											<span class="" id="total-rpa">0</span>
+											<span id="rpa-plus" role="button" class="ml-1" onClick="assignRPoint('a')">+</span>
+										</td>
+									</tr>
+									<tr>
+										<th style="width:80%">
+											Mutations:
+											<p class="font-italic small font-weight-light">
+												Special bodily organs. They warp one's appearance, 
+												but possess great power.
+											</p>
+										</th>
+										<td class="font-weight-bolder text-outline text-white text-monospace align-middle">
+											<span id="rpm-minus"role="button" class="mr-1 disabled" onclick="unassignRPoint('m')">-</span>
+											<span id="total-rpm">0</span>
+											<span id="rpm-plus" role="button" class="ml-1" onClick="assignRPoint('m')">+</span>
+										</td>
+									</tr>
+									<tr>
+										<th style="width:80%">
+											Enhancements:
+											<p class="font-italic small font-weight-light">
+												Mechanical parts attached to the body, 
+												often made of metal or plastic.
+											</p>
+										</th>
+										<td class="font-weight-bolder text-outline text-white text-monospace align-middle">
+											<span id="rpe-minus" role="button" class="mr-1 disabled" onclick="unassignRPoint('e')">-</span>
+											<span id="total-rpe">0</span>
+											<span id="rpm-plus" role="button" class="ml-1" onClick="assignRPoint('e')">+</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
 					<div class="d-flex justify-content-between mt-3">
 						<button type="button" class="btn btn-dark col-2" onclick="clickLink('classes-tab')">Back</button>
 						<button type="button" class="btn btn-dark col-2" onclick="clickLink('parts-tab')">Next</button>
