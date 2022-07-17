@@ -17,12 +17,18 @@
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		
+		<!--Icons-->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
+		integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+		
 		<!--JSONP scripts-->
 		<script src="json/dollPremonitionsJSON.js"></script>
 		<script src="json/dollMemoriesJSON.js"></script>
 		<script src="json/dollPositionsJSON.js"></script>
 		<script src="json/dollClassesJSON.js"></script>
 		<script src="json/dollSkillsJSON.js"></script>
+		<script src="json/dollPartsJSON.js"></script>
 		
 		
 		<!--custom style and scripts-->
@@ -65,7 +71,7 @@
 			<a class="nav-link" data-toggle="tab" href="#r-points" id="r-points-tab" onclick="updateRPoints()">Reinforcement</a>
 		  </li>
 		  <li class="nav-item flex-fill">
-			<a class="nav-link" data-toggle="tab" href="#parts" id="parts-tab">Parts</a>
+			<a class="nav-link" data-toggle="tab" href="#parts" id="parts-tab" onclick="updateParts()">Parts</a>
 		  </li>
 		  <li class="nav-item flex-fill">
 			<a class="nav-link" data-toggle="tab" href="#treasure" id="treasure-tab">Treasure</a>
@@ -321,7 +327,42 @@
 			</div>
 			<div class="tab-pane container fade" id="parts">
 				<div class="mt-3 p-3 border rounded">
-					
+					<div class="row">
+						<div id="parts-summary" class="col">
+							<div class="sticky-top">
+								<div id="remaining-points">
+									<table class="table table-dark">
+										<tbody>
+											<tr>
+												<th style="width:120px">Armaments:</th>
+												<td id="tiered-rpa"></td>
+											</tr>
+											<tr>
+												<th>Mutations:</th>
+												<td id="tiered-rpm"></td>
+											</tr>
+											<tr>
+												<th>Enhancements:</th>
+												<td id="tiered-rpe"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<button type="button" class="btn btn-danger" style="width:100%" onclick="resetParts()">Reset</button>
+								<div class="row mt-3">
+									<div id="partCol1" class="col">
+										
+									</div>
+									<div id="partCol2" class="col">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="part-picker" class="col-8">
+							
+						</div>
+					</div>
 					<div class="d-flex justify-content-between mt-3">
 						<button type="button" class="btn btn-dark col-2" onclick="clickLink('r-points-tab')">Back</button>
 						<button type="button" class="btn btn-dark col-2" onclick="clickLink('treasure-tab')">Next</button>
@@ -392,6 +433,39 @@
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 			  </div>
+
+			</div>
+		  </div>
+		</div>
+		<!--part position picker-->
+		<div class="modal" id="part-location-picker">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+
+				  <!-- Modal Header -->
+				  <div class="modal-header">
+					<h4 class="modal-title">Set Part Location</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				  </div>
+
+				  <!-- Modal body -->
+				  <div class="modal-body d-flex justify-content-center">
+					<button type="button" id="set-loc-head" data-dismiss="modal" onclick="placePart('Head')"
+					class="btn btn-dark rounded text-outline tile-64 bg-img-head m-2">Head</button>
+					<button type="button" id="set-loc-head" data-dismiss="modal" onclick="placePart('Arms')"
+					class="btn btn-dark rounded text-outline tile-64 bg-img-arms m-2">Arms</button>
+					<button type="button" id="set-loc-head" data-dismiss="modal" onclick="placepart('Torso')"
+					class="btn btn-dark rounded text-outline tile-64 bg-img-torso m-2">Torso</button>
+					<button type="button" id="set-loc-head" data-dismiss="modal" onclick="placePart('Legs')"
+					class="btn btn-dark rounded text-outline tile-64 bg-img-legs m-2">Legs</button>
+				  </div>
+
+				  <!-- Modal footer -->
+				  <div class="modal-footer">
+					<button type="button" id="set-loc-remove" class="btn btn-danger" 
+					data-dismiss="modal" onclick="placePart('')">Remove</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+				  </div>
 
 			</div>
 		  </div>

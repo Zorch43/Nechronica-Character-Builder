@@ -8,13 +8,13 @@ const PartLocations = ["Any", "Head", "Arms", "Torso", "Legs"];
 const partTypes = ["Basic", "Armament", "Mutation", "Enhancement", "Treasure"];
 const deployments = ["Eden", "Elysium", "Limbo"];
 const fetterTargetGroups = ["Fetters", "Savant", "Neutral"];
-//filled by template functions
+//filled by JSON(P)
 const premonitions = JSON.parse(dollPremonitionsJSON);
 const memoryFragments = JSON.parse(dollMemoriesJSON);
 const dollPositions = JSON.parse(dollPositionsJSON);
 const dollClasses = JSON.parse(dollClassesJSON);
 const dollSkills = JSON.parse(dollSkillsJSON);
-const dollParts = [];
+const dollParts = JSON.parse(dollPartsJSON);
 const fetterTypes = [];
 const treasures = [];
 
@@ -97,7 +97,7 @@ function DollSkill(id, classId, name, cost, timing, rangeMin, rangeMax,
 //minimized part
 function Part(partId, partLocation){
 	this.id = partId;//part id from catalogue
-	this.partLocation = partLocation;//part location id from array (when relevant)
+	this.partLocation = partLocation;//part location from array (when relevant)
 	this.damaged = false;//whether this part is currently damaged
 	this.used = false;//whether this part's ability has been used (when relevant)
 }
@@ -209,5 +209,12 @@ function FetterType(id, targetGroup, name, flavorText, flavorImage,
 	this.madFlavorImage = madFlavorImage;
 	this.effect = effect;
 }
-
+//list query function
+function getById(id, list){
+	for(let i=0; i < list.length; i++){
+		if(list[i].id == id){
+			return list[i];
+		}
+	}
+}
 

@@ -73,6 +73,26 @@
 	background-repeat: no-repeat;
 	background-position: right;
 }
+.tile-64{
+	width: 64px;
+	height: 64px;
+	background-size: contain;
+}
+.bg-img-head{
+	background-image: url("../Content/Icons/LocationHead.png");
+}
+.bg-img-arms{
+	background-image: url("../Content/Icons/LocationArms.png");
+}
+.bg-img-torso{
+	background-image: url("../Content/Icons/LocationTorso.png");
+}
+.bg-img-legs{
+	background-image: url("../Content/Icons/LocationLegs.png");
+}
+.spent{
+	color: #808080;
+}
 /*bootstrap overrides*/
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {

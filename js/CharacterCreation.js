@@ -509,6 +509,9 @@ let fragmentDisplayId = "";
 let memorySlot = -1;
 let positionsPopulated = false;
 let classesPopulated = false;
+let partsPopulated = false;
+let selectedPart = null;
+let selectedPartIndex = -1;
 
 //utilities
 function clickLink(linkId){
@@ -1032,29 +1035,11 @@ function resetClass(){
 }
 
 function updateRPoints(){
-	let class1 = null;
-	let class2 = null;
-	for(let i = 0; i < dollClasses.length; i++){
-		if(characterWIP.classPrimary == dollClasses[i].id){
-			class1 = dollClasses[i];
-		}
-		if(characterWIP.classSecondary == dollClasses[i].id){
-			class2 = dollClasses[i];
-		}
-		if(class1 != null && class2 != null){
-			break;
-		}
-	}
+	let totals = getRPointTotals();
 	//update total reinforcement points
-	$('#total-rpa').text((class1 != null ? class1.rpa : 0) 
-						+ (class2 != null ? class2.rpa : 0)
-						+ characterWIP.rpa);
-	$('#total-rpm').text((class1 != null ? class1.rpm : 0) 
-						+ (class2 != null ? class2.rpm : 0)
-						+ characterWIP.rpm);
-	$('#total-rpe').text((class1 != null ? class1.rpe : 0) 
-						+ (class2 != null ? class2.rpe : 0)
-						+ characterWIP.rpe);
+	$('#total-rpa').text(totals[0]);
+	$('#total-rpm').text(totals[1]);
+	$('#total-rpe').text(totals[2]);
 	//show and hide buttons
 	//hide all buttons
 	$('#rp-allocation-table td>span:nth-child(1), #rp-allocation-table td>span:nth-child(3)').addClass('fade disabled');
@@ -1104,3 +1089,434 @@ function unassignRPoint(category){
 	characterWIP.rpu++;
 	updateRPoints();
 }
+
+function updateParts(){
+	//one-time setup
+	if(!partsPopulated){
+		partsPopulated = true;
+		let content = "";
+		content += buildPartTiers("Armament");
+		content += buildPartTiers("Mutation");
+		content += buildPartTiers("Enhancement");
+		
+		$('#part-picker').html(content);
+		$('#part-picker .collapse').on('show.bs.collapse', function(e) {
+			var $card = $(this).closest('.card');
+			var $open = $($(this).data('parent')).find('.collapse.show');
+
+			var additionalOffset = 0;
+			if($card.prevAll().filter($open.closest('.card')).length !== 0)
+			{
+				additionalOffset =  $open.height();
+			}
+			$('html,body').animate({
+			scrollTop: $card.offset().top - additionalOffset
+			}, 500);
+		});
+		
+		//setup basic parts
+		characterWIP.parts = [
+			new Part(5, "Head"),//brain
+			new Part(6, "Head"),//eyes
+			new Part(7, "Head"),//jaw
+			new Part(2, "Arms"),//shoulder
+			new Part(1, "Arms"),//forearm
+			new Part(0, "Arms"),//fist
+			new Part(8, "Torso"),//spine
+			new Part(9, "Torso"),//entrails
+			new Part(9, "Torso"),//entrails
+			new Part(3, "Legs"),//bone
+			new Part(3, "Legs"),//bone
+			new Part(4, "Legs"),//foot
+		];
+	}
+	//get r-points
+	let rPointArray = calculateTieredRPoints();
+	//update list of buyable parts
+	updateBuyablePartList(rPointArray);
+	//update rpoints
+	updateTieredRPoints(rPointArray);
+	//update list of owned parts
+	updateOwnedPartList();
+}
+function calculateTieredRPoints(){
+	//get skill list
+	let parts = [];
+	for(let i = 0; i < characterWIP.parts.length; i++){
+		parts.push(getById(characterWIP.parts[i].id, dollParts));
+	}
+	//get total r-points of each tier, for each category
+	//let rPointArray = [[0,0,0],[0,0,0][0,0,0]];
+	let rPointArray = [[],[],[]];
+	let totals = getRPointTotals();
+	let bonusMut = false;
+	let bonusEnh = false;
+	//find bonus points
+	for(let i = 0; i < characterWIP.skills.length; i++){
+		let skill = getById(characterWIP.skills[i], dollSkills);
+		if(skill != null){
+			if(skill.extremeMutation){
+				bonusMut = true;
+			}
+			if(skill.clockwork){
+				bonusEnh = true;
+			}
+		}
+	}
+	//calculate r-point array
+	for(let c = 0; c < rPointArray.length; c++){
+		for(let i = 0; i < totals[c];){
+			//t1
+			rPointArray[c].push(1);
+			i++;
+			//t2
+			if(i < totals[c]){
+				rPointArray[c].push(2);
+				i++;
+			}
+			//t3
+			if(i < totals[c]){
+				rPointArray[c].push(3);
+				i++;
+			}
+		}
+	}
+	if(bonusMut){
+		rPointArray[1].push(3);
+	}
+	if(bonusEnh){
+		rPointArray[2].push(3);
+	}
+	
+	//for each reinforcement part,
+	for(let i = 0; i < parts.length; i++){
+		let part = parts[i];
+		if(part.type == "Basic"){
+			continue;
+		}
+		//determine category index
+		let c = 0;
+		if(part.type == "Mutation"){
+			c = 1;
+		}
+		else if(part.type == "Enhancement"){
+			c = 2;
+		}
+		//spend the most appropriate r-point
+		//TODO: improve algorithm by spending in descending tier order
+		let bestVal = 0;
+		let bestIndex = -1;
+		for(let r = 0; r < rPointArray[c].length; r++){
+			let tier = rPointArray[c][r]; 
+			if(part.tier <= tier && (tier <  bestVal || bestIndex == -1)){
+				bestVal = tier;
+				bestIndex = r;
+			}
+		}
+		rPointArray[c][bestIndex] *= -1;//mark as spent
+	}
+	
+	//return r-point remainder array
+	return rPointArray
+}
+function updateBuyablePartList(rPointArray){
+	//find the highest tier in each category
+	let tiers = [0,0,0];
+	//for each category
+	for(let c = 0; c < rPointArray.length; c++){
+		//find the highest value
+		let bestValue = 0;
+		for(let i = 0; i < rPointArray[c].length; i++){
+			if(rPointArray[c][i] > bestValue){
+				bestValue = rPointArray[c][i];
+				if(bestValue == 3){
+					break;
+				}
+			}
+		}
+		tiers[c] = bestValue;
+	}
+	//reset active state for all item
+	$('#part-picker .necro-item').removeClass('active')
+	//set active state for all owned reinforcement points
+	for(let i = 0; i < characterWIP.parts.length; i++){
+		$('#part' + characterWIP.parts[i].id).addClass('active');
+	}
+	//disable un-purchaseable parts for each category
+	updateBuyablePartCategory("Armament", tiers[0]);
+	updateBuyablePartCategory("Mutation", tiers[1]);
+	updateBuyablePartCategory("Enhancement", tiers[2]);
+	
+}
+function updateBuyablePartCategory(categoryName, maxTier){
+	for(let t = 1; t <= 3; t++){
+		if(maxTier >= t){
+			$(`#${categoryName}-${t} .necro-item`).removeClass('disabled');
+		}
+		else{
+			$(`#${categoryName}-${t} .necro-item:not(.active)`).addClass('disabled');
+		}
+	}
+}
+function updateOwnedPartList(){
+	let headList = getPartsInLocation("Head");
+	let armsList = getPartsInLocation("Arms");
+	let torsoList = getPartsInLocation("Torso");
+	let legsList = getPartsInLocation("Legs");
+	
+	let headContent = buildPartLocation(headList, "Head");
+	let armsContent = buildPartLocation(armsList, "Arms");
+	let torsoContent = buildPartLocation(torsoList, "Torso");
+	let legsContent = buildPartLocation(legsList, "Legs");
+	
+	//rearrange tables if neccessary
+	let colContent1 = "";
+	let colContent2 = "";
+	
+	//if any one category is longer than the other categories combined (+ wiggle room + account for headers and margins),
+	//move its column-mate to the other column (at the end)
+	if(headList.length >= armsList.length + torsoList.length + legsList.length){
+		colContent1 = headContent;
+		colContent2 = armsContent + torsoContent + legsContent;
+	}
+	else if(armsList.length >= headList.length + torsoList.length + legsList.length){
+		colContent1 = headContent + torsoContent + legsContent;
+		colContent2 = armsContent;
+	}	
+	else if(torsoList.length >= headList.length + armsList.length + legsList.length){
+		colContent1 = torsoContent;
+		colContent2 = headContent + armsContent + legsContent;
+	}	
+	else if(legsList.length >= headList.length + armsList.length + torsoList.length){
+		colContent1 = headContent + armsContent + torsoContent;
+		colContent2 = legsContent;
+	}		
+	//if the sum of a column is significantly larger (x2) than the sum of the other column,
+	//switch columns
+	else if(headList.length + torsoList.length >= 2 * (armsList.length + legsList.length)
+		|| 2 * (headList.length + torsoList.length) <= armsList.length + legsList.length){
+		colContent1 = headContent + armsContent;
+		colContent2 = torsoContent + legsContent;
+	}
+	//if no rearrangement needed, put in default columns
+	else{
+		colContent1 = headContent + torsoContent;
+		colContent2 = armsContent + legsContent;
+	}
+	
+	//display tables
+	$('#partCol1').html(colContent1);
+	$('#partCol2').html(colContent2);
+}
+function getPartsInLocation(partLocation){
+	let list = [];
+	for(let i = 0; i < characterWIP.parts.length; i++){
+		if(characterWIP.parts[i].partLocation == partLocation){
+			list.push(getById(characterWIP.parts[i].id, dollParts));
+		}
+	}
+	return list;
+}
+function buildPartLocation(list, partLocation){
+	let partList = "";
+	for(let i = 0; i < list.length; i++){
+		partList += buildPartSummary(list[i]);
+	}
+	let content =
+	`
+	<table class="table table-sm thead-dark table-bordered">
+		<thead class="thead-dark">
+			<tr>
+				<th>${partLocation}</th>
+			</tr>
+		</thead>
+		<tbody>
+			${partList}
+		</tbody>
+	</table>
+	`;
+	return content;
+}
+function buildPartSummary(part){
+	return `<tr><td>${part.name}</td></tr>`;
+}
+function buildPartTiers(type){
+	let content = "";
+	for(let i = 1; i <= 3; i++){
+		content += buildPartCategory(type, i);
+	}
+	return content;
+}
+function buildPartCategory(type, tier){
+	let collapseName = type + "-" + tier;
+	let categoryParts = buildCategoryParts(type, tier);
+	let content = 
+	`
+	<div class="card">
+		<div class="card-header p-0">
+			<a class="btn btn-light col-12 text-center"  
+				data-toggle="collapse" href="#${collapseName}">
+			  <h4>Tier ${tier} ${type}s</h4>
+			</a>
+		</div>
+		<div id=${collapseName} class="collapse" data-parent="#part-picker">
+			<div class="card-body">
+				${categoryParts}
+			</div>
+		</div>
+	</div>
+	`;
+	return content;
+}
+function buildCategoryParts(type, tier){
+	let content = "";
+	for(let i = 0; i < dollParts.length; i++){
+		let part = dollParts[i];
+		if(part.type == type && part.tier == tier){
+			content += buildPart(dollParts[i]);
+		}
+	}
+	return content;
+}
+function buildPart(part){
+	let imgSrc = "Content/Parts/" + part.flavorImage;
+	let effectText = "";
+	for(let i = 0; i < part.effect.length; i++){
+		effectText += `<p>${part.effect[i]}</p>`;
+	}
+	let content = 
+	`
+	<div id="part${part.id}" class="rounded border p-2 mb-1 text-black-50 necro-item" role="button" onclick="buyPart(${part.id})">
+		<div class="d-flex">
+			<img src=${imgSrc} class="mr-2 rounded" style="width:64px; height:64px;">
+			<div class="">
+				<h5>${part.name}</h5>
+				<p>Location: ${part.partLocation} /// Timing: ${part.timing} /// Cost: ${part.cost} /// Range: ${part.range}</p>
+			</div>
+		</div>
+		<div class="border border-right-0 border-bottom-0 p-2 mt-1 bg-white text-black-50">
+			${effectText}
+			<p class="font-italic lighter small">
+				${part.flavorText}
+			</p>
+		</div>
+	</div>
+	`;
+	return content;
+}
+function updateTieredRPoints(rPointsArray){
+	updateTieredRPointsCategory("tiered-rpa", rPointsArray[0]);
+	updateTieredRPointsCategory("tiered-rpm", rPointsArray[1]);
+	updateTieredRPointsCategory("tiered-rpe", rPointsArray[2]);	
+}
+function updateTieredRPointsCategory(displayId, points){
+	let content = "";
+	for(let i = 0; i < points.length; i++){
+		if(points[i] == -3){
+			content += `<i class="fas fa-dice-three spent"></i> `;
+		}
+		else if(points[i] == -2){
+			content += `<i class="fas fa-dice-two spent"></i> `;
+		}
+		else if(points[i] == -1){
+			content += `<i class="fas fa-dice-one spent"></i> `;
+		}
+		else if(points[i] == 1){
+			content += `<i class="fas fa-dice-one"></i> `;
+		}
+		else if(points[i] == 2){
+			content += `<i class="fas fa-dice-two"></i> `;
+		}
+		else if(points[i] == 3){
+			content += `<i class="fas fa-dice-three"></i> `;
+		}
+	}
+	
+	$('#' + displayId).html(content);
+}
+function getRPointTotals(){
+	let class1 = null;
+	let class2 = null;
+	for(let i = 0; i < dollClasses.length; i++){
+		if(characterWIP.classPrimary == dollClasses[i].id){
+			class1 = dollClasses[i];
+		}
+		if(characterWIP.classSecondary == dollClasses[i].id){
+			class2 = dollClasses[i];
+		}
+		if(class1 != null && class2 != null){
+			break;
+		}
+	}
+	let rpaTotal = (class1 != null ? class1.rpa : 0) 
+						+ (class2 != null ? class2.rpa : 0)
+						+ characterWIP.rpa;
+	let rpmTotal = (class1 != null ? class1.rpm : 0) 
+						+ (class2 != null ? class2.rpm : 0)
+						+ characterWIP.rpm;
+	let rpeTotal = (class1 != null ? class1.rpe : 0) 
+						+ (class2 != null ? class2.rpe : 0)
+						+ characterWIP.rpe;
+	return [rpaTotal, rpmTotal, rpeTotal];
+}
+function buyPart(partId){
+	let part = getById(partId, dollParts);
+	//get the index of the owned part (if it exists)
+	let ownedIndex = -1;
+	for(let i = 0; i < characterWIP.parts.length; i++){
+		if(characterWIP.parts[i].id == partId){
+			ownedIndex = i;
+			break;
+		}
+	}
+	//if part can be placed in any location,
+	if(part.partLocation == "Any"){
+		//set selected part
+		selectedPart = part;
+		selectedPartIndex = ownedIndex;
+		//if the part was already owned, add option to remove part
+		if(ownedIndex >= 0){
+			$('#set-loc-remove').removeClass('fade');
+		}
+		else{
+			$('#set-loc-remove').addClass('fade');
+		}
+		
+		//open modal to pick location, or remove the part
+		$('#part-location-picker').modal();
+		
+	}
+	else{
+		if(ownedIndex >= 0){
+			//if part is already owned, remove it
+			characterWIP.parts.splice(ownedIndex, 1);
+		}
+		else{
+			//if part is not owned, add to list of parts
+			characterWIP.parts.push(new Part(partId, part.partLocation));
+		}
+		//update  parts and rpoints
+		updateParts();
+	}
+}
+function placePart(partLocation){
+	//remove selected part (if able)
+	if(selectedPartIndex >= 0){
+		characterWIP.parts.splice(selectedPartIndex, 1);
+	}
+	//add the part to the corresponding location
+	characterWIP.parts.push(new Part(selectedPart.id, partLocation));
+	//update parts
+	updateParts();
+}
+function resetParts(){
+	for(let i = 0; i < characterWIP.parts.length; i++){
+		if(getById(characterWIP.parts[i].id, dollParts).type != "Basic"){
+			characterWIP.parts.splice(i, 1);
+		}
+	}
+	updateParts();
+}
+
+
+
