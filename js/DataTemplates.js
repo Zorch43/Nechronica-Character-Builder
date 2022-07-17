@@ -15,8 +15,9 @@ const dollPositions = JSON.parse(dollPositionsJSON);
 const dollClasses = JSON.parse(dollClassesJSON);
 const dollSkills = JSON.parse(dollSkillsJSON);
 const dollParts = JSON.parse(dollPartsJSON);
-const fetterTypes = [];
-const treasures = [];
+const dollTreasures = JSON.parse(dollTreasuresJSON);
+const dollFetterTypes = [];
+
 
 //doll constructor
 function Doll(nextId)
@@ -145,10 +146,11 @@ function DollPart(id, type, tier, partLocation, name, cost,
 	this.flavorImage = flavorImage;//part image
 }
 //treasure constructor
-function Treasure(name, flavorText, partLocation){
+function Treasure(name, partLocation, flavorText, flavorImage){
 	this.name = name;//name of the treasure
-	this.flavorText = flavorText;//treasure flavor text
 	this.partLocation = partLocation;//where the treasure is located
+	this.flavorText = flavorText;//treasure flavor text
+	this.flavorImage = flavorImage;//treasure image
 }
 //class constructor
 function DollClass(id, name, rpa, rpm, rpe, flavorText, flavorImage){

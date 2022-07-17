@@ -512,6 +512,7 @@ let classesPopulated = false;
 let partsPopulated = false;
 let selectedPart = null;
 let selectedPartIndex = -1;
+let treasuresPopulated = false;
 
 //utilities
 function clickLink(linkId){
@@ -1516,6 +1517,64 @@ function resetParts(){
 		}
 	}
 	updateParts();
+}
+
+function updateTreasure(){
+	if(!treasuresPopulated){
+		treasuresPopulated = true;
+		let content = "";
+		for(let i = 0; i < dollTreasures.length; i++){
+			content += buildTreasure(dollTreasures[i], i);
+		}
+		$('#treasure-picker .modal-body').html(content);
+		//set default treasure
+		pickTreasure(0);
+	}
+	
+}
+function buildTreasure(treasure, index){
+	let imgSrc = "../Content/Treasures/" + treasure.flavorImage;
+	let content = 
+	`
+	<div class="rounded border p-2 mb-1 text-black-50 necro-item" role="button" data-dismiss="modal" onclick="pickTreasure(${index})">
+		<div class="d-flex">
+			<img src=${imgSrc} class="mr-2 rounded tile-64">
+			<div class="">
+				<h5>${treasure.name}</h5>
+				<p>Location: Any /// Timing: Auto /// Cost: None /// Range: None</p>
+			</div>
+		</div>
+		<div class="border border-right-0 border-bottom-0 p-2 mt-1 bg-white text-black-50">
+			<p class="font-italic lighter small">
+				${treasure.flavorText}
+			</p>
+		</div>
+	</div>	
+	`;
+	return content;
+}
+function pickTreasure(index){
+	let treasure = dollTreasures[index];
+	let imgSrc = "../Content/Treasures/" + treasure.flavorImage;
+	//save to character
+	characterWIP.treasures[0] = treasure;
+	//update treasure display
+	$('#treasureImage').attr("src", imgSrc);
+	$('#treasureName').val(treasure.name);
+	$('#treasureFlavor').val(treasure.flavorText);
+	$('#treasureLocation').val(treasure.partLocation).change();
+}
+function pickRandomTreasure(){
+	let random = Math.floor(Math.random() * dollTreasures.length);
+	pickTreasure(random);
+}
+function editTreasure(){
+	let name = $('#treasureName').val();
+	let partLocation = $('#treasureLocation').val();
+	let flavorText = $('#treasureFlavor').val();
+	let flavorImage = $('#treasureImage').attr("src");
+	
+	characterWIP.treasures[0] = new Treasure(name, partLocation, flavorText, flavorImage);
 }
 
 
