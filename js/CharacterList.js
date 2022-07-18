@@ -22,17 +22,19 @@ function loadCharacterList()
 	
 	container.innerHTML = content;
 }
-function listItemHTML(item)
+function listItemHTML(doll)
 {
+	let classPosition = getById(doll.classPosition, dollPositions);
+	let classPrimary = getById(doll.classPrimary, dollClasses);
+	let classSecondary = getById(doll.classSecondary, dollClasses);
 	let content = 
 		`<div class='necro-box mb-3'>
 			<div class='rounded bg-black text-white p-2'>
-				<h5 class='text-outline'>Character Name</h5>
+				<h5 class='text-outline'>${doll.name}</h5>
 				<div class='rounded bg-white text-dark p-2'>
-					<p>Position /// Primary Class /// Secondary Class
+					<p>${classPosition.name} /// ${classPrimary.name} /// ${classSecondary.name}</p>
 					<button type='button' class='btn btn-dark' 
-						onclick='deleteDoll(${item.id})'>- Delete -</button></p>
-					<p>Armaments: 0 /// Mutations: 0 /// Enhancements: 0</p>
+						onclick='deleteDoll(${doll.id})'>- Delete -</button>
 				</div>
 			</div>
 		</div>`;
@@ -43,16 +45,25 @@ function listItemHTML(item)
 //doll CRUD functions
 function createDoll(nextId)
 {
-	//get data
+	//create new doll for character creation
+	characterWIP = new Doll(nextId);
+	//start character creation
+	startCharacterCreation();
+}
+function saveDoll(){
 	let data = loadData();
-	//add new character to list
-	
-	data.charList.push(new Doll(nextId)); 
-	//save data
+	let update = false;
+	for(let i = 0; i < data.charList.length; i++){
+		if(characterWIP.id == data.charList[i].id){
+			data.charList[i] = characterWIP;
+			update = true;
+			break;
+		}
+	}
+	if(!update){
+		data.charList.push(characterWIP);
+	}
 	saveData(data);
-	//temp: reload character list
-	//TODO: load character creation sequence
-	loadCharacterList();
 }
 function deleteDoll(id)
 {

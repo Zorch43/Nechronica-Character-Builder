@@ -1,506 +1,4 @@
 //global variables
-const randomNames = [
-	"Body Water",
-	"Rollers Running",
-	"Prints Cat",
-	"Floppy Disk Ice cream",
-	"Dislike Whale",
-	"Prints Fusion",
-	"Leash Ice cream",
-	"Breakfast Cone",
-	"Horse Android",
-	"Dislike Nuclear",
-	"Leash Puppy",
-	"Mail Horse",
-	"Horse Breakfast",
-	"Video games Laptop",
-	"Monster Toilet",
-	"Clock Trees",
-	"Soda Post office",
-	"Sink Video games",
-	"Solar Comics",
-	"Crab Shoes",
-	"Ice cream Cone",
-	"Puppy Male",
-	"Laptop Ring",
-	"Rollers Website",
-	"Shoes Crab",
-	"Hnads Rollers",
-	"Kitty Fusion",
-	"Flowers Cat",
-	"Website Towel",
-	"Flowers Cat",
-	"Towel Flowers",
-	"Plus Dislike",
-	"Cat System",
-	"Water Settings",
-	"Website Puppy",
-	"YouTube Video games",
-	"Comics Drugs",
-	"Dog Kitty",
-	"Urine Horse",
-	"Water Sink",
-	"Post office Leash",
-	"Sink Comics",
-	"Websites Fusion",
-	"Whale Ice cream",
-	"Shoe System",
-	"Elevator Kitty",
-	"Comics Toilet",
-	"Drugs Video games",
-	"Light saber Flowers",
-	"Fusion Horse",
-	"Plus Towel",
-	"Soda Drugs",
-	"Comics Clock",
-	"Allergies Sink",
-	"Flowers Flowers",
-	"Horse Plants",
-	"Kitty Fusion",
-	"Ice cream Cone",
-	"Allergies Leash",
-	"Shelf YouTube",
-	"Shoes Rollers",
-	"Dog Dog",
-	"Cone Website",
-	"Bird System",
-	"Drugs Soap",
-	"Ring Male",
-	"Plants Shelf",
-	"Video games Bird",
-	"Puppy YouTube",
-	"Running Websites",
-	"Website Hnads",
-	"Towel Nuclear",
-	"Toolbox Website",
-	"BBQ Poop",
-	"Sink Plus",
-	"Solar Plus",
-	"Light saber Fusion",
-	"Nuclear Clock",
-	"Toilet Horse",
-	"Android Elevator",
-	"Solar Shelf",
-	"Monster Clock",
-	"Dislike Poop",
-	"Soap Body",
-	"Breakfast Sink",
-	"Soap Crab",
-	"Rollers Light saber",
-	"Water Allergies",
-	"Shower Drugs",
-	"YouTube Flowers",
-	"Sink Crab",
-	"Urine Cat",
-	"Urine Rollers",
-	"Robot Puppy",
-	"Horse Shelf",
-	"Poop Video games",
-	"Ice cream Whale",
-	"Nuclear Elevator",
-	"Cat Allergies",
-	"Hnads System",
-	"Hobbledehoy Mumpsimus",
-	"Ecdysiast Slangwhanger",
-	"Crudivore Boustrophedon",
-	"Unremacadamized Klutz",
-	"Gobbledygook Lagopodous",
-	"Hemidemisemiquaver Ecdysiast",
-	"Troglodyte Lickety-split",
-	"Yahoo Hemidemisemiquaver",
-	"Hobbledehoy Discombobulate",
-	"Lickety-split Collop",
-	"Ornery Nincompoop",
-	"Mumpsimus Hobbledehoy",
-	"Callipygian Maverick",
-	"Hobbledehoy Skedaddle",
-	"Cantankerous Collywobbles",
-	"Borborygm Maverick",
-	"Smellfungus Turdiform",
-	"Lagopodous Codswallop",
-	"Collywobbles Slangwhanger",
-	"Flummox Formication",
-	"Kerfuffle Batrachomyomachy",
-	"Crudivore Bowyang",
-	"Hoosegow Gongoozle",
-	"Tatterdemalion Formication",
-	"Widdershins Callipygian",
-	"Gaberlunzie Nincompoop",
-	"Maverick Gobbledygook",
-	"Tatterdemalion Pratfall",
-	"Snool Hoosegow",
-	"Furbelow Skullduggery",
-	"Klutz Doozy",
-	"Firkin Collywobbles",
-	"Gardyloo! Klutz",
-	"Fatuous Gonzo",
-	"Pratfall Furphy",
-	"Mugwump Tatterdemalion",
-	"Widdershins Snollygoster",
-	"Nincompoop Discombobulate",
-	"Furbelow Cantankerous",
-	"Troglodyte Canoodle",
-	"Rambunctious Mugwump",
-	"Eructation Rambunctious",
-	"Fartlek Formication",
-	"Ecdysiast Eructation",
-	"Goombah Batrachomyomachy",
-	"Hocus-pocus Rambunctious",
-	"Pandiculation Cockamamie",
-	"Batrachomyomachy Eructation",
-	"Batrachomyomachy Furphy",
-	"Firkin Gaberlunzie",
-	"Allegator Ornery",
-	"Widdershins Lollygag",
-	"Mumpsimus Abibliophobia",
-	"Yahoo Godwottery",
-	"Catercornered Gonzo",
-	"Brouhaha Nincompoop",
-	"Lickety-split Cantankerous",
-	"Gonzo Hoosegow",
-	"Yahoo Comeuppance",
-	"Fard Fatuous",
-	"Borborygm Flibbertigibbet",
-	"Dudgeon Furbelow",
-	"Doozy Hemidemisemiquaver",
-	"Fartlek Brouhaha",
-	"Kerfuffle Hocus-pocus",
-	"Shenanigan Catercornered",
-	"Nincompoop Crapulence",
-	"Mollycoddle Absquatulate",
-	"Ranivorous Rigmarole",
-	"Mumpsimus Donnybrook",
-	"Gardyloo! Bowyang",
-	"Allegator Billingsgate",
-	"Wabbit Anencephalous",
-	"Rambunctious Hobbledehoy",
-	"Mugwump Anencephalous",
-	"Pettifogger Formication",
-	"Hemidemisemiquaver Godwottery",
-	"Mollycoddle Borborygm",
-	"Bumbershoot Cockamamie",
-	"Skedaddle Snickersnee",
-	"Fatuous Cantankerous",
-	"Discombobulate Gobbledygook",
-	"Catercornered Gonzo",
-	"Panjandrum Allegator",
-	"Slangwhanger Argle-bargle",
-	"Kerfuffle Logorrhea",
-	"Pratfall Canoodle",
-	"Blunderbuss Unremacadamized",
-	"Gardyloo! Doozy",
-	"Batrachomyomachy Allegator",
-	"Crudivore Snickersnee",
-	"Tatterdemalion Snool",
-	"Codswallop Collop",
-	"Logorrhea Lickety-split",
-	"Argle-bargle Filibuster",
-	"Gonzo Troglodyte",
-	"Fatuous Absquatulate",
-	"Dudgeon Hootenanny",
-	"Hemidemisemiquaver Ecdysiast",
-	"Canoodle Abibliophobia",
-	"Baylor Rashan",
-	"Burton Bently",
-	"Hayes Vernon",
-	"Braxton Zayden",
-	"Luigi Dwight",
-	"Hassan Rodney",
-	"Ellington Duncan",
-	"Adnan Will",
-	"Jaiden Leaf",
-	"Carson Edmund",
-	"Amir Kieran",
-	"Wally Eason",
-	"Gian Boston",
-	"Luca Orson",
-	"Jeffrey Alfonse",
-	"Eric Maxim",
-	"Nickolas Isidore",
-	"Preston Rudolph",
-	"Jon Florian",
-	"Jacques Judas",
-	"Antony Buck",
-	"Quintrell Frankie",
-	"Davin Petar",
-	"Gael Nathaniel",
-	"Johan Thaddeus",
-	"Emanuel Samir",
-	"Jason Deacon",
-	"Zachary Eddy",
-	"Tiberius Curtis",
-	"Brian Gale",
-	"Marlon Luigi",
-	"Mel Godwin",
-	"Toryn Keegan",
-	"Richie Yardley",
-	"Petar Vishal",
-	"Fraser Kennedy",
-	"Chuck Jagger",
-	"Jarvis Tariq",
-	"Asa Perry",
-	"Finnigan Morgan",
-	"Tevin Corbin",
-	"Kellan Bevan",
-	"Brice Julian",
-	"Rajesh Kerry",
-	"Marcel Calvin",
-	"Thor Hunter",
-	"Gustavo Silas",
-	"Link Wilfred",
-	"Merick Aran",
-	"Martyn Abdullah",
-	"Rosanna Ciel",
-	"Lacie Nisha",
-	"Chrissy Jazmine",
-	"Alka Judy",
-	"Reilly Bernice",
-	"Nerissa Sierra",
-	"Elaina Rayna",
-	"Irene Kylie",
-	"Chastity Isha",
-	"Goldie Danielle",
-	"Rhianna Shawnette",
-	"Justice Charlotte",
-	"Selah Magdalena",
-	"Jodi Hetty",
-	"Rocio Maryam",
-	"Jenny Lacey",
-	"Shauna Ira",
-	"Dena Addison",
-	"Montserrat Caterina",
-	"Raina Margot",
-	"Nieve Mildred",
-	"Julie Ilene",
-	"Lacie Denise",
-	"Tara Carol",
-	"Kera Charlotte",
-	"Vienna Pearl",
-	"Opal Leila",
-	"Theodora Olga",
-	"Liv Avery",
-	"Winifred Lianne",
-	"Marcella Hallie",
-	"Ivy Tammy",
-	"Ryanne Melanie",
-	"Brie Dana",
-	"Constance Maris",
-	"Fatima Emma",
-	"Claire Lou",
-	"Eris Lottie",
-	"Carmel Margot",
-	"Kera Madisyn",
-	"Hepsiba Sylvie",
-	"Destinee Meagan",
-	"Brianna Sadhbh",
-	"Sebastianne Cassandra",
-	"Jody Emilee",
-	"Diamond Rani",
-	"Dana Iris",
-	"Alka Katelyn",
-	"Amelie Rhiannon",
-	"Sammy Siobhan",
-	"Malina Caitlyn",
-	"Pippa Daniela",
-	"Megan Xia",
-	"Jancis Luna",
-	"Maja Brogan",
-	"Mollie Lyric",
-	"Lucia Alma",
-	"Remi Denice",
-	"Odalis Kaylin",
-	"Elly Shelley",
-	"Jaya Imelda",
-	"Tasmin Liliana",
-	"Jill Chanelle",
-	"Celina Camila",
-	"Ruby Waverley",
-	"Amaris Chenille",
-	"Angelia Ashton",
-	"Millicent Elaina",
-	"Taylah Calliope",
-	"Aimee Annabella",
-	"Kaliyah Mira",
-	"Kerry Star",
-	"Aislinn Candis",
-	"Kasey Ceanna",
-	"Aileen Cressida",
-	"Leonie Eimear",
-	"Alyshialynn Salome",
-	"Karin Nerissa",
-	"Lynnette Caleigh",
-	"Kaitlyn Brook",
-	"Annmarie Cameron",
-	"Deana Kimmy",
-	"Francoise Jo",
-	"Charlotte Jamiya",
-	"Keana Liza",
-	"Joanne Malia",
-	"Honour Winifred",
-	"Dulce Andromeda",
-	"Kenzie Dixie",
-	"Paisley Celestia",
-	"Bessie Honey",
-	"Lillie Aislynn",
-	"Sophie Kim",
-	"Cassandra Grainne",
-	"Rosalie Genesis",
-	"Maja Mildred",
-	"Elouise Elisabeth",
-	"Janis Kylie",
-	"Sara Livia",
-	"Delilah Maggie",
-	"Letitia Rydel",
-	"Darcey Heather",
-	"Tala Gabriella",
-	"Agnes Aileen",
-	"Raegan Ethel",
-	"Una Xia",
-	"Jacqueline Hailey",
-	"Zula Kelley",
-	"Ruby Julianna",
-	"Justina Eleanor",
-	"Cecily Lynne",
-	"Kelsey Clara",
-	"Tiara Primrose",
-	"Zola Beyonce",
-	"Amelie Hortense",
-	"Carmel Maire",
-	"Prue Kaye",
-	"Kali Carina",
-	"Nadene Beatrix",
-	"Aliyah Renee",
-	"Violetta Arden",
-	"Sugar Winnie",
-	"Bunty Deb",
-	"Cecilia Daria",
-	"Octavia Lyra",
-	"Farah Taya",
-	"Jaime Juniper",
-	"Rikki Everly",
-	"Adelina Imogen",
-	"Adrienne Violet",
-	"Dottie Karen",
-	"Cate Kasey",
-	"Penny Shania",
-	"Kimberley Jacquelyn",
-	"Mira Autumn",
-	"Zaya Sydney",
-	"Reagan Stefanie",
-	"Lorri Alexandra",
-	"Kadence Estelle",
-	"Giovanna Nia",
-	"Annika Leyla",
-	"Jeannie Mel",
-	"Apple January",
-	"Ellie Kerian",
-	"Bryony Angelina",
-	"Lois Kristin",
-	"Isha Robin",
-	"Frances Jules",
-	"Sierra Sharon",
-	"Xochil Toni",
-	"Patricia Ellen",
-	"Kaylee Cassandra",
-	"Lucky Blythe",
-	"Atlanta Kaylin",
-	"Jenelle Lianne",
-	"Dahlia Nana",
-	"Sharon Stacie",
-	"Alannah Esmeralda",
-	"Kiara Catlin",
-	"Eliza Georgette",
-	"Isobel Laurel",
-	"Chrystal Brynn",
-	"Ashley Asha",
-	"Cynthia Eudora",
-	"Gena Golda",
-	"Jo Paloma",
-	"Taryn Kirsty",
-	"Tiana Lacey",
-	"Wendi Nita",
-	"Aislynn Alma",
-	"Henrietta Camry",
-	"Aubreanna Michelle",
-	"Mei Honey",
-	"Anabelle Beatrice",
-	"Bliss Elektra",
-	"Julissa Magdalene",
-	"Dulce Kit",
-	"Candy Janine",
-	"Guadalupe Cayla",
-	"Megan Amanda",
-	"Tanya Norma",
-	"Ramona Jodie",
-	"Venus Zyana",
-	"Mariana Nishka",
-	"Sherrie Mariella",
-	"Anjali Joann",
-	"Iliana Shary",
-	"Eleanor Liberty",
-	"Kelly Mae",
-	"Yvaine Nishka",
-	"Coco Ellen",
-	"Kaylee Lindsay",
-	"Lainey Elicia",
-	"Sofie Elisabeth",
-	"Isadora Carla",
-	"Beatrice Rhiannon",
-	"Perrie Nita",
-	"Ashlyn Sabrina",
-	"Jan Alexia",
-	"Meadow Isabell",
-	"Ariella Janae",
-	"January Suzie",
-	"Sabrina Petra",
-	"Alia Jet",
-	"Gabrielle Colleen",
-	"Leela Meredith",
-	"Odette Maggie",
-	"Nicola Blake",
-	"Alberta Maryam",
-	"Becky Isobel",
-	"Shelby Aphrodite",
-	"Hester Daphne",
-	"Rita Ashlee",
-	"Andrea Angelina",
-	"Muriel Eugenie",
-	"Marcella Delores",
-	"Salome Nikita",
-	"Lainey Cailin",
-	"Bella Aqua",
-	"Carole Abrielle",
-	"Hepsiba Bobbie",
-	"Rae Katelyn",
-	"Maribel Elaine",
-	"Marisol Henrietta",
-	"Elana Jude",
-	"Talitha Alex",
-	"Ceanna Lucia",
-	"Abby Arden",
-	"Daina Belinda",
-	"Marlena Meryl",
-	"Talitha Tatum",
-	"Cyndi Kora",
-	"Larissa Hazel",
-	"Alberta Davida",
-	"Ella Alize",
-	"Yolanda Kristen",
-	"Keana Violetta",
-	"Angelique Karla",
-	"Sandy Meadow",
-	"Deirdre Zakia",
-	"Eden Leonora",
-	"Eudora Oriana",
-	"Wendy Marla",
-	"Roisin Arianne",
-	"Joan Michaela",
-	"Tula Debra",
-	"Tiegan Senuri",
-	"Deb Kaidence",
-	"Mariah Cerise",
-	"Cristina Keana"
-];
 
 let characterWIP = new Doll(-1);//current character creation data
 let premonitionsPopulated = false;
@@ -513,7 +11,440 @@ let partsPopulated = false;
 let selectedPart = null;
 let selectedPartIndex = -1;
 let treasuresPopulated = false;
+//content loader
+function startCharacterCreation(){
+	let content=
+	`
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs d-flex ml-3 mr-3">
+	  <li class="nav-item flex-fill">
+		<a class="nav-link active" data-toggle="tab" href="#name-age" id="name-age-tab">Name & Age</a>
+	  </li>
+	  <li class="nav-item flex-fill">
+		<a class="nav-link" data-toggle="tab" href="#memories" id="memories-tab">Memories</a>
+	  </li>
+	  <li class="nav-item flex-fill">
+		<a class="nav-link" data-toggle="tab" href="#position" id="position-tab" onclick="populatePositions('position-picker')">Position</a>
+	  </li>
+	  <li class="nav-item flex-fill">
+		<a class="nav-link" data-toggle="tab" href="#classes" id="classes-tab" onclick="populateClasses('class-picker')">Classes</a>
+	  </li>
+	  <li class="nav-item flex-fill">
+		<a class="nav-link" data-toggle="tab" href="#r-points" id="r-points-tab" onclick="updateRPoints()">Reinforcement</a>
+	  </li>
+	  <li class="nav-item flex-fill">
+		<a class="nav-link" data-toggle="tab" href="#parts" id="parts-tab" onclick="updateParts()">Parts</a>
+	  </li>
+	  <li class="nav-item flex-fill">
+		<a class="nav-link" data-toggle="tab" href="#treasure" id="treasure-tab" onclick="updateTreasure()">Treasure</a>
+	  </li>
+	  <li class="nav-item flex-fill">
+		<a class="nav-link creation-tab" data-toggle="tab" href="#deployment" id="deployment-tab">Deployment</a>
+	  </li>
+	</ul>
 
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div class="tab-pane container active" id="name-age">
+			<div class="mt-3 p-3 border rounded">
+				<p class="pl-3 pr-3 pt-3">
+					Your name can be a nickname, a Japanese name, a 
+					foreign name, a number, or anything you like. 
+					Since you're all made from corpses, often from 
+					who knows where, it doesn't have to make sense. 
+					Names are often bestowed upon you by the 
+					Necromancers. Don't worry yourselves over them.
+				</p>
+				<div class="pl-3 pt-3 form-inline">
+					<label for="cc-name">Name:</label>
+					<input class="form-control mr-2 ml-2" id="cc-name" onchange="setName('cc-name')">
+					<button type="button" class="btn btn-secondary" onclick ="randomName('cc-name')">Random</button>
+				</div>
+				<div class="pl-3 pt-3 form-inline">
+					<label for="cc-age">Age:</label>
+					<input type="number" class="form-control mr-2 ml-2" style="width:70px" id="cc-age" onchange="setAge('cc-age')">
+					<button type="button" class="btn btn-secondary" onclick="randomAge('cc-age')">Random</button>
+				</div>
+				<p class="p-3">
+					"Age" refers to the age you were when you died, 
+					and is usually between 8 and 17.
+				</p>
+				<div class="d-flex justify-content-between mt-3">
+					<button type="button" class="btn btn-danger col-2">Cancel</button>
+					<button type="button" class="btn btn-dark col-2" onclick="clickLink('memories-tab')">Next</button>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane container fade" id="memories">
+			<div class="mt-3 p-3 border rounded">
+				<p class="pl-3 pr-3 pt-3">
+					Though Dolls have lost most of their memories of 
+					their previous life, they have not lost them all.
+					Just a few memories of their previous life remain.
+					These meager scraps are thus known as "Fragments 
+					of Memory."
+				</p>
+				<p class="pl-3 pr-3">
+					Dolls possess but two of these "Fragments of 
+					Memory" when they are newly awakened.
+				</p>
+				<p class="pl-3 pr-3">
+					These are the foundation of your Doll. They are 
+					the patches that hold the heart of your Doll 
+					together.
+				</p>
+				<div class="pl-3 pr-3 pt-3 form-inline">
+					<label for="cc-memory-1">Memory Fragment 1</label>
+					<div class="border rounded col ml-2 mr-2" style="height:80px" id="cc-memory-1"></div>
+					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick ="pickMemory('cc-memory-1', '0')">Pick</button>
+					<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-1', '0')">Random</button>
+				</div>
+				<div class="pl-3 pr-3 pt-3 form-inline">
+					<label for="cc-memory-2">Memory Fragment 2</label>
+					<div class="border rounded col ml-2 mr-2" style="height:80px" id="cc-memory-2"></div>
+					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick ="pickMemory('cc-memory-2', '1')">Pick</button>
+					<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-2', '1')">Random</button>
+				</div>
+				<div class="pl-3 pr-3 pt-3 form-inline">
+					<label for="cc-premonition">Premonition</label>
+					<div class="border rounded col ml-2 mr-2" style="height:80px" id="cc-premonition">
+						
+					</div>
+					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#premonition-picker" onclick ="pickPremonition('premonition-picker', 'premonition-list', 'cc-premonition')">Pick</button>
+					<button type="button" class="btn btn-secondary" onclick ="randomPremonition('cc-premonition')">Random</button>
+				</div>
+				<p class="p-3">
+					As game sessions take place, the Dolls will
+					reacquire their lost memories. But they can carry
+					only a vague suspicion of what these memories
+					will reveal to them. These "Premonitions" serve
+					as a guide towards their former lives.
+				</p>
+				<div class="d-flex justify-content-between mt-3">
+					<button type="button" class="btn btn-dark col-2" onclick="clickLink('name-age-tab')">Back</button>
+					<button type="button" class="btn btn-dark col-2" onclick="clickLink('position-tab')">Next</button>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane container fade" id="position">
+			<div class="mt-3 p-3 border rounded">
+				<p>Dolls do not wander the world on their own; they have sisters with them. Amongst their
+					fellow sisters, each of the Dolls fills a spiritual role- this is known as their Position.</p>
+				<p>Select a skill from any of the positions below to set your doll's position.</p>
+				<div class="row">
+					<div class="col-3">
+						<div class="sticky-top">
+							<table class="table table-borderless table-dark sticky-top">
+								<thead>
+									<tr>
+										<th style="width:64px">Position:</th>
+										<th style="">Skill:</th>
+									<tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td id="selectedPosition">None</td>
+										<td id="selectedPositionSkill">None</td>
+									</tr>
+								</tbody>
+							</table>
+							<button class="btn btn-danger" onclick="resetPosition()" style="width:100%">Reset</button>
+						</div>
+					</div>
+					<div class="col" id="position-picker">
+						
+					</div>
+				</div>
+				<div class="d-flex justify-content-between mt-3">
+					<button type="button" class="btn btn-dark col-2" onclick="clickLink('memories-tab')">Back</button>
+					<button type="button" class="btn btn-dark col-2" onclick="clickLink('classes-tab')">Next</button>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane container fade" id="classes">
+			<div class="mt-3 p-3 border rounded">
+				<p>Undead are created with a variety of types of armament.</p>
+				<p>In order that they may oppose the Undead, Dolls themselves are given reinforcements.</p>
+				<p>Select three skills from up to two classes.  The skills selected will determine your primary and secondary classes.
+				  The selected classes determine the Doll's starting reinforcement points.  A classes' special skill may only be taken if 
+				  that class is selected for both the primary and secondary class.</p>
+				<div class="row">
+					<div class="col-3">
+						<div class="sticky-top">
+							<table class="table table-dark">
+								<thead>
+									<tr>
+										<th style="width:64px">Class:</th>
+										<th style="">Skill:</th>
+									<tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td id="selectedClass1" rowspan="2">None</td>
+										<td id="selectedSkill1">None</td>
+									</tr>
+									<tr>
+										<td id="selectedSkill2">None</td>
+									</tr>
+									<tr>
+										<td id="selectedClass2">None</td>
+										<td id="selectedSkill3">None</td>
+									</tr>
+								</tbody>
+							</table>
+							<table class="table table-dark">
+								<tbody>
+									<tr>
+										<th>Armaments:</th>
+										<td id="class-rpa">0</td>
+									</tr>
+									<tr>
+										<th>Mutations:</th>
+										<td id="class-rpm">0</td>
+									</tr>
+									<tr>
+										<th>Enhancements:</th>
+										<td id="class-rpe">0</td>
+									</tr>
+								</tbody>
+							</table>
+							<button class="btn btn-danger" onclick="resetClass()" style="width:100%">Reset</button>
+						</div>
+						
+					</div>
+					<div class="col" id="class-picker">
+						
+					</div>
+				</div>
+				<div class="d-flex justify-content-between mt-3">
+					<button type="button" class="btn btn-dark col-2" onclick="clickLink('position-tab')">Back</button>
+					<button type="button" class="btn btn-dark col-2" onclick="clickLink('r-points-tab')">Next</button>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane container fade" id="r-points">
+			<div class="mt-3 p-3 border rounded">
+				<p>
+					Classes possess point values divided among "Armaments", "Mutations", and
+					"Enhancements." These are Reinforcement Points, and determine which manner of
+					special Parts can be used to reinforce a Doll's body.
+				</p>
+				<div class="d-flex justify-content-center">
+					
+					<div class="col-6">
+						<h4 id="r-point-instructions" class="text-nowrap">Assign one reinforcement point to any category:</h4> 
+						<table id="rp-allocation-table" class="table table-dark">
+							<tbody>
+								<tr>
+									<th style="width:80%">
+										Armaments:
+										<p class="font-italic small font-weight-light">
+											Weapons, guns and other offensive equipment. 
+											Frequently attached to the arms.
+										</p>
+									</th>
+									<td class="font-weight-bolder text-outline text-white text-monospace align-middle">
+										<span id="rpa-minus" role="button" class="mr-1 disabled" onclick="unassignRPoint('a')">-</span>
+										<span class="" id="total-rpa">0</span>
+										<span id="rpa-plus" role="button" class="ml-1" onClick="assignRPoint('a')">+</span>
+									</td>
+								</tr>
+								<tr>
+									<th style="width:80%">
+										Mutations:
+										<p class="font-italic small font-weight-light">
+											Special bodily organs. They warp one's appearance, 
+											but possess great power.
+										</p>
+									</th>
+									<td class="font-weight-bolder text-outline text-white text-monospace align-middle">
+										<span id="rpm-minus"role="button" class="mr-1 disabled" onclick="unassignRPoint('m')">-</span>
+										<span id="total-rpm">0</span>
+										<span id="rpm-plus" role="button" class="ml-1" onClick="assignRPoint('m')">+</span>
+									</td>
+								</tr>
+								<tr>
+									<th style="width:80%">
+										Enhancements:
+										<p class="font-italic small font-weight-light">
+											Mechanical parts attached to the body, 
+											often made of metal or plastic.
+										</p>
+									</th>
+									<td class="font-weight-bolder text-outline text-white text-monospace align-middle">
+										<span id="rpe-minus" role="button" class="mr-1 disabled" onclick="unassignRPoint('e')">-</span>
+										<span id="total-rpe">0</span>
+										<span id="rpm-plus" role="button" class="ml-1" onClick="assignRPoint('e')">+</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="d-flex justify-content-between mt-3">
+					<button type="button" class="btn btn-dark col-2" onclick="clickLink('classes-tab')">Back</button>
+					<button type="button" class="btn btn-dark col-2" onclick="clickLink('parts-tab')">Next</button>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane container fade" id="parts">
+			<div class="mt-3 p-3 border rounded">
+				<p>After determining your Reinforcement Points, you may select Reinforcement Parts.</p>
+				<p>Parts refer to pieces of a Doll's body. Prior to this step of creation, Dolls have three
+				parts in each of their Head, Arms, Torso and Legs - a total of 12. These are their Basic
+				Parts. Reinforcement Parts are special Parts that can be acquired in addition to these.</p>
+				<p>In addition to the three categories of Reinforcement Parts, they are divided into three tiers. 
+				For every three reinforcement points in a category, Dolls gain one tier 1, one tier 2, and one tier 3 reinforcement point.
+				Each reinforcement point can be used to purchase a point of that tier or lower from its category.</p>
+				<div class="row">
+					<div id="parts-summary" class="col">
+						<div class="sticky-top">
+							<div id="remaining-points">
+								<table class="table table-dark">
+									<tbody>
+										<tr>
+											<th style="width:120px">Armaments:</th>
+											<td id="tiered-rpa"></td>
+										</tr>
+										<tr>
+											<th>Mutations:</th>
+											<td id="tiered-rpm"></td>
+										</tr>
+										<tr>
+											<th>Enhancements:</th>
+											<td id="tiered-rpe"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<button type="button" class="btn btn-danger" style="width:100%" onclick="resetParts()">Reset</button>
+							<div class="row mt-3">
+								<div id="partCol1" class="col">
+									
+								</div>
+								<div id="partCol2" class="col">
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="part-picker" class="col-8">
+						
+					</div>
+				</div>
+				<div class="d-flex justify-content-between mt-3">
+					<button type="button" class="btn btn-dark col-2" onclick="clickLink('r-points-tab')">Back</button>
+					<button type="button" class="btn btn-dark col-2" onclick="clickLink('treasure-tab')">Next</button>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane container fade" id="treasure">
+			<div class="mt-3 p-3 border rounded">
+				<p>Though Dolls may be dead, they are still girls.</p>
+				<p>They each possess a single trinket as girls would. These are precious belongings where
+				the Hearts of the Dolls are kept, and are known as Treasures.</p>
+				<p>Treasures are treated as a Part. Below is listed the Part data for a "Treasure."</p>
+				<p>You may generate a random treasure, pick from a list, or create your own by editing the title and flavor text of the treasure. 
+				Then assign the treasure to the location of your choice.</p>
+				<div class="d-flex justify-content-center">
+					<div class="col">
+
+					</div>
+					<div class="col-8">
+						<div id="treasure" class="rounded border p-2 mb-1 text-black-50 necro-item">
+							<div class="d-flex">
+								<img id="treasureImage" src="Content/Parts/Treasure.png" class="mr-2 rounded tile-64">
+								<div class="">
+									<input id="treasureName" onchange="editTreasure()" class="form-control treasure-title mb-1">
+									<div class="form-inline">
+										<span>Location: </span>
+										<select id="treasureLocation" onchange="editTreasure()" class="form-control treasure-location ml-1 mr-1">
+											<option value="Head">Head</option>
+											<option value="Arms">Arms</option>
+											<option value="Torso">Torso</option>
+											<option value="Legs">Legs</option>
+										</select>
+										<span>/// Timing: Auto /// Cost: None /// Range: None</span>
+									</div>
+								</div>
+							</div>
+							<div class="border border-right-0 border-bottom-0 p-2 mt-1 bg-white text-black-50">
+								<p>Your Treasure.</p>
+								<p>At the end of the Battle Phase, you
+								may remove one Madness Point from a Fetter of your
+								choice.</p>
+								<p> If this Part is destroyed, immediately remove it
+								from your Owned Parts.</p>
+								<textarea id="treasureFlavor" rows="3" onchange="editTreasure()" class="form-control font-italic lighter small">
+
+								</textarea>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#treasure-picker">Pick</button>
+						<button type="button" class="btn btn-dark" onclick="pickRandomTreasure()"><i class="fas fa-dice"></i></button>
+					</div>
+				</div>
+				<div class="d-flex justify-content-between mt-3">
+					<button type="button" class="btn btn-dark col-2" onclick="clickLink('parts-tab')">Back</button>
+					<button type="button" class="btn btn-dark col-2" onclick="clickLink('deployment-tab')">Next</button>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane container fade" id="deployment">
+			<div class="mt-3 p-3 border rounded">
+				<div class="row">
+					<div class="col">
+						<p>The final step is to decide your Initial Deployment.</p>
+						<p>This is the area of the Battle Map in which your Doll 
+						is placed at the beginning of combat. Choose one of 
+						"Eden", "Elysium" or "Limbo."</p>
+						<p>If you have many short range attacks, "Limbo" is advisable, whereas if you specialize in
+						attacks with a range of 1 or 2 "Elysium" is a wise choice, and if you have attacks with a
+						range of 3 or greater "Eden" is best.</p>
+						<p>You can change your Initial Deployment between sessions. If you are displeased with
+						your current Initial Deployment, talk to the Necromancer between sessions about changing it.</p>
+					</div>
+					<div class="col-3">
+						<h4 class="necro-bar">Initial Deployment</h4>
+						<div class="bg-black rounded text-white p-1 pl-4 pr-4" style="margin-top:-16px">
+							<div class="bg-white rounded-lg text-dark p-2 mb-1" style="width:100%">
+								<div class="form-check">
+									<label for="ipeden" class="form-check-label">
+										<input class="form-check-input" type="radio" id="ipeden" name="initialplacement" value="option1" onclick="setDeployment(0)">Eden
+									</label>
+								</div>
+							</div>
+							<div class="bg-white rounded-lg text-dark p-2 mb-1" style="width:100%">
+								<div class="form-check">
+									<label for="ipelysium" class="form-check-label">
+										<input class="form-check-input" type="radio" id="ipelysium" name="initialplacement" value="option2" onclick="setDeployment(1)">Elysium
+									</label>
+								</div>
+							</div>
+							<div class="bg-white rounded-lg text-dark p-2 mb-1" style="width:100%">
+								<div class="form-check">
+									<label for="iplimbo" class="form-check-label">
+										<input class="form-check-input" type="radio" id="iplimbo" name="initialplacement" value="option3" onclick="setDeployment(2)">Limbo
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="d-flex justify-content-between mt-3">
+					<button type="button" class="btn btn-dark col-2" onclick="clickLink('treasure-tab')">Back</button>
+					<button type="button" class="btn btn-success col-2" onClick="finishCreation()">Finish</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	`;
+	$('#mainContainer').html(content);
+}
 //utilities
 function clickLink(linkId){
 	document.getElementById(linkId).click();
@@ -524,12 +455,14 @@ function clickLink(linkId){
 function randomAge(agefieldId){
 	let age = 8 + Math.floor(Math.random() * 10);
 	document.getElementById(agefieldId).value = age;
+	setAge(ageFieldId);
 }
 
 //random name
 function randomName(nameFieldId){
 	let rand = randomNames[Math.floor(randomNames.length * Math.random())];
 	document.getElementById(nameFieldId).value = rand;
+	setName(nameFieldId);
 }
 //set name data
 function setName(nameFieldId){
@@ -1506,14 +1439,19 @@ function placePart(partLocation){
 		characterWIP.parts.splice(selectedPartIndex, 1);
 	}
 	//add the part to the corresponding location
-	characterWIP.parts.push(new Part(selectedPart.id, partLocation));
+	if(partLocation != ''){
+		characterWIP.parts.push(new Part(selectedPart.id, partLocation));
+	}
 	//update parts
 	updateParts();
 }
 function resetParts(){
-	for(let i = 0; i < characterWIP.parts.length; i++){
+	for(let i = 0; i < characterWIP.parts.length;){
 		if(getById(characterWIP.parts[i].id, dollParts).type != "Basic"){
 			characterWIP.parts.splice(i, 1);
+		}
+		else{
+			i++;
 		}
 	}
 	updateParts();
@@ -1576,6 +1514,14 @@ function editTreasure(){
 	
 	characterWIP.treasures[0] = new Treasure(name, partLocation, flavorText, flavorImage);
 }
-
+function setDeployment(zoneId){
+	characterWIP.deployment = zoneId;
+}
+function finishCreation(){
+	//save characterWIP to character list
+	saveDoll();
+	//load character list
+	loadCharacterList();
+}
 
 
