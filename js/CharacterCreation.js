@@ -13,6 +13,17 @@ let selectedPartIndex = -1;
 let treasuresPopulated = false;
 //content loader
 function startCharacterCreation(){
+	//reset global variables
+	premonitionsPopulated = false;
+	memoryFragmentsPopulated = false;
+	fragmentDisplayId = "";
+	memorySlot = -1;
+	positionsPopulated = false;
+	classesPopulated = false;
+	partsPopulated = false;
+	selectedPart = null;
+	selectedPartIndex = -1;
+	treasuresPopulated = false;
 	let content=
 	`
 	<!-- Nav tabs -->
@@ -452,9 +463,9 @@ function clickLink(linkId){
 
 //pickers
 //random age
-function randomAge(agefieldId){
+function randomAge(ageFieldId){
 	let age = 8 + Math.floor(Math.random() * 10);
-	document.getElementById(agefieldId).value = age;
+	document.getElementById(ageFieldId).value = age;
 	setAge(ageFieldId);
 }
 
@@ -480,7 +491,7 @@ function randomMemory(displayId, slotNumber){
 	//update data
 	characterWIP.fragments[slotNumber] = rand.id;
 	//update form
-	document.getElementById(displayId).innerHTML = buildMemory(rand, false);
+	$("#" + displayId).html(buildMemory(rand, false));
 }
 //pick memory from list
 function pickMemory(displayId, slotNumber){
@@ -520,11 +531,11 @@ function buildMemory(memory, clickable){
 }
 function setMemory(memoryId){
 	//get memory object
-	let memory = memoryFragments[memoryId];
+	let memory = getById(memoryId, memoryFragments);
 	//update data
-	characterWIP.fragments[memorySlot] = memory;
+	characterWIP.fragments[memorySlot] = memoryId;
 	//update form
-	document.getElementById(fragmentDisplayId).innerHTML = buildMemory(memory, false);
+	$("#" + fragmentDisplayId).html(buildMemory(memory, false));
 	//close modal
 	$("#memory-picker").modal('hide');
 }
@@ -533,9 +544,9 @@ function setMemory(memoryId){
 function randomPremonition(){
 	let premonition = premonitions[Math.floor(Math.random() * premonitions.length)];
 	//update data
-	characterWIP.premonition = premonition;
+	characterWIP.premonition = premonition.id;
 	//update form
-	document.getElementById("cc-premonition").innerHTML = buildPremonition(premonition, false);
+	$("#cc-premonition").html(buildPremonition(premonition, false));
 }
 function pickPremonition(){
 	//populate list of premonitions
@@ -548,7 +559,7 @@ function populatePremonitionPicker(){
 		for(let i = 0; i < premonitions.length; i++){
 			content += buildPremonition(premonitions[i], true);
 		}
-		document.getElementById("premonition-list").innerHTML = content;
+		$("#premonition-list").html(content);
 		
 	}
 }
@@ -568,11 +579,11 @@ function buildPremonition(premonition, clickable){
 }
 function setPremonition(premonitionId){
 	//get premonition object
-	let premonition = premonitions[premonitionId];
+	let premonition = getById(premonitionId, premonitions);
 	//update data
-	characterWIP.premonition = premonition;
+	characterWIP.premonition = premonitionId;
 	//update form
-	document.getElementById("cc-premonition").innerHTML = buildPremonition(premonition, false);
+	$("#cc-premonition").html(buildPremonition(premonition, false));
 	//close modal
 	$("#premonition-picker").modal('hide');
 }
@@ -732,13 +743,13 @@ function setSkill(classId, skillId, isPosition){
 }
 
 function setPositionSkill(positionId, skillId){
-	if(skillId == characterWIP.skills[0]){
+	if(skillId == characterWIP.skills[0].id){
 		characterWIP.classPosition = -1;
-		characterWIP.skills[0] = -1;
+		characterWIP.skills[0] = null;
 	}
 	else{
 		characterWIP.classPosition = positionId;
-		characterWIP.skills[0] = skillId;//position skill takes first position
+		characterWIP.skills[0] = new Skill(skillId);//position skill takes first position
 	}
 	
 	displayPositionSkill();
@@ -746,37 +757,26 @@ function setPositionSkill(positionId, skillId){
 
 function displayPositionSkill(){
 	if(characterWIP.classPosition > -1){
-		let position = null;
-		for(let i = 0; i < dollPositions.length; i++){
-			if(characterWIP.classPosition == dollPositions[i].id){
-				position = dollPositions[i];
-				break;
-			}
-		}
-		document.getElementById("selectedPosition").innerHTML = position.name;
+		let position = getById(characterWIP.classPosition, dollPositions);
+		$("#selectedPosition").text(position.name);
 	}
 	else{
-		document.getElementById("selectedPosition").innerHTML = "None";
+		$("#selectedPosition").text("None");
 	}
 	
-	if(characterWIP.skills[0] > -1){
-		let skill = null;
-		for(i = 0; i < dollSkills.length; i++){
-			if(characterWIP.skills[0] == dollSkills[i].id){
-				skill = dollSkills[i];
-			}
-		}
-		document.getElementById("selectedPositionSkill").innerHTML = skill.name;
+	if(characterWIP.skills[0] != null){
+		let skill = getById(characterWIP.skills[0].id, dollSkills);
+		$("#selectedPositionSkill").text(skill.name);
 		//disable all position skills
 		$('#position-picker .necro-item').addClass('disabled');
 		$('#position-picker .necro-item').removeClass('active');
 		//set selected skill as active
-		$('#skill-' + characterWIP.skills[0]).addClass('active');
-		$('#skill-' + characterWIP.skills[0]).removeClass('disabled');
+		$('#skill-' + characterWIP.skills[0].id).addClass('active');
+		$('#skill-' + characterWIP.skills[0].id).removeClass('disabled');
 		
 	}
 	else{
-		document.getElementById("selectedPositionSkill").innerHTML = "None";
+		$("#selectedPositionSkill").text("None");
 		//enable all position skills
 		$('#position-picker .necro-item').removeClass('disabled');
 		//unselect last selected position skill
@@ -785,7 +785,7 @@ function displayPositionSkill(){
 }
 function resetPosition(){
 	characterWIP.classPosition = -1;
-	characterWIP.skills[0] = -1;
+	characterWIP.skills[0] = null;
 	displayPositionSkill();
 }
 
@@ -794,57 +794,57 @@ function setClassSkill(classId, skillId){
 	//clear that skill, then adjust skill array and classes
 	let fixArray = false;
 	for(let i = 1; i < 4; i++){
-		if(characterWIP.skills[i] == skillId){
-			characterWIP.skills[i] = -1;
+		if(characterWIP.skills[i].id == skillId){
+			characterWIP.skills[i] = null;
 			fixArray = true;
 		}
 	}
 	
 	if(fixArray){
 		//if the first slot is empty, move the second skill to the first
-		if(characterWIP.skills[1] == -1){
+		if(characterWIP.skills[1] == null){
 			characterWIP.skills[1] = characterWIP.skills[2];
-			characterWIP.skills[2] = -1;
+			characterWIP.skills[2] = null;
 		}
 		//if only the second slot is empty, and the primary and secondary classes match, 
 		//move the third skill to the second slot and remove the secondary class.
-		if(characterWIP.skills[2] == -1 
+		if(characterWIP.skills[2] == null 
 			&& characterWIP.classPrimary == characterWIP.classSecondary){
 			characterWIP.skills[2] = characterWIP.skills[3];
-			characterWIP.skills[3] = -1;
+			characterWIP.skills[3] = null;
 			characterWIP.classSecondary = -1;
 		}
 		//if there is no skill in the third position, clear the secondary class
-		if(characterWIP.skills[3] == -1){
+		if(characterWIP.skills[3] == null){
 			characterWIP.classSecondary = -1;
 		}
 		//if there are no skills in the first or second slots, 
 		//swap primary and secondary classes
-		if(characterWIP.skills[1] == -1 && characterWIP.skills[2] == -1){
+		if(characterWIP.skills[1] == null && characterWIP.skills[2] == null){
 			characterWIP.classPrimary = characterWIP.classSecondary;
 			classSecondary = -1;
 			characterWIP.skills[1] = characterWIP.skills[3];
-			characterWIP.skills[3] = -1;
+			characterWIP.skills[3] = null;
 		}
 	}
 	//otherwise, add skill to best place in array
 	else{
 		//if first slot is open, put skill there and set primary class
-		if(characterWIP.skills[1] == -1){
-			characterWIP.skills[1] = skillId;
+		if(characterWIP.skills[1] == null){
+			characterWIP.skills[1] = new Skill(skillId);
 			characterWIP.classPrimary = classId;
 		}
 		//if second slot is open, and classId matches primary class,
 		//place skill in slot
-		else if(characterWIP.skills[2] == -1 
+		else if(characterWIP.skills[2] == null 
 			&& classId == characterWIP.classPrimary){
-			characterWIP.skills[2] = skillId;
+			characterWIP.skills[2] = new Skill(skillId);
 		}
 		//else if matches secondary class,
 		//place skill in slot, then swap classes and slots 1 and 3
-		else if(characterWIP.skills[2] == -1
+		else if(characterWIP.skills[2] == null
 			&& classId == characterWIP.classSecondary){
-			characterWIP.skills[2] = skillId;
+			characterWIP.skills[2] = new Skill(skillId);
 			characterWIP.classSecondary = characterWIP.classPrimary;
 			characterWIP.classPrimary = classId;
 			let skillTemp = characterWIP.skills[1];
@@ -853,7 +853,7 @@ function setClassSkill(classId, skillId){
 		}
 		//else place in third slot and set secondary class
 		else{
-			characterWIP.skills[3] = skillId;
+			characterWIP.skills[3] = new Skill(skillId);
 			characterWIP.classSecondary = classId;
 		}
 	}
@@ -876,20 +876,11 @@ function displayClassSkills(){
 		}
 	}
 	let skills = [null, null, null];
-	let skillsFound = 0;
-	for(let i = 0; i < dollSkills.length; i++){
-		for(let s = 0; s < skills.length; s++){
-			if(characterWIP.skills[s+1] == dollSkills[i].id){
-				skills[s] = dollSkills[i];
-				skillsFound++;
-				break;
-			}
-		}
-		if(skillsFound >= 3){
-			break;
-		}
+
+	for(let s = 0; s < skills.length; s++){
+		skills[s] = getById(characterWIP.skills[s+1].id, dollSkills);
 	}
-	
+
 	//update display of primary class
 	$('#selectedClass1').text(class1 != null ? class1.name : "None");
 	//update display of secondary class
@@ -964,7 +955,7 @@ function displayClassSkills(){
 function resetClass(){
 	characterWIP.classPrimary = -1;
 	characterWIP.classSecondary = -1;
-	characterWIP.skills.splice(1,3, -1, -1, -1);
+	characterWIP.skills.splice(1,3, null, null, null);
 	displayClassSkills();
 }
 
@@ -1369,19 +1360,9 @@ function updateTieredRPointsCategory(displayId, points){
 	$('#' + displayId).html(content);
 }
 function getRPointTotals(){
-	let class1 = null;
-	let class2 = null;
-	for(let i = 0; i < dollClasses.length; i++){
-		if(characterWIP.classPrimary == dollClasses[i].id){
-			class1 = dollClasses[i];
-		}
-		if(characterWIP.classSecondary == dollClasses[i].id){
-			class2 = dollClasses[i];
-		}
-		if(class1 != null && class2 != null){
-			break;
-		}
-	}
+	let class1 = getById(characterWIP.classPrimary, dollClasses);
+	let class2 = getById(characterWIP.classSecondary, dollClasses);
+	
 	let rpaTotal = (class1 != null ? class1.rpa : 0) 
 						+ (class2 != null ? class2.rpa : 0)
 						+ characterWIP.rpa;

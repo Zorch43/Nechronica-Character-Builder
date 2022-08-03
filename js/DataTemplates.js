@@ -33,7 +33,7 @@ function Doll(nextId)
 	this.classPosition = -1;//position class id
 	this.classPrimary = -1;//primary class id
 	this.classSecondary = -1;//secondary class id
-	this.skills = [-1, -1, -1, -1];//list of all skills from position and classes
+	this.skills = [null, null, null, null];//list of all skills from position and classes
 	this.rpu = 1;//unallocated reinforcement points
 	this.rpa = 0;//allocated armament points
 	this.rpm = 0;//allocated mutation points

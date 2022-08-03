@@ -1,7 +1,5 @@
 function loadCharacterList()
-{
-	let container = document.getElementById("mainContainer");
-	
+{	
 	let content =
 	`<h4 class='necro-bar mt-4'>Character List</h5>
 	<div id='charlist' class='p-4'>`;
@@ -10,17 +8,27 @@ function loadCharacterList()
 
 	let listContent = "";
 	let listData = loadData();
+	let nextId = listData.charList.length;
+	
 	//TODO: load from cookie JSON
 	for(let i = 0; i < listData.charList.length; i++)
 	{
+		listData.charList[i].id = i;//set id = index
+		//temp refactoring fixes
+		/*
+		for(let s = 0; s < listData.charList[i].skills.length; s++){
+			listData.charList[i].skills[s] = new Skill(listData.charList[i].skills[s]);
+		}
+		*/
 		listContent += listItemHTML(listData.charList[i]);
 	}
+	saveData(listData);
 	content += listContent;
 	content += 
-	`<button type='button' class='btn btn-dark' onclick='createDoll()'>+ New Doll +</button>
+	`<button type='button' class='btn btn-dark' onclick='createDoll(${nextId})'>+ New Doll +</button>
 	</div>`;
 	
-	container.innerHTML = content;
+	$('#mainContainer').html(content);
 }
 function listItemHTML(doll)
 {
@@ -28,10 +36,10 @@ function listItemHTML(doll)
 	let classPrimary = getById(doll.classPrimary, dollClasses);
 	let classSecondary = getById(doll.classSecondary, dollClasses);
 	let content = 
-		`<div class='necro-box mb-3'>
+		`<div class='doll-list-item necro-box rounded' role="button" onclick="viewDoll(${doll.id})">
 			<div class='rounded bg-black text-white p-2'>
 				<h5 class='text-outline'>${doll.name}</h5>
-				<div class='rounded bg-white text-dark p-2'>
+				<div class='rounded text-dark p-2'>
 					<p>${classPosition.name} /// ${classPrimary.name} /// ${classSecondary.name}</p>
 					<button type='button' class='btn btn-dark' 
 						onclick='deleteDoll(${doll.id})'>- Delete -</button>

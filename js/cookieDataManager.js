@@ -1,11 +1,13 @@
+const savedData = "nechronica-character-builder-data";
 function loadData()
 {
 	//check for cookie
 	//if cookie exists,
 	//and JSON value exists,
 	//load data from cookie
-	let data = getCookie("savedData");
-	if(data == "")
+	//let data = getCookie("savedData");
+	let data = window.localStorage.getItem(savedData);
+	if(data == null)
 	{
 		//otherwise, create data and add to cookie
 		saveData(constructData());
@@ -19,7 +21,8 @@ function saveData(data)
 	//serialize data into JSON, 
 	//then save to cookie
 	let dataString = JSON.stringify(data);
-	setCookie("savedData", dataString, 90);
+	//setCookie("savedData", dataString, 90);
+	window.localStorage.setItem(savedData, dataString);
 }
 
 function constructData()

@@ -29,9 +29,9 @@ const dollSkillsJSON =
 		"usable": false,
 		"range": "See Effect",
 		"effectText": [
-			"Other Sisters' Conversation Checks toward you all gain +1 to their rolls."
+			"Other Sisters\' Conversation Checks toward you all gain +1 to their rolls."
 		],
-		"flavorText": "A girl's smile is a glow in the dark. You have the power to shatter the mind filled with madness.",
+		"flavorText": "A girl\'s smile is a glow in the dark. You have the power to shatter the mind filled with madness.",
 		"flavorImage": "Healing.png",
 		"special": false,
 		"restricted": false,
@@ -291,7 +291,7 @@ const dollSkillsJSON =
 			"Target \\"Rapid\\", \\"Damage\\", or \\"Check\\" Maneuver.",
 			"Cancel the effects of one."
 		],
-		"flavorText": "It is important to know about the enemy that appeared. It also helps tactics to instantly see the enemy's war potential and offensive power.",
+		"flavorText": "It is important to know about the enemy that appeared. It also helps tactics to instantly see the enemy\'s war potential and offensive power.",
 		"flavorImage": "Anticipate.png",
 		"special": false,
 		"restricted": false,
@@ -325,7 +325,7 @@ const dollSkillsJSON =
 		"usable": false,
 		"range": "0-1",
 		"effectText": [
-			"The Cost of the target's next Action decreases by 1 (minimum 0.)"
+			"The Cost of the target\'s next Action decreases by 1 (minimum 0.)"
 		],
 		"flavorText": "By knowing the movements of enemies and ally in advance, you can act with the minimum necessary movement.",
 		"flavorImage": "Foresight.png",
@@ -346,7 +346,7 @@ const dollSkillsJSON =
 			"When you fail (or critically fail) a Madness Check, you may change the result to a Success.",
 			"As the cost of this Skill, damage one of your Basic Parts of your choice."
 		],
-		"flavorText": "Loss of, distortion of mind. Let's cheat. With loss of body and distortion of the body. Pain is proof of sanity...even such a distorted philosophy is useful for regulating you now.",
+		"flavorText": "Loss of, distortion of mind. Let\'s cheat. With loss of body and distortion of the body. Pain is proof of sanity...even such a distorted philosophy is useful for regulating you now.",
 		"flavorImage": "Restraint.png",
 		"special": false,
 		"restricted": false,
@@ -402,7 +402,7 @@ const dollSkillsJSON =
 			"As the Cost of this Skill, add a Madness Point to a Fetter of your choice.",
 			"Support 3."
 		],
-		"flavorText": "No, it's not like this, it should be like this. Desire, obsession, thoughts. They can distort physical laws.",
+		"flavorText": "No, it\'s not like this, it should be like this. Desire, obsession, thoughts. They can distort physical laws.",
 		"flavorImage": "Carnage.png",
 		"special": false,
 		"restricted": false,
@@ -605,7 +605,7 @@ const dollSkillsJSON =
 			"This Skill can only be used when one of your Sisters uses a Movement Maneuver.",
 			"Move 1."
 		],
-		"flavorText": "Behavior that has been repeated many times. It's fixed in your brain by now. Instinct.",
+		"flavorText": "Behavior that has been repeated many times. It\'s fixed in your brain by now. Instinct.",
 		"flavorImage": "Follow.png",
 		"special": false,
 		"restricted": false,
@@ -660,7 +660,7 @@ const dollSkillsJSON =
 			"Regardless of their current place on the Battle Map, all your sisters, including you, are instantly transported to Elysium.",
 			"This is not considered a Movement Maneuver."
 		],
-		"flavorText": "The girl's gatherings can not be messy to anyone. It can not be disturbed. Even in battle.",
+		"flavorText": "The girl\'s gatherings can not be messy to anyone. It can not be disturbed. Even in battle.",
 		"flavorImage": "GatheringInElysium.png",
 		"special": false,
 		"restricted": false,
@@ -742,7 +742,7 @@ const dollSkillsJSON =
 	{
 		"id": 40,
 		"classId": 5,
-		"name": "Sister's Kiss",
+		"name": "Sister\'s Kiss",
 		"cost": 1,
 		"timing": "Rapid",
 		"usable": true,
@@ -803,7 +803,7 @@ const dollSkillsJSON =
 		"usable": false,
 		"range": "Self",
 		"effectText": [
-			"You may ignore any \\"Dismember\\", \\"Explosive\\", and \\"Move\\" properties associated with an attack you've been hit by",
+			"You may ignore any \\"Dismember\\", \\"Explosive\\", and \\"Move\\" properties associated with an attack you\'ve been hit by",
 			"This Maneuver can be used any number of times per Turn."
 		],
 		"flavorText": "Unusual body fluid flowing in a heteromorphic body. If it touches the outside air it will crystallize and harden. It will be cut and it will absorb the explosion. Indeed the body of a monster, but it is a useful body",
@@ -1040,7 +1040,7 @@ const dollSkillsJSON =
 		"usable": false,
 		"range": 0,
 		"effectText": [
-			"When you succeed with a Range 0 Unarmed Attack, if the number of Parts the target has remaining is no greater than  the result of the Attack Check minus five, all of the target's Parts are instantly broken (however, Legions are not affected.)"
+			"When you succeed with a Range 0 Unarmed Attack, if the number of Parts the target has remaining is no greater than  the result of the Attack Check minus five, all of the target\'s Parts are instantly broken (however, Legions are not affected.)"
 		],
 		"flavorText": "Regardless of size, eating that can crush the swallowed body inside. Sometimes digestion can not catch up, but it is not a big deal.",
 		"flavorImage": "UltimatePredator.png",
@@ -1096,7 +1096,7 @@ const dollSkillsJSON =
 		"effectText": [
 			"Until the end of the Turn, all your Attack Checks gain +1 to the die roll."
 		],
-		"flavorText": "Sharpen the senses and aim for the opponent's weakness. Aimed shots will probably set off enemies.",
+		"flavorText": "Sharpen the senses and aim for the opponent\'s weakness. Aimed shots will probably set off enemies.",
 		"flavorImage": "Concentration.png",
 		"special": false,
 		"restricted": false,
@@ -1178,7 +1178,7 @@ const dollSkillsJSON =
 	{
 		"id": 64,
 		"classId": 8,
-		"name": "Rear Guard's Pride",
+		"name": "Rear Guard\'s Pride",
 		"cost": "None",
 		"timing": "Auto",
 		"usable": false,
@@ -1240,7 +1240,7 @@ const dollSkillsJSON =
 		"effectText": [
 			"Stagger."
 		],
-		"flavorText": "Tickling of sensuality. If maiden's fingers crawl, the flesh of the dead will also be crankless and will tremble from the pleasure of the moment.",
+		"flavorText": "Tickling of sensuality. If maiden\'s fingers crawl, the flesh of the dead will also be crankless and will tremble from the pleasure of the moment.",
 		"flavorImage": "Caress.png",
 		"special": false,
 		"restricted": false,
@@ -1305,7 +1305,7 @@ const dollSkillsJSON =
 	{
 		"id": 71,
 		"classId": 9,
-		"name": "One's Many Charms",
+		"name": "One\'s Many Charms",
 		"cost": "None",
 		"timing": "Auto",
 		"usable": false,
@@ -1388,7 +1388,7 @@ const dollSkillsJSON =
 			"As the Cost of this Skill, break one of your Basic Parts.",
 			"Support 2 or Hinder 2."
 		],
-		"flavorText": "Grab the opponent with his own arms. If you are dead and throw your jaw to bite people from afar, it's a natural tactic.",
+		"flavorText": "Grab the opponent with his own arms. If you are dead and throw your jaw to bite people from afar, it\'s a natural tactic.",
 		"flavorImage": "CorpseStyle.png",
 		"special": false,
 		"restricted": false,
@@ -1537,7 +1537,7 @@ const dollSkillsJSON =
 			"You may only use this Skill when you deal damage with a Melee Attack.",
 			"Add the \\"Area Attack\\" property to this damage. You do not take damage from this \\"Area Attack.\\""
 		],
-		"flavorText": "Your existence is a tornado of death. Weapons and madness raging in places where you cut and you'll be drawn into a whirlpool of destruction.",
+		"flavorText": "Your existence is a tornado of death. Weapons and madness raging in places where you cut and you\'ll be drawn into a whirlpool of destruction.",
 		"flavorImage": "Calamity.png",
 		"special": false,
 		"restricted": false,
@@ -1589,7 +1589,7 @@ const dollSkillsJSON =
 		"usable": false,
 		"range": "Self",
 		"effectText": [
-			"During the Battle Phase, when you declare an Attack Maneuver, no one other than you can perform Maneuvers at the 'Check' and 'Rapid' timings in response."
+			"During the Battle Phase, when you declare an Attack Maneuver, no one other than you can perform Maneuvers at the \'Check\' and \'Rapid\' timings in response."
 		],
 		"flavorText": "Ultra high speed blow. It is impossible for anyone to prevent it.",
 		"flavorImage": "Instantaneous.png",
@@ -1625,7 +1625,7 @@ const dollSkillsJSON =
 		"usable": true,
 		"range": "Self",
 		"effectText": [
-			"Use this Skill only during your own Melee Attack Maneuver's Attack Check. The die result of the Attack Check becomes 6, and no effect can change this result."
+			"Use this Skill only during your own Melee Attack Maneuver\'s Attack Check. The die result of the Attack Check becomes 6, and no effect can change this result."
 		],
 		"flavorText": "There is a blow that cannot be stopped. Liberated from bad luck, it will bring an ending.",
 		"flavorImage": "Judgment.png",
@@ -1643,7 +1643,7 @@ const dollSkillsJSON =
 		"usable": false,
 		"range": "Self",
 		"effectText": [
-			"Hinder Move' Maneuvers used by Legions have no effect on you.",
+			"Hinder Move\' Maneuvers used by Legions have no effect on you.",
 			"Furthermore, Legions must roll a 7 or higher on Attack Checks made against you to hit."
 		],
 		"flavorText": "No matter how many they arrange, their dead fingers cannot even touch you.",
@@ -1715,7 +1715,7 @@ const dollSkillsJSON =
 	{
 		"id": 93,
 		"classId": 12,
-		"name": "Pawn's Gambit",
+		"name": "Pawn\'s Gambit",
 		"cost": 2,
 		"timing": "Action",
 		"usable": false,
@@ -1745,7 +1745,7 @@ const dollSkillsJSON =
 			"Choose one of your Hit Locations.",
 			"For every broken Part of yours in that Hit Location, the target chooses and destroy a Part of its own."
 		],
-		"flavorText": "The destruction that you received is projected onto the enemy's ego and misunderstood... Effective attacks only for those with only a very low self are not destroyed and they can not be used.",
+		"flavorText": "The destruction that you received is projected onto the enemy\'s ego and misunderstood... Effective attacks only for those with only a very low self are not destroyed and they can not be used.",
 		"flavorImage": "SharedLoss.png",
 		"special": false,
 		"restricted": true,
@@ -1783,7 +1783,7 @@ const dollSkillsJSON =
 			"As the Cost of this Skill, add a Madness Point to a Fetter of your choice.",
 			"Regardless of the result of the Attack Check, the attack is considered a failure."
 		],
-		"flavorText": "Eyes to see the future. Power too heavy for the mind in one's heart. At the price of pain to the soul, the power to avoid only the worst crisis.",
+		"flavorText": "Eyes to see the future. Power too heavy for the mind in one\'s heart. At the price of pain to the soul, the power to avoid only the worst crisis.",
 		"flavorImage": "TwistOfFate.png",
 		"special": false,
 		"restricted": true,
