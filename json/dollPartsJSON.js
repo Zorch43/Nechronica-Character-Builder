@@ -10,7 +10,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Unarmed Attack 1"],
+	"effectText": ["Unarmed Attack 1"],
 	"flavorText": "",
 	"flavorImage": "Fist.png",
 	"usable": false
@@ -24,7 +24,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Check",
 	"range": 0,
-	"effect": ["Support 1"],
+	"effectText": ["Support 1"],
 	"flavorText": "",
 	"flavorImage": "Forearm.png",
 	"usable": true
@@ -38,7 +38,7 @@ const dollPartsJSON =
 	"cost": 4,
 	"timing": "Action",
 	"range": "Self",
-	"effect": ["Move 1"],
+	"effectText": ["Move 1"],
 	"flavorText": "",
 	"flavorImage": "Shoulder.png",
 	"usable": false
@@ -52,7 +52,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": "Self",
-	"effect": ["Move 1"],
+	"effectText": ["Move 1"],
 	"flavorText": "",
 	"flavorImage": "Bone.png",
 	"usable": false
@@ -66,7 +66,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Check",
 	"range": 0,
-	"effect": ["Hinder 1"],
+	"effectText": ["Hinder 1"],
 	"flavorText": "",
 	"flavorImage": "Foot.png",
 	"usable": true
@@ -80,7 +80,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["Maximum Action Points +2"],
+	"effectText": ["Maximum Action Points +2"],
 	"flavorText": "",
 	"flavorImage": "Brain.png",
 	"usable": false
@@ -94,7 +94,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["Maximum Action Points +1"],
+	"effectText": ["Maximum Action Points +1"],
 	"flavorText": "",
 	"flavorImage": "Eyeballs.png",
 	"usable": false
@@ -108,7 +108,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Unarmed Attack 1"],
+	"effectText": ["Unarmed Attack 1"],
 	"flavorText": "",
 	"flavorImage": "Jaw.png",
 	"usable": false
@@ -122,7 +122,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Action",
 	"range": "Self",
-	"effect": ["One Maneuver you use on the next Count during this Turn has its Cost reduced by 1(to a minimum of 0.)",
+	"effectText": ["One Maneuver you use on the next Count during this Turn has its Cost reduced by 1(to a minimum of 0.)",
 	"Stacks if used repeatedly. Discount may be divided totally arbitrarily."],
 	"flavorText": "",
 	"flavorImage": "Spine.png",
@@ -137,7 +137,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "None",
-	"effect": ["None"],
+	"effectText": ["None"],
 	"flavorText": "",
 	"flavorImage": "Entrails.png",
 	"usable": false
@@ -152,7 +152,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 3"],
+	"effectText": ["Melee Attack 3"],
 	"flavorText": "A weapon with a heavy metal blade on the tip of the rod. The power as a weapon is also high, the evaluation is high because it also has many uses as a tool.",
 	"flavorImage": "Axe.png",
 	"usable": false
@@ -166,7 +166,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 2 + Dismember"],
+	"effectText": ["Melee Attack 2 + Dismember"],
 	"flavorText": "Close combat weapons that had been distributed to many infantry during the war. Weapons used to quickly disassemble the undead.",
 	"flavorImage": "Chainsaw.png",
 	"usable": false
@@ -180,7 +180,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "See Effect",
-	"effect": ["At the end of the Battle Phase, if this Part is not damaged, you may choose three Basic Parts belonging to your Sisters other than yourself to regenerate."],
+	"effectText": ["At the end of the Battle Phase, if this Part is not damaged, you may choose three Basic Parts belonging to your Sisters other than yourself to regenerate."],
 	"flavorText": "With sewing needles and organic fibres, the soft repair tool for humans is still a repair tool for the undead.",
 	"flavorImage": "FirstAidKit.png",
 	"usable": false
@@ -194,7 +194,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": "0-1",
-	"effect": ["Ranged Attack 1"],
+	"effectText": ["Ranged Attack 1"],
 	"flavorText": "A large Caliber gun that can demonstrate it's effect with a small number of bullets. It is far more effective than a standard handgun.",
 	"flavorImage": "Handcannon.png",
 	"usable": false
@@ -208,7 +208,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 1 + Dismember"],
+	"effectText": ["Melee Attack 1 + Dismember"],
 	"flavorText": "From the distinctive shape, the meat cutting knife is distinguished from the sword. It is not unusual for the power of strikes to cut the sharpness of the blade.",
 	"flavorImage": "Katana.png",
 	"usable": false
@@ -222,7 +222,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["Maximum Action Points +1"],
+	"effectText": ["Maximum Action Points +1"],
 	"flavorText": "Martial Arts engraved in the brain. Many of those attacks are meaningless against the deceased, but their handling has a reasonable meaning.",
 	"flavorImage": "KungFu.png",
 	"usable": false
@@ -236,7 +236,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 2"],
+	"effectText": ["Melee Attack 2"],
 	"flavorText": "It seems that even kitchen knives are being brought to bear. Rust and all.",
 	"flavorImage": "MeatCleaver.png",
 	"usable": false
@@ -250,7 +250,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 2. Add +1 to the die roll of the Attack Check"],
+	"effectText": ["Melee Attack 2. Add +1 to the die roll of the Attack Check"],
 	"flavorText": "A bar that is a mass of metal, no longer limited to being used as a tool.",
 	"flavorImage": "MetalBar.png",
 	"usable": false
@@ -264,7 +264,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": "0-1",
-	"effect": ["Blast Attack 1 + Explosive + Chain Attack 1. The Attack Check receives a penalty of -1."],
+	"effectText": ["Blast Attack 1 + Explosive + Chain Attack 1. The Attack Check receives a penalty of -1."],
 	"flavorText": "Breakable container packed with fuel. You will make the enemy burn. You made the fire, but it will become your own fire...",
 	"flavorImage": "MolotovCocktail.png",
 	"usable": false
@@ -278,7 +278,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 1 + Explosive"],
+	"effectText": ["Melee Attack 1 + Explosive"],
 	"flavorText": "A bat or thorny club made into a weapon after the war.",
 	"flavorImage": "NailBat.png",
 	"usable": false
@@ -292,7 +292,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 1 + Dismember (Enemies get +2 to the Dismember Check.)",
+	"effectText": ["Melee Attack 1 + Dismember (Enemies get +2 to the Dismember Check.)",
 	"Defend Maneuvers cannot reduce the damage of this attack."],
 	"flavorText": "You need a shovel to bury the dead. If it still continues to move you will stab, slash, crush and kill it.",
 	"flavorImage": "Shovel.png",
@@ -307,7 +307,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": "2-3",
-	"effect": ["Ranged Attack 1. Add +1 to the die roll of the Attack Check."],
+	"effectText": ["Ranged Attack 1. Add +1 to the die roll of the Attack Check."],
 	"flavorText": "The gun which makes the attack of the ultra-far away be faithful. The effect is perfect if you are an impersonal person, but the near opponent will not feel it's power.",
 	"flavorImage": "SniperRifle.png",
 	"usable": false
@@ -322,7 +322,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": "0-1",
-	"effect": ["Melee Attack 1 + Stagger"],
+	"effectText": ["Melee Attack 1 + Stagger"],
 	"flavorText": "You can collapse the opposition by twisting the metal chain after hitting them with the iron ball first.",
 	"flavorImage": "BallAndChain.png",
 	"usable": false
@@ -336,7 +336,7 @@ const dollPartsJSON =
 	"cost": 0,
 	"timing": "Damage",
 	"range": "Self",
-	"effect": ["You may only use this Maneuver when you deal damage. Add +1 to the damage for an Unarmed or Melee Attack."],
+	"effectText": ["You may only use this Maneuver when you deal damage. Add +1 to the damage for an Unarmed or Melee Attack."],
 	"flavorText": "Spiked wires. The undead attacker that wraps their body in this will gouge the opponent's body more strongly and deeply.",
 	"flavorImage": "BarbedWire.png",
 	"usable": true
@@ -350,7 +350,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": "0-2",
-	"effect": ["Ranged Attack 3"],
+	"effectText": ["Ranged Attack 3"],
 	"flavorText": "Super powerful gun with incredible power. For a human being it is a gorgeous gun, but for undead it is hard to shoot a bit.",
 	"flavorImage": "BearGun.png",
 	"usable": false
@@ -364,7 +364,7 @@ const dollPartsJSON =
 	"cost": 0,
 	"timing": "Rapid",
 	"range": 0,
-	"effect": ["You cannot target yourself. Move 1."],
+	"effectText": ["You cannot target yourself. Move 1."],
 	"flavorText": "A fighting skill attack which blows the palm to the opponent and blows them away. Oriental Mystery.",
 	"flavorImage": "Boost.png",
 	"usable": true
@@ -378,7 +378,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 2. Add +1 to the die roll of the Attack Check."],
+	"effectText": ["Melee Attack 2. Add +1 to the die roll of the Attack Check."],
 	"flavorText": "Boots remodeled so that the blade comes out from the toe or heel. If you can use it with the leg power of the dead, that blade gives off an unusual effect.",
 	"flavorImage": "BootKnife.png",
 	"usable": false
@@ -392,7 +392,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Damage",
 	"range": "Self",
-	"effect": ["Defend 2. At the end of the Battle Phase, if this Part is not damaged, you may choose two of your own Parts to regenerate."],
+	"effectText": ["Defend 2. At the end of the Battle Phase, if this Part is not damaged, you may choose two of your own Parts to regenerate."],
 	"flavorText": "With a coffin on the back or dragging or a special storage device system, you can store spare parts.",
 	"flavorImage": "Coffin.png",
 	"usable": true
@@ -406,7 +406,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Rapid",
 	"range": "0-1",
-	"effect": ["Blast Attack 2 + Explosive. The Attack Check receives a penalty of -1."],
+	"effectText": ["Blast Attack 2 + Explosive. The Attack Check receives a penalty of -1."],
 	"flavorText": "A bomb that explodes and scatters iron pieces. Also, there is no possibility of rolling back over to your feet...",
 	"flavorImage": "HandGrenade.png",
 	"usable": true
@@ -420,7 +420,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": "1",
-	"effect": ["Ranged Attack 1 + Area Attack"],
+	"effectText": ["Ranged Attack 1 + Area Attack"],
 	"flavorText": "A shooting gun that shoots many bullets in the blink of an eye and pours bullet rain. When the enemies are gathering in one place, the effect is large.",
 	"flavorImage": "MachineGun.png",
 	"usable": false
@@ -434,7 +434,7 @@ const dollPartsJSON =
 	"cost": 0,
 	"timing": "Damage",
 	"range": "Self",
-	"effect": ["Defend 1 + Negate \\"Explosive\\""],
+	"effectText": ["Defend 1 + Negate \\"Explosive\\""],
 	"flavorText": "A reinforced case that can be used as a shield in a pinch. This can be things like guitar cases, umbrellas, etc, depending on your preference.",
 	"flavorImage": "MetalCase.png",
 	"usable": true
@@ -448,7 +448,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": 1,
-	"effect": ["Ranged Attack 1 + Stagger.",
+	"effectText": ["Ranged Attack 1 + Stagger.",
 	"If this attack hits, until the end of the Turn, Move Maneuvers performed by the target on themselves cost them an additional 2 AP (this effect does not stack if multiple attacks are made.)"],
 	"flavorText": "Metal net with iron balls on top. You can collapse your opponents below it.",
 	"flavorImage": "NetGun.png",
@@ -463,7 +463,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": "0-1",
-	"effect": ["Ranged Attack 1 + Explosive. Add +1 to the die roll of the Attack Check."],
+	"effectText": ["Ranged Attack 1 + Explosive. Add +1 to the die roll of the Attack Check."],
 	"flavorText": "It is effective against the undead because it shoots out countless small iron balls with high killing ability.",
 	"flavorImage": "Shotgun.png",
 	"usable": false
@@ -477,7 +477,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": "0-1",
-	"effect": ["Ranged Attack 2 + Chain Attack 1"],
+	"effectText": ["Ranged Attack 2 + Chain Attack 1"],
 	"flavorText": "Use two large handguns with both hands to gain considerable combat strength. There are two pistols and it is a double pistol attack.",
 	"flavorImage": "TwinPistols.png",
 	"usable": false
@@ -492,7 +492,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": "0-2",
-	"effect": ["At the time of its use, you may decide whether this Part performs a Melee Attack 1 + Dismember or a Melee Attack 1 + Stagger"],
+	"effectText": ["At the time of its use, you may decide whether this Part performs a Melee Attack 1 + Dismember or a Melee Attack 1 + Stagger"],
 	"flavorText": "A weapon of incredibly evil design. You can fight using many blades, throw it and use it.",
 	"flavorImage": "AfricanThrowingKnife.png",
 	"usable": false
@@ -506,7 +506,7 @@ const dollPartsJSON =
 	"cost": 4,
 	"timing": "Action",
 	"range": "1-3",
-	"effect": ["Ranged Attack 5"],
+	"effectText": ["Ranged Attack 5"],
 	"flavorText": "Originally a gun made to puncture the armor of a tank, it's power is comparable to a small missile",
 	"flavorImage": "AntiTankRifle.png",
 	"usable": false
@@ -520,7 +520,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": "0-1",
-	"effect": ["Blast Attack 2 + Explosive + Area Attack"],
+	"effectText": ["Blast Attack 2 + Explosive + Area Attack"],
 	"flavorText": "A powerful bomb which blows up a wide area. Many suicide bombers using explosions require careful handling.",
 	"flavorImage": "Dynamite.png",
 	"usable": false
@@ -534,7 +534,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": "0-1",
-	"effect": ["Blast Attack 1 + Explosive + Chain Attack 1"],
+	"effectText": ["Blast Attack 1 + Explosive + Chain Attack 1"],
 	"flavorText": "Flame spraying weapons that emit powerful flames and light the target on fire. Well used against the undead.",
 	"flavorImage": "FlameThrower.png",
 	"usable": false
@@ -548,7 +548,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": "0-1",
-	"effect": ["Melee Attack 1 + Dismember + Stagger"],
+	"effectText": ["Melee Attack 1 + Dismember + Stagger"],
 	"flavorText": "A chain with a saw-toothed disk with many blades on it's head. It is an excellent weapon that strikes away enemies and cuts.",
 	"flavorImage": "FlyingGuillotine.png",
 	"usable": false
@@ -562,7 +562,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 2 + Dismember (Enemies get -2 to the Dismember Check.)"],
+	"effectText": ["Melee Attack 2 + Dismember (Enemies get -2 to the Dismember Check.)"],
 	"flavorText": "An incomparably heinous weapon made just to break up an enemy's body and slice it apart. It is hard to walk around, but the effect is terrible.",
 	"flavorImage": "GiantScissors.png",
 	"usable": false
@@ -576,7 +576,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 4. Add +1 to the die roll of the Attack Check."],
+	"effectText": ["Melee Attack 4. Add +1 to the die roll of the Attack Check."],
 	"flavorText": "A fearsome murder weapon that looks like a sledge on a sword. It can pierce the prey easily.",
 	"flavorImage": "GreatKnife.png",
 	"usable": false
@@ -590,7 +590,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 3 + Chain Attack 2."],
+	"effectText": ["Melee Attack 3 + Chain Attack 2."],
 	"flavorText": "Spin the blade of the lawnmower and it will dismantle anything that is touched. Although it is hard to aim, it is one of the strongest undead destroying tools.",
 	"flavorImage": "Lawnmower.png",
 	"usable": false
@@ -604,7 +604,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": "0-1",
-	"effect": ["Melee Attack 1 + Dismember + Chain Attack 1"],
+	"effectText": ["Melee Attack 1 + Dismember + Chain Attack 1"],
 	"flavorText": "Strong wire that can cut off most matter in the world. Experts disassemble countless enemies in pieces with one fingertip.",
 	"flavorImage": "Monofilament.png",
 	"usable": false
@@ -618,7 +618,7 @@ const dollPartsJSON =
 	"cost": 4,
 	"timing": "Action",
 	"range": "1-2",
-	"effect": ["Blast Attack 4 + Explosive"],
+	"effectText": ["Blast Attack 4 + Explosive"],
 	"flavorText": "Crushing enemies with powerful rockets requires time to carry large portable shots, but it\'s destructive power is certainly worth it.",
 	"flavorImage": "RocketLauncher.png",
 	"usable": false
@@ -632,7 +632,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 2 + Dismember. Add +1 to the die roll of the Attack Check"],
+	"effectText": ["Melee Attack 2 + Dismember. Add +1 to the die roll of the Attack Check"],
 	"flavorText": "A named Japanese sword with quick attacks and highly reliable killing power. In order to wield, some sort of spiritual unification is required.",
 	"flavorImage": "SuperiorKatana.png",
 	"usable": false
@@ -646,7 +646,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": "1-2",
-	"effect": ["Ranged Attack 1 + Explosive + Area Attack"],
+	"effectText": ["Ranged Attack 1 + Explosive + Area Attack"],
 	"flavorText": "A gun that connects multiple shotguns and releases countless shots at the same time. The rain of destruction changes the meat within range to mince.",
 	"flavorImage": "UndeadGun.png",
 	"usable": false
@@ -661,7 +661,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": "Self",
-	"effect": ["Move 1. \\"Hinder Move\\" is ineffective against this Movement."],
+	"effectText": ["Move 1. \\"Hinder Move\\" is ineffective against this Movement."],
 	"flavorText": "There are claws and suction cups on your feet. Tricky movement is possible by running on walls and ceilings.",
 	"flavorImage": "AdhesivePads.png",
 	"usable": false
@@ -675,7 +675,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Check",
 	"range": "0-1",
-	"effect": ["Support 1"],
+	"effectText": ["Support 1"],
 	"flavorText": "You are white flesh without pigment. Albinism is said to bring strange luck. Who knows if this is true or not?",
 	"flavorImage": "Albino.png",
 	"usable": true
@@ -689,7 +689,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Check",
 	"range": "0-1",
-	"effect": ["Hinder 1"],
+	"effectText": ["Hinder 1"],
 	"flavorText": "Rotted murky blood, flowing in your body. It easily sprays and hinders the vision of others.",
 	"flavorImage": "BloodStained.png",
 	"usable": true
@@ -703,7 +703,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Unarmed Attack 2"],
+	"effectText": ["Unarmed Attack 2"],
 	"flavorText": "Claws developed to tear enemies. It seems inconvenient for everyday life, but there\'s no such thing as everyday life for the undead. Therefore, there is no problem.",
 	"flavorImage": "Claws.png",
 	"usable": false
@@ -717,7 +717,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["Maximum Action Points +1"],
+	"effectText": ["Maximum Action Points +1"],
 	"flavorText": "A partly artificial heart that beats in the undead body. The power of belief or lost necromancy, it allows for faster reactions.",
 	"flavorImage": "Heart.png",
 	"usable": false
@@ -731,7 +731,7 @@ const dollPartsJSON =
 	"cost": 0,
 	"timing": "Check",
 	"range": "0-3",
-	"effect": ["You may only use this Maneuver when an Attack Check is made against you.",
+	"effectText": ["You may only use this Maneuver when an Attack Check is made against you.",
 	"Hinder 1."],
 	"flavorText": "There is a big hole in your body. However, there is no hindrance to battle. It only makes you a harder target for the enemy to strike.",
 	"flavorImage": "Hole.png",
@@ -746,7 +746,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["At the end of a Turn of combat or at the end of the Battle Phase: If this part has been damaged, you may regenerate it."],
+	"effectText": ["At the end of a Turn of combat or at the end of the Battle Phase: If this part has been damaged, you may regenerate it."],
 	"flavorText": "Myriad of worms gushing out of the body, the larvae of mutant insects. They slowly reinforce your body tissue.",
 	"flavorImage": "Maggots.png",
 	"usable": false
@@ -760,7 +760,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["At the end of the Battle Phase: If this part has been damaged, you may regenerate this part and one basic Part."],
+	"effectText": ["At the end of the Battle Phase: If this part has been damaged, you may regenerate this part and one basic Part."],
 	"flavorText": "Seams running longitudinally and transversely through the body. Individual parts with different colours and sizes. Your body is a patchwork of patches.",
 	"flavorImage": "Patchwork.png",
 	"usable": false
@@ -774,7 +774,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Damage",
 	"range": "0-1",
-	"effect": ["You may only use this Maneuver when you receive damage, and only against the target which inflicted that damage.", 
+	"effectText": ["You may only use this Maneuver when you receive damage, and only against the target which inflicted that damage.", 
 	"Unarmed Attack 2."],
 	"flavorText": "Body fluid of strong acid flows inside you. It splatters over the enemy who hurt you and melts their body.",
 	"flavorImage": "Slime.png",
@@ -789,7 +789,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Check",
 	"range": 0,
-	"effect": ["You may only use this Maneuver when an Attack Check is made against you.",
+	"effectText": ["You may only use this Maneuver when an Attack Check is made against you.",
 	"Hinder 1.",
 	"You may use this Maneuver any number of times per Turn, but only once per Attack."],
 	"flavorText": "The mucus that covers your skin is extremely uncomfortable, but it is not uncommon that enemy attacks slip off it.",
@@ -805,7 +805,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Unarmed Attack 1. When you damage an enemy Part with this attack, you may regenerate one of your Entrails Parts."],
+	"effectText": ["Unarmed Attack 1. When you damage an enemy Part with this attack, you may regenerate one of your Entrails Parts."],
 	"flavorText": "Tubular long tongue. You can puncture it into enemies and literally suck up their meat or organic computer parts.",
 	"flavorImage": "Slurper.png",
 	"usable": false
@@ -819,7 +819,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["Maximum Action Points +1."],
+	"effectText": ["Maximum Action Points +1."],
 	"flavorText": "The tail of a beast or reptile is upon your butt. It balances the body, makes you agile and is pretty cute.",
 	"flavorImage": "Tail.png",
 	"usable": false
@@ -834,7 +834,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["Maximum Action Points +1.",
+	"effectText": ["Maximum Action Points +1.",
 	"If you make an Action Check using this Part, a Critical Failure does not destroy this part."],
 	"flavorText": "Your ears were torn off and the ears of a beast were put on your head. The perceptive power of a destroyed beast. It is an organ that enables rapid reaction. Cute!",
 	"flavorImage": "AnimalEars.png",
@@ -849,7 +849,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Unarmed Attack 1 + Chain Attack 1"],
+	"effectText": ["Unarmed Attack 1 + Chain Attack 1"],
 	"flavorText": "Some bones of the body protrude like a spear and penetrate the enemy. Suddenly, there are few foes who can avoid a constant attack.",
 	"flavorImage": "BoneSpear.png",
 	"usable": false
@@ -863,7 +863,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["When you make a Conversation Check, you may add +1 to the dice roll."],
+	"effectText": ["When you make a Conversation Check, you may add +1 to the dice roll."],
 	"flavorText": "Your body is a young girl, but you also have male features. Anyway, a man with rare value is going to be played.",
 	"flavorImage": "Boy.png",
 	"usable": false
@@ -877,7 +877,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Action",
 	"range": "Self",
-	"effect": ["Until the end of the Turn or until this Part is damaged: All Horrors and Legions on the Stage of Battle receive a -1 to Attack Checks made against targets other than you.",
+	"effectText": ["Until the end of the Turn or until this Part is damaged: All Horrors and Legions on the Stage of Battle receive a -1 to Attack Checks made against targets other than you.",
 	"This effect does not stack."],
 	"flavorText": "You can freely release pale light that blinds from the body. It seems to be a signal that attracts lower forms of undead.",
 	"flavorImage": "ColdLight.png",
@@ -892,7 +892,7 @@ const dollPartsJSON =
 	"cost": 0,
 	"timing": "Rapid",
 	"range": "Self",
-	"effect": ["You may perform one Action Maneuver of your choice as if its timing was \\"Rapid\\"."],
+	"effectText": ["You may perform one Action Maneuver of your choice as if its timing was \\"Rapid\\"."],
 	"flavorText": "Your arms are not two. An additional arm has been attached. It is difficult to master it, but the range of tactics widens a lot.",
 	"flavorImage": "ExtraArm.png",
 	"usable": true
@@ -906,7 +906,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Check",
 	"range": "0-1",
-	"effect": ["Support 2."],
+	"effectText": ["Support 2."],
 	"flavorText": "Several additional eyes are attached. A wide field of the view makes it possible to react quickly, but it feels unpleasant.",
 	"flavorImage": "ExtraEyes.png",
 	"usable": true
@@ -920,7 +920,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["When you make a Critical Hit against an enemy with a Range 0 Unarmed Attack, you may either add the Chain Attack 1 (if the attack already has it, increase the number of Chain Attacks) or the Stagger (if the attack already has it, you cannot Stagger twice) properties to the attack. Horn works once per Count. Attack affected by Instrument of Evil may still activate Horn\'s Chain effect."],
+	"effectText": ["When you make a Critical Hit against an enemy with a Range 0 Unarmed Attack, you may either add the Chain Attack 1 (if the attack already has it, increase the number of Chain Attacks) or the Stagger (if the attack already has it, you cannot Stagger twice) properties to the attack. Horn works once per Count. Attack affected by Instrument of Evil may still activate Horn\'s Chain effect."],
 	"flavorText": "A huge and brutal horn grows from your body. it is a weapon that can easily pierce the enemy and throw them.",
 	"flavorImage": "Horn.png",
 	"usable": true
@@ -934,7 +934,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Damage",
 	"range": "Self",
-	"effect": ["Defend 2"],
+	"effectText": ["Defend 2"],
 	"flavorText": "Covering the body is thick scales, furs, shells. Organic armor. It does not have any cute value, but one cannot deny it is powerful protection.",
 	"flavorImage": "Scales.png",
 	"usable": true
@@ -948,7 +948,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Check",
 	"range": "0-1",
-	"effect": ["Hinder 1 + Stagger"],
+	"effectText": ["Hinder 1 + Stagger"],
 	"flavorText": "A grotesque long tongue that keeps slurping. It shoots out as a surprise attack and it slows the movement of the opponent.",
 	"flavorImage": "Slobber.png",
 	"usable": true
@@ -962,7 +962,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Unarmed Attack 3"],
+	"effectText": ["Unarmed Attack 3"],
 	"flavorText": "There is a poison needle somewhere on your body to inject a strong acid that melts the enemy's insides.",
 	"flavorImage": "Stinger.png",
 	"usable": false
@@ -976,7 +976,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Rapid",
 	"range": "0-1",
-	"effect": ["Hinder Move 1"],
+	"effectText": ["Hinder Move 1"],
 	"flavorText": "The tentacles grabbing and squirming are perfect for hindering the enemy's behavior. It is a bad taste as a thing growing up from your body, but complaints cannot be said.",
 	"flavorImage": "Tentacles.png",
 	"usable": true
@@ -990,7 +990,7 @@ const dollPartsJSON =
 	"cost": 0,
 	"timing": "Check",
 	"range": 0,
-	"effect": ["Support 1 or Hinder 1"],
+	"effectText": ["Support 1 or Hinder 1"],
 	"flavorText": "Flowers bloom even in the destroyed world. Poisonous flowers and stretching vines cover your body. They will help you and hinder the foe.",
 	"flavorImage": "Vine.png",
 	"usable": true
@@ -1005,7 +1005,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": "Self",
-	"effect": ["Move 1-2"],
+	"effectText": ["Move 1-2"],
 	"flavorText": "Your feet have been cut off and replaced by those of a beast. It is terribly distorted modelling, but it is not a manner of running fast.",
 	"flavorImage": "AnimalLegs.png",
 	"usable": false
@@ -1019,7 +1019,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": "Self",
-	"effect": ["Until the end of the Turn or until you use an Attack Maneuver: Horrors and Legions cannot make you the target of Attack Maneuvers."],
+	"effectText": ["Until the end of the Turn or until you use an Attack Maneuver: Horrors and Legions cannot make you the target of Attack Maneuvers."],
 	"flavorText": "An unnatural mimicry. You change to be almost transparent and melt into the surroundings.",
 	"flavorImage": "Chameleon.png",
 	"usable": false
@@ -1033,7 +1033,7 @@ const dollPartsJSON =
 	"cost": 0,
 	"timing": "Check",
 	"range": 0,
-	"effect": ["Hinder 2"],
+	"effectText": ["Hinder 2"],
 	"flavorText": "Fungi adapted to the devastated world, living in your body. They can dull the enemy attack with a tremendous spore cloud.",
 	"flavorImage": "CorpseMushroom.png",
 	"usable": true
@@ -1047,7 +1047,7 @@ const dollPartsJSON =
 	"cost": 0,
 	"timing": "Damage",
 	"range": 0,
-	"effect": ["Defend 2"],
+	"effectText": ["Defend 2"],
 	"flavorText": "A film of deadly flesh. The wing of the dead angel. The wings that protect the sky cannot fly but protect the body like armor.",
 	"flavorImage": "CrackedFlesh.png",
 	"usable": true
@@ -1061,7 +1061,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["Maximum Action Points +2"],
+	"effectText": ["Maximum Action Points +2"],
 	"flavorText": "On the shoulder there is another head. two beings that are somehow doing something somehow do it quickly.",
 	"flavorImage": "ExtraHead.png",
 	"usable": false
@@ -1075,7 +1075,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["If Parts located upon your Legs other than this one have been destroyed, you may use their Maneuvers as normal."],
+	"effectText": ["If Parts located upon your Legs other than this one have been destroyed, you may use their Maneuvers as normal."],
 	"flavorText": "You have more than two legs. Like centaurs, like octopi, you have been giving multiple legs.",
 	"flavorImage": "ExtraLegs.png",
 	"usable": false
@@ -1089,7 +1089,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": "0-1",
-	"effect": ["Unarmed Attack 2 + Chain Attack 1"],
+	"effectText": ["Unarmed Attack 2 + Chain Attack 1"],
 	"flavorText": "A thin, long and tough tentacle can strike the body of an enemy like a whip. Over and over again.",
 	"flavorImage": "FleshWhip.png",
 	"usable": false
@@ -1103,7 +1103,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Damage",
 	"range": "Self",
-	"effect": ["You may only use this Maneuver when you take Damage. Remove one Madness Point from a Fetter of your choice."],
+	"effectText": ["You may only use this Maneuver when you take Damage. Remove one Madness Point from a Fetter of your choice."],
 	"flavorText": "When you get hurt, it's murky in your head. Let it flow out. It makes you forget something disgusting.",
 	"flavorImage": "HappyPills.png",
 	"usable": true
@@ -1117,7 +1117,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": "0-1",
-	"effect": ["Unarmed Attack 1 + Explosive + Stagger"],
+	"effectText": ["Unarmed Attack 1 + Explosive + Stagger"],
 	"flavorText": "You will be able to spoil your opponent who you can spray with the poison inside your body.",
 	"flavorImage": "LiquidRot.png",
 	"usable": false
@@ -1131,7 +1131,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Unarmed Attack 2 + Chain Attack 2.", 
+	"effectText": ["Unarmed Attack 2 + Chain Attack 2.", 
 	"During the Attack Checks (from the declaration of the attack to the end of the action) you may reroll a single die."],
 	"flavorText": "Countless ugly horrors are hiding inside you! Even if you attack the enemy by yourself, they devour it.",
 	"flavorImage": "MeatSnake.png",
@@ -1146,7 +1146,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["When you take damage to your Arms or Legs, you may divide that damage among all your Locations as you wish. This effect does not apply to damage with the \\"Explosive\\" effect. If you need to make a Dismemberment Check, choose one location to make it for."],
+	"effectText": ["When you take damage to your Arms or Legs, you may divide that damage among all your Locations as you wish. This effect does not apply to damage with the \\"Explosive\\" effect. If you need to make a Dismemberment Check, choose one location to make it for."],
 	"flavorText": "You have no hands and no feet. there is no pain being shoved into your body at those missing parts.",
 	"flavorImage": "QuadrupleAmputee.png",
 	"usable": false
@@ -1160,7 +1160,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["During the Battle Phase, once for each Check, you may negate 1 Hinder attempt against it."],
+	"effectText": ["During the Battle Phase, once for each Check, you may negate 1 Hinder attempt against it."],
 	"flavorText": "A body that looks like wasted meat and malnourished. While looking unhealthy, it is good to catch enemies off guard.",
 	"flavorImage": "Skinny.png",
 	"usable": false
@@ -1175,7 +1175,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["Maximum Action Points +1"],
+	"effectText": ["Maximum Action Points +1"],
 	"flavorText": "An adjustment that speeds up brain function and forcibly activates the reaction rate. Undead unique drug strengthening.",
 	"flavorImage": "Adrenaline.png",
 	"usable": false
@@ -1189,7 +1189,7 @@ const dollPartsJSON =
 	"cost": 0,
 	"timing": "Damage",
 	"range": "Self",
-	"effect": ["Defend 1"],
+	"effectText": ["Defend 1"],
 	"flavorText": "Strong artificial skin covering the whole body. This will surely reduce the damage you receive.",
 	"flavorImage": "ArmorSkin.png",
 	"usable": true
@@ -1203,7 +1203,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Check",
 	"range": "Self",
-	"effect": ["Support 2"],
+	"effectText": ["Support 2"],
 	"flavorText": "Adjustment knob protrudes from the head. You can control response and brain drugs by adjusting it.",
 	"flavorImage": "BoltHead.png",
 	"usable": true
@@ -1217,7 +1217,7 @@ const dollPartsJSON =
 	"cost": "See Effect",
 	"timing": "Damage",
 	"range": "Self",
-	"effect": ["You may only use this Maneuver when you are dealing damage.",
+	"effectText": ["You may only use this Maneuver when you are dealing damage.",
 	"As its Cost, damage one of your own Basic Parts of your choice.",
 	"Add +1 to an Unarmed or Melee Attack (only once per attack.)",
 	"You may use this any number of times per Turn."],
@@ -1234,7 +1234,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["At the end of the Battle Phase, if this Part is not damaged, you may regenerate all damaged Basic Parts in the same Location as this Part."],
+	"effectText": ["At the end of the Battle Phase, if this Part is not damaged, you may regenerate all damaged Basic Parts in the same Location as this Part."],
 	"flavorText": "Iron pipes and simple scrap. A body made from such debris is easily repaired.",
 	"flavorImage": "JunkPart.png",
 	"usable": false
@@ -1248,7 +1248,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["When you receive a Madness Point, you may break this Part in order to ignore it."],
+	"effectText": ["When you receive a Madness Point, you may break this Part in order to ignore it."],
 	"flavorText": "An attack to the ego is an emergency. In order to protect mental health, a little excessive stress will be taken upon the body.",
 	"flavorImage": "KarmaProcessor.png",
 	"usable": false
@@ -1262,7 +1262,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["When this Part becomes damaged, you may gain +2 to your Maximum Action Points.", 
+	"effectText": ["When this Part becomes damaged, you may gain +2 to your Maximum Action Points.", 
 	"This effect lasts until the end of the Battle Phase. This Part may not be repaired or regenerated while this effect is active."],
 	"flavorText": "A suppressor to hold back drugs in the brain that will not stop pumping. As soon as it\'s lost, the world will not be able to catch up with your sharp senses.",
 	"flavorImage": "Limiter.png",
@@ -1277,7 +1277,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": "0-1",
-	"effect": ["Unarmed Attack 1 + Stagger"],
+	"effectText": ["Unarmed Attack 1 + Stagger"],
 	"flavorText": "Arms and legs, sometimes even the head are separated and fired towards the opponent. After the attack, the part will come back instantly so there is no limit on the number of shot.",
 	"flavorImage": "RemoteAttack.png",
 	"usable": false
@@ -1291,7 +1291,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Unarmed Attack 2"],
+	"effectText": ["Unarmed Attack 2"],
 	"flavorText": "Steel jaws and teeth. Every bite causes brutal damage. Most of the time it's kept hidden, so it cannot be seen from the outside.",
 	"flavorImage": "Sabretooth.png",
 	"usable": false
@@ -1305,7 +1305,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Unarmed Attack 1 + Dismember"],
+	"effectText": ["Unarmed Attack 1 + Dismember"],
 	"flavorText": "Scissor-shaped prosthetic hands or sharp nails. Although they’re inconvenient for normal use, you can cut up and tear apart enemy bodies.",
 	"flavorImage": "ScissorHands.png",
 	"usable": false
@@ -1319,7 +1319,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Damage",
 	"range": "Self",
-	"effect": ["Defend 1 + Negate \\"Dismember\\""],
+	"effectText": ["Defend 1 + Negate \\"Dismember\\""],
 	"flavorText": "Steel embedded in the body. Ultra reinforced metal and monomolecular fiber boasts a strong defense against slashing.",
 	"flavorImage": "SteelBones.png",
 	"usable": true
@@ -1333,7 +1333,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Rapid",
 	"range": "0-2",
-	"effect": ["You may make a mutual Conversation Check with your target sister."],
+	"effectText": ["You may make a mutual Conversation Check with your target sister."],
 	"flavorText": "Throat that emits directional sound. Communication can be taken in the heat of battle",
 	"flavorImage": "VoiceEffect.png",
 	"usable": true
@@ -1348,7 +1348,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["During the Battle Phase, once per Turn, you may reduce the Madness Point cost of your Maneuver by 1."],
+	"effectText": ["During the Battle Phase, once per Turn, you may reduce the Madness Point cost of your Maneuver by 1."],
 	"flavorText": "It is a reminder that you are receiving a spirit stabilized radio that is transmitted from somewhere with a noticeable antenna attached to your head.",
 	"flavorImage": "Antenna.png",
 	"usable": true
@@ -1362,7 +1362,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Rapid",
 	"range": 0,
-	"effect": ["Melee Attack 2 + Chain Attack 1"],
+	"effectText": ["Melee Attack 2 + Chain Attack 1"],
 	"flavorText": "A blade hidden in the body. Spring out instantly and slice the opponent. That unexpected slash is enough to silence an enemy.",
 	"flavorImage": "AssassinBlade.png",
 	"usable": true
@@ -1376,7 +1376,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 2. This damage cannot be defended against."],
+	"effectText": ["Melee Attack 2. This damage cannot be defended against."],
 	"flavorText": "A powerful drill that rotates with tremendous momentum and ignores the opponent\'s defenses and penetrates them. It is a weapon that can be called a natural enemy for those with high defense ability.",
 	"flavorImage": "Drill.png",
 	"usable": false
@@ -1390,7 +1390,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Unarmed Attack 1 + Stagger"],
+	"effectText": ["Unarmed Attack 1 + Stagger"],
 	"flavorText": "Despite being a corpse that releases electricity routinely stored in the body, the body cannot move for a moment due to reflexive convulsions.",
 	"flavorImage": "Electrigger.png",
 	"usable": false
@@ -1404,7 +1404,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["Maximum Action Points +2.",
+	"effectText": ["Maximum Action Points +2.",
 	"When this location this part is equipped in takes damage, you must choose any one of your Basic Parts and damage it as well."],
 	"flavorText": "A bold tube attached to the body. Always circulating a lot of power, this will abnormally activate the flesh of the Doll.",
 	"flavorImage": "EnergyTube.png",
@@ -1419,7 +1419,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": "0-3",
-	"effect": ["Ranged Attack 1 + Dismember"],
+	"effectText": ["Ranged Attack 1 + Dismember"],
 	"flavorText": "A heat ray that strikes from a part of the body. Although it's power is small, it will reach far and will be useful.",
 	"flavorImage": "LaserBeam.png",
 	"usable": false
@@ -1433,7 +1433,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Rapid",
 	"range": "0-1",
-	"effect": ["Hinder Move 1"],
+	"effectText": ["Hinder Move 1"],
 	"flavorText": "Metal tentacle like a biological tentacle. It interferes with enemies and hinders action. Because of it\'s inorganic appearance, it is more popular with Dolls than tentacles.",
 	"flavorImage": "MechaTentacle.png",
 	"usable": true
@@ -1447,7 +1447,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["Maximum Action Points +1"],
+	"effectText": ["Maximum Action Points +1"],
 	"flavorText": "Reinforced Reflexes. It enables faster body reactions and can move quickly as possible.",
 	"flavorImage": "Reflexes.png",
 	"usable": false
@@ -1461,7 +1461,7 @@ const dollPartsJSON =
 	"cost": 0,
 	"timing": "Check",
 	"range": "Self",
-	"effect": ["Support 2. Use this Maneuver only when making a Ranged or Blast Attack"],
+	"effectText": ["Support 2. Use this Maneuver only when making a Ranged or Blast Attack"],
 	"flavorText": "Suitable for spying. A scope directly attached to the face. It makes precise shooting possible.",
 	"flavorImage": "Scope.png",
 	"usable": true
@@ -1475,7 +1475,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Damage",
 	"range": "Self",
-	"effect": ["You may only use this Maneuver when you deal damage. Add +2 to the damage for an Unarmed or Melee Attack."],
+	"effectText": ["You may only use this Maneuver when you deal damage. Add +2 to the damage for an Unarmed or Melee Attack."],
 	"flavorText": "Thorns that grow and break through the body.",
 	"flavorImage": "Spikes.png",
 	"usable": true
@@ -1489,7 +1489,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Rapid",
 	"range": "0-2",
-	"effect": ["Move 1"],
+	"effectText": ["Move 1"],
 	"flavorText": "A hook that is fired and forcibly draws the target with the now embedded wire.",
 	"flavorImage": "WireReel.png",
 	"usable": true
@@ -1503,7 +1503,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": 0,
-	"effect": ["When this Part is damaged in Battle Phase, a Blast 2 + Explosive + Area Attack with a Check value of 8 occurs against yourself.",
+	"effectText": ["When this Part is damaged in Battle Phase, a Blast 2 + Explosive + Area Attack with a Check value of 8 occurs against yourself.",
 	"However, \\"Rapid\\" and \\"Check\\" timings do not occur for this effect."],
 	"flavorText": "A bomb charged in the body. Of course, the person alone is not pleased. However, when surrounded by many foes it can be an unexpected help.",
 	"flavorImage": "ZombieBomb.png",
@@ -1519,7 +1519,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Check",
 	"range": 0,
-	"effect": ["Support 2 or Hinder 2"],
+	"effectText": ["Support 2 or Hinder 2"],
 	"flavorText": "A prosthesis system that enhances grip strength. A person gripped by a powerful fingertip cannot escape the next attack.",
 	"flavorImage": "ArmVise.png",
 	"usable": true
@@ -1533,7 +1533,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["The \\"Dismember\\" effect is ineffective against you."],
+	"effectText": ["The \\"Dismember\\" effect is ineffective against you."],
 	"flavorText": "A system that separates itself from itself. Easily dismantled, but each part moves independently and reconnects again.",
 	"flavorImage": "AutoSeparate.png",
 	"usable": false
@@ -1547,7 +1547,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["During Damage Timing, you gain \\"Defend 1\\" for Legs only",
+	"effectText": ["During Damage Timing, you gain \\"Defend 1\\" for Legs only",
 	"Additionally, during battle, when your Movement Maneuver successfully moves you, you may use a Melee or Unarmed Maneuvers against one target in either your current area or in the one in which you began your movement."],
 	"flavorText": "Half the body is replaced by a multi-legged tank. In addition to armor, movement attacks due to self running ability are possible. However, you cannot deny how far from human you are now.",
 	"flavorImage": "CrabLegs.png",
@@ -1562,7 +1562,7 @@ const dollPartsJSON =
 	"cost": 0,
 	"timing": "Damage",
 	"range": "Self",
-	"effect": ["Defend 2"],
+	"effectText": ["Defend 2"],
 	"flavorText": "Semi-machine human who has most of their body replaced by mechanics. It\'s body is an organism if you see it, but most attacks bounce off the steel armor.",
 	"flavorImage": "Cyborg.png",
 	"usable": true
@@ -1576,7 +1576,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Check",
 	"range": 0,
-	"effect": ["Hinder 2",
+	"effectText": ["Hinder 2",
 	"You may use this Maneuver any number of times per Turn, but only once per Check."],
 	"flavorText": "An appearance of beautiful decoration for the Doll. It is the adoration of the Dolls, a sanctuary that is unclean even for the love and death of the necromancer.",
 	"flavorImage": "Embalming.png",
@@ -1591,7 +1591,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effect": ["During Damage Timing, you gain \\"Defend 1\\" for Arms only.",
+	"effectText": ["During Damage Timing, you gain \\"Defend 1\\" for Arms only.",
 	"Damage +1 to Melee and Unarmed Attack Maneuvers on the Arms location."],
 	"flavorText": "A gigantic and powerful steel arm. It crushes and hammers most enemies.",
 	"flavorImage": "Gauntlet.png",
@@ -1606,7 +1606,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Rapid",
 	"range": "Self",
-	"effect": ["Move 1. \\"Hinder Move\\" Maneuvers are ineffective against this movement."],
+	"effectText": ["Move 1. \\"Hinder Move\\" Maneuvers are ineffective against this movement."],
 	"flavorText": "It is possible to make a dynamic avoidance and movement that can jump instantly by a strong spring put into the legs.",
 	"flavorImage": "Hopper.png",
 	"usable": true
@@ -1620,7 +1620,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 1 + Dismember + Chain Attack 1."],
+	"effectText": ["Melee Attack 1 + Dismember + Chain Attack 1."],
 	"flavorText": "When needed, light that can be generated. The light that is burning bright, to chop through the enemy\'s body with an electronic sound.",
 	"flavorImage": "Lightsaber.png",
 	"usable": false
@@ -1634,7 +1634,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Rapid",
 	"range": "0-1",
-	"effect": ["Hinder Move 1 + Stagger"],
+	"effectText": ["Hinder Move 1 + Stagger"],
 	"flavorText": "Elongated joints that can be stretched to some extent by wires to grasp enemies unexpectedly.",
 	"flavorImage": "Manipulator.png",
 	"usable": true
@@ -1648,7 +1648,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Action",
 	"range": 0,
-	"effect": ["Melee Attack 2", 
+	"effectText": ["Melee Attack 2", 
 	"\\"Defend\\" Maneuvers are ineffective against this attack.",
 	"If the attack hits, you may \\"Move 1\\" the target."],
 	"flavorText": "High speed injection of the metal spike with high vibration, blows apart the defense of the enemy it punches out.",
@@ -1664,7 +1664,7 @@ const dollPartsJSON =
 	"cost": "See Effect",
 	"timing": "Rapid",
 	"range": "0-2",
-	"effect": ["At the Cost of this Maneuver, pay 1 AP, then add a Madness Point to a Fetter of your choice.", 
+	"effectText": ["At the Cost of this Maneuver, pay 1 AP, then add a Madness Point to a Fetter of your choice.", 
 	"Ranged Attack 4."],
 	"flavorText": "By-product of ESP development forcibly interferes with the user's ego and activates some kind of supernatural power and blasts apart enemies.",
 	"flavorImage": "PsychoBlaster.png",
@@ -1679,7 +1679,7 @@ const dollPartsJSON =
 	"cost": 0,
 	"timing": "Action",
 	"range": "Self",
-	"effect": ["Move 1~2. You may use this Maneuver only once per Battle."],
+	"effectText": ["Move 1~2. You may use this Maneuver only once per Battle."],
 	"flavorText": "In conjunction with the slime mold community in the body, the military gear that burns the saved energy can grant flight for a short time.",
 	"flavorImage": "RocketPack.png",
 	"usable": true

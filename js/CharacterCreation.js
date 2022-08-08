@@ -743,7 +743,7 @@ function setSkill(classId, skillId, isPosition){
 }
 
 function setPositionSkill(positionId, skillId){
-	if(skillId == characterWIP.skills[0].id){
+	if(characterWIP.skills[0] != null && skillId == characterWIP.skills[0].id){
 		characterWIP.classPosition = -1;
 		characterWIP.skills[0] = null;
 	}
@@ -794,7 +794,7 @@ function setClassSkill(classId, skillId){
 	//clear that skill, then adjust skill array and classes
 	let fixArray = false;
 	for(let i = 1; i < 4; i++){
-		if(characterWIP.skills[i].id == skillId){
+		if(characterWIP.skills[i] != null && characterWIP.skills[i].id == skillId){
 			characterWIP.skills[i] = null;
 			fixArray = true;
 		}
@@ -878,7 +878,12 @@ function displayClassSkills(){
 	let skills = [null, null, null];
 
 	for(let s = 0; s < skills.length; s++){
-		skills[s] = getById(characterWIP.skills[s+1].id, dollSkills);
+		if(characterWIP.skills[s+1] == null){
+			skills[s] = null;
+		}
+		else{
+			skills[s] = getById(characterWIP.skills[s+1].id, dollSkills);
+		}
 	}
 
 	//update display of primary class
@@ -1306,8 +1311,8 @@ function buildCategoryParts(type, tier){
 function buildPart(part){
 	let imgSrc = "Content/Parts/" + part.flavorImage;
 	let effectText = "";
-	for(let i = 0; i < part.effect.length; i++){
-		effectText += `<p>${part.effect[i]}</p>`;
+	for(let i = 0; i < part.effectText.length; i++){
+		effectText += `<p>${part.effectText[i]}</p>`;
 	}
 	let content = 
 	`
