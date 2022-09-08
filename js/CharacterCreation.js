@@ -1500,8 +1500,87 @@ function editTreasure(){
 	
 	characterWIP.treasures[0] = new Treasure(name, partLocation, flavorText, flavorImage);
 }
+function buildDeploymentChoice(){
+	let edenCheck = "";
+	let elysiumCheck = "";
+	let limboCheck = "";
+	if(characterWIP.deployment == 0){
+		edenCheck = "checked";
+	}
+	else if(characterWIP.deployment == 1){
+		elysiumCheck = "checked";
+	}
+	else if(characterWIP.deployment == 2){
+		limboCheck = "checked";
+	}
+	/*
+	let content = 
+	`
+	<h4 class="necro-bar" style="z-index:100">Initial Deployment</h4>
+	<div class="bg-black rounded text-white p-1 pl-4 pr-4" style="margin-top:-16px">
+		<div class="row">
+			<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg" style="width:100%">
+				<div class="form-check">
+					<label for="ipeden" class="form-check-label">
+						<input class="form-check-input" type="radio" id="ipeden" name="initialplacement" value="option1" ${edenCheck} onclick="setDeployment(0)">Eden
+					</label>
+				</div>
+			</div>
+			<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg" style="width:100%">
+				<div class="form-check">
+					<label for="ipelysium" class="form-check-label">
+						<input class="form-check-input" type="radio" id="ipelysium" name="initialplacement" value="option2" ${elysiumCheck} onclick="setDeployment(1)">Elysium
+					</label>
+				</div>
+			</div>
+			<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg" style="width:100%">
+				<div class="form-check">
+					<label for="iplimbo" class="form-check-label">
+						<input class="form-check-input" type="radio" id="iplimbo" name="initialplacement" value="option3" ${limboCheck} onclick="setDeployment(2)">Limbo
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	`;
+	*/
+	let content=`
+	<h5 class="necro-box-header">Initial Deployment</h4>
+	<div class="necro-box">
+		
+		<div class="rounded bg-black text-white pt-3 pl-3 pr-3 pb-1">
+			<div class="row">
+				<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg" style="width:100%">
+					<div class="form-check">
+						<label for="ipeden" class="form-check-label">
+							<input class="form-check-input" type="radio" id="ipeden" name="initialplacement" value="option1" ${edenCheck} onclick="setDeployment(0)">Eden
+						</label>
+					</div>
+				</div>
+				<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg" style="width:100%">
+					<div class="form-check">
+						<label for="ipelysium" class="form-check-label">
+							<input class="form-check-input" type="radio" id="ipelysium" name="initialplacement" value="option2" ${elysiumCheck} onclick="setDeployment(1)">Elysium
+						</label>
+					</div>
+				</div>
+				<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg" style="width:100%">
+					<div class="form-check">
+						<label for="iplimbo" class="form-check-label">
+							<input class="form-check-input" type="radio" id="iplimbo" name="initialplacement" value="option3" ${limboCheck} onclick="setDeployment(2)">Limbo
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	`;
+	
+	return content;
+}
 function setDeployment(zoneId){
 	characterWIP.deployment = zoneId;
+	saveDoll(characterWIP);
 }
 function finishCreation(){
 	//save characterWIP to character list

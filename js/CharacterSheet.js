@@ -9,6 +9,8 @@ function viewDoll(id){
 	if(doll != null){
 		characterWIP = doll;
 		let premonition = buildMemoryFragmentListItem(getById(doll.premonition, premonitions));
+		let deployment = buildDeploymentChoice();
+		let favor = buildFavorDisplay();
 		let fragmentList = buildMemoryFragmentList(doll);
 		let dollPosition = getById(doll.classPosition, dollPositions);
 		let dollClass1 = getById(doll.classPrimary, dollClasses);
@@ -32,7 +34,12 @@ function viewDoll(id){
 				</table>
 				
 			</div>
-			<div class="col card">
+			<div class="col d-flex flex-column justify-content-end">
+				<div class="card mb-3 flex-fill">
+				
+				</div>
+				${favor}
+				${deployment}
 			
 			</div>
 		</div>
@@ -163,6 +170,7 @@ function buildLocationPartList(doll, partLocation){
 
 function buildListItem(item, type, active){
 	let imgSrc = "";
+	let defaultSrc = "none";
 	let name = "";
 	let timing = "";
 	let cost = "";
@@ -172,13 +180,18 @@ function buildListItem(item, type, active){
 	let destroyBtn = "";
 	let effectText = "";
 	let special = "";
-	
+
 	if(type == "Skill" || type == "Part"){
 		let full = null;//
 		//image source and part damage toggle
 		if(type == "Skill"){
 			full = getById(item.id, dollSkills);
 			imgSrc = "Content/Skills/" + full.flavorImage;
+			let skillClass = getById(full.classId, dollClasses);
+			if(skillClass == null){
+				skillClass = getById(full.classId, dollPositions);
+			}
+			defaultSrc = "Content/Skills/_placeholder_" + skillClass.name + ".png";
 
 			if(full.special == true){
 				special = 
@@ -190,6 +203,7 @@ function buildListItem(item, type, active){
 		else{
 			full = getById(item.id, dollParts);
 			imgSrc = "Content/Parts/" + full.flavorImage;
+			defaultSrc = "Content/Parts/_placeholder_" + item.partLocation + ".png";
 			let damageChecked = "";
 			if(!active && item.damaged){
 				damageChecked = "checked";
@@ -242,8 +256,8 @@ function buildListItem(item, type, active){
 		cost = "None";
 		range = "None";
 		
-		imgSrc = "../Content/Treasures/" + full.flavorImage;
-		
+		imgSrc = "Content/Treasures/" + full.flavorImage;
+		defaultSrc = "Content/Treasures/_placeholder_Treasure.png";
 		destroyBtn = 
 		`
 		<button type="button" class="btn btn-dark bg-black pt-0 pb-0 mt-1">Destroy</button>
@@ -264,7 +278,10 @@ function buildListItem(item, type, active){
 		<div class="row">
 			<div class="col-lg">
 				<div class="d-flex">
-					<img src='${imgSrc}' class="tile-64 mr-2">
+					<object data='${imgSrc}' type="image/png" class="tile-64 mr-2">
+						<img src='${defaultSrc}' class="tile-64">
+					</object>
+					<!--<img src='${imgSrc}' onerror="this.style.display='${defaultSrc}'" class="tile-64 mr-2">-->
 					<div class="flex-fill">
 						<div class="mt-2">
 							<h5 class="necro-item-header">${special}${name}</h5>
@@ -309,5 +326,22 @@ function setUsedState(itemId, type){
 function setDmgState(partId){
 	let part = getById(partId, characterWIP.parts);
 	part.damaged = $("#partDmgCheck" + partId).is(":checked");
+	saveDoll(characterWIP);
+}
+
+function buildFavorDisplay(){
+	let content = 
+	`
+	<h5 class="necro-box-header">Favor</h5>
+	<div class="necro-box">
+		<div class="bg-black rounded text-white p-2 col">
+			<input id="favorValue" class="form-control" type="number" value="${characterWIP.favor}" onchange="updateFavor()">
+		</div>
+	</div>
+	`;
+	return content;
+}
+function updateFavor(){
+	characterWIP.favor = $("#favorValue").val();
 	saveDoll(characterWIP);
 }

@@ -19,6 +19,7 @@ const dollTreasures = JSON.parse(dollTreasuresJSON);
 const dollFetterTypes = [];
 
 
+
 //doll constructor
 function Doll(nextId)
 {

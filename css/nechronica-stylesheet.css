@@ -36,8 +36,21 @@
 	background-repeat: no-repeat;
 	padding-top: 24px;
 	padding-left: 24px;
+	margin-left: -24px;
+	margin-bottom: 16px;
 	min-height: 56px;
 	background-origin: border-box;
+}
+.necro-box-header{
+	z-index: 100;
+	color: white;
+	margin-bottom: -34px;
+	margin-left: 16px;
+	font-weight: bold;
+	text-shadow: -1px 1px 0 #000,
+				  1px 1px 0 #000,
+				 1px -1px 0 #000,
+				-1px -1px 0 #000;
 }
 .bg-black{
 	background-color: #121212;
@@ -79,6 +92,8 @@
 	width: 64px;
 	height: 64px;
 	background-size: contain;
+	border-radius: 5px;
+	border: 1px outset #DDDDDD;
 }
 .bg-img-head{
 	background-image: url("../Content/Icons/LocationHead.png");
@@ -172,6 +187,7 @@
 .full-height{
 	height: 100%;
 }
+
 /*bootstrap overrides*/
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
