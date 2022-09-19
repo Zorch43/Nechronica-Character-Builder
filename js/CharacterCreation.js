@@ -27,6 +27,7 @@ function startCharacterCreation(){
 	treasuresPopulated = false;
 	let content=
 	`
+	
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs d-flex ml-3 mr-3">
 	  <li class="nav-item flex-fill">
@@ -459,49 +460,11 @@ function startCharacterCreation(){
 	$('.nav-tabs a').on('hide.bs.tab', function(){
 		//get active tab (that will be hidden)
 		let lastTab = $("a.nav-link.active").attr('id');
+		validateTab(lastTab);
 		
-		//validate the data of the previously viewed tab
-		let valid = false;
-		if(lastTab == "name-age-tab"){
-			valid = validateName() && validateAge();
-		}
-		else if(lastTab == "memories-tab"){
-			valid = validateMemoryFragments() && validatePremonition();
-		}
-		else if(lastTab == "position-tab"){
-			valid = validatePosition();
-		}
-		else if(lastTab == "classes-tab"){
-			valid = validateClasses();
-		}
-		else if(lastTab == "r-points-tab"){
-			valid = validateRPoints();
-		}
-		else if(lastTab == "parts-tab"){
-			valid = validateParts();
-		}
-		else if(lastTab == "treasure-tab"){
-			valid = validateTreasure();
-		}
-		else if(lastTab == "deployment-tab"){
-			valid = validateDeployment();
-		}
-		else{
-			
-		}
-		markTabValidation(lastTab, valid);
 	});
 }
-function markTabValidation(tabId, state){
-	let stateMark = "";
-	if(state){
-		stateMark = `<i class="fas fa-check-circle text-success"></i>`;
-	}
-	else{
-		stateMark = `<i class="fas fa-exclamation-circle text-warning"></i>`;
-	}
-	$("#" + tabId + " span").html(stateMark);
-}
+
 //utilities
 function clickLink(linkId){
 	document.getElementById(linkId).click();
@@ -1690,14 +1653,68 @@ function validateDeployment(){
 	}
 	return true;
 }
-function validateSteps(){
-	
+function validateTab(lastTab){
+	//validate the data of the previously viewed tab
+		let valid = false;
+		if(lastTab == "name-age-tab"){
+			valid = validateName() && validateAge();
+		}
+		else if(lastTab == "memories-tab"){
+			valid = validateMemoryFragments() && validatePremonition();
+		}
+		else if(lastTab == "position-tab"){
+			valid = validatePosition();
+		}
+		else if(lastTab == "classes-tab"){
+			valid = validateClasses();
+		}
+		else if(lastTab == "r-points-tab"){
+			valid = validateRPoints();
+		}
+		else if(lastTab == "parts-tab"){
+			valid = validateParts();
+		}
+		else if(lastTab == "treasure-tab"){
+			valid = validateTreasure();
+		}
+		else if(lastTab == "deployment-tab"){
+			valid = validateDeployment();
+		}
+		else{
+			
+		}
+		markTabValidation(lastTab, valid);
+		return valid;
+}
+function markTabValidation(tabId, state){
+	let stateMark = "";
+	if(state){
+		stateMark = `<i class="fas fa-check-circle text-success"></i>`;
+	}
+	else{
+		stateMark = `<i class="fas fa-exclamation-circle text-warning"></i>`;
+	}
+	$("#" + tabId + " span").html(stateMark);
 }
 function finishCreation(){
-	//save characterWIP to character list
-	saveDoll();
-	//load character list
-	loadCharacterList();
+	//validate all steps, mark all tabs
+	let valid = true;
+	$(".nav-tabs a").each(function(){
+		let tabId = $(this).attr('id');
+		let tabValid = validateTab(tabId);
+		valid = valid && tabValid;
+	});
+	
+	if(valid){
+		//if valid,
+		//save characterWIP to character list
+		saveDoll();
+		//load character list
+		loadCharacterList();
+	}
+	else{
+		//TODO: show toast?
+	}
 }
 
 
