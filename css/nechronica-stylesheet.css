@@ -43,14 +43,19 @@
 }
 .necro-box-header{
 	z-index: 100;
+	position: relative;
 	color: white;
 	margin-bottom: -34px;
-	margin-left: 16px;
+	margin-left: -8px;
 	font-weight: bold;
 	text-shadow: -1px 1px 0 #000,
 				  1px 1px 0 #000,
 				 1px -1px 0 #000,
 				-1px -1px 0 #000;
+}
+
+.karma-done{
+	text-decoration: line-through;
 }
 .bg-black{
 	background-color: #121212;
@@ -186,6 +191,25 @@
 }
 .full-height{
 	height: 100%;
+}
+/*doll fetters*/
+/*hide mad elements while sane, sane elements while mad*/
+.fetter.fetter-state-sane .fetter-mad, .fetter.fetter-state-mad .fetter-sane{
+	display: none;
+}	
+.fetter-chain{
+	background-image: url("../Content/FetterChain.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: #dddddd;
+	width: 31px;
+	height: 19px;
+	text-align: center;
+	background-size: contain;
+}
+.fetter-madness-track{
+	display:flex;
+	align-items: center;
 }
 
 /*bootstrap overrides*/

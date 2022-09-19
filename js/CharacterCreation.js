@@ -11,6 +11,7 @@ let partsPopulated = false;
 let selectedPart = null;
 let selectedPartIndex = -1;
 let treasuresPopulated = false;
+let stepViewedState = [false,false,false,false,false,false,false,false];//which tabs have been viewed
 //content loader
 function startCharacterCreation(){
 	//reset global variables
@@ -29,28 +30,28 @@ function startCharacterCreation(){
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs d-flex ml-3 mr-3">
 	  <li class="nav-item flex-fill">
-		<a class="nav-link active" data-toggle="tab" href="#name-age" id="name-age-tab">Name & Age</a>
+		<a class="nav-link active" data-toggle="tab" href="#name-age" id="name-age-tab">Name & Age<span></span></a>
 	  </li>
 	  <li class="nav-item flex-fill">
-		<a class="nav-link" data-toggle="tab" href="#memories" id="memories-tab">Memories</a>
+		<a class="nav-link" data-toggle="tab" href="#memories" id="memories-tab">Memories<span></span></a>
 	  </li>
 	  <li class="nav-item flex-fill">
-		<a class="nav-link" data-toggle="tab" href="#position" id="position-tab" onclick="populatePositions('position-picker')">Position</a>
+		<a class="nav-link" data-toggle="tab" href="#position" id="position-tab" onclick="populatePositions('position-picker')">Position<span></span></a>
 	  </li>
 	  <li class="nav-item flex-fill">
-		<a class="nav-link" data-toggle="tab" href="#classes" id="classes-tab" onclick="populateClasses('class-picker')">Classes</a>
+		<a class="nav-link" data-toggle="tab" href="#classes" id="classes-tab" onclick="populateClasses('class-picker')">Classes<span></span></a>
 	  </li>
 	  <li class="nav-item flex-fill">
-		<a class="nav-link" data-toggle="tab" href="#r-points" id="r-points-tab" onclick="updateRPoints()">Reinforcement</a>
+		<a class="nav-link" data-toggle="tab" href="#r-points" id="r-points-tab" onclick="updateRPoints()">Reinforcement<span></span></a>
 	  </li>
 	  <li class="nav-item flex-fill">
-		<a class="nav-link" data-toggle="tab" href="#parts" id="parts-tab" onclick="updateParts()">Parts</a>
+		<a class="nav-link" data-toggle="tab" href="#parts" id="parts-tab" onclick="updateParts()">Parts<span></span></a>
 	  </li>
 	  <li class="nav-item flex-fill">
-		<a class="nav-link" data-toggle="tab" href="#treasure" id="treasure-tab" onclick="updateTreasure()">Treasure</a>
+		<a class="nav-link" data-toggle="tab" href="#treasure" id="treasure-tab" onclick="updateTreasure()">Treasure<span></span></a>
 	  </li>
 	  <li class="nav-item flex-fill">
-		<a class="nav-link creation-tab" data-toggle="tab" href="#deployment" id="deployment-tab">Deployment</a>
+		<a class="nav-link" data-toggle="tab" href="#deployment" id="deployment-tab">Deployment<span></span></a>
 	  </li>
 	</ul>
 
@@ -455,6 +456,51 @@ function startCharacterCreation(){
 	</div>
 	`;
 	$('#mainContainer').html(content);
+	$('.nav-tabs a').on('hide.bs.tab', function(){
+		//get active tab (that will be hidden)
+		let lastTab = $("a.nav-link.active").attr('id');
+		
+		//validate the data of the previously viewed tab
+		let valid = false;
+		if(lastTab == "name-age-tab"){
+			valid = validateName() && validateAge();
+		}
+		else if(lastTab == "memories-tab"){
+			valid = validateMemoryFragments() && validatePremonition();
+		}
+		else if(lastTab == "position-tab"){
+			valid = validatePosition();
+		}
+		else if(lastTab == "classes-tab"){
+			valid = validateClasses();
+		}
+		else if(lastTab == "r-points-tab"){
+			valid = validateRPoints();
+		}
+		else if(lastTab == "parts-tab"){
+			valid = validateParts();
+		}
+		else if(lastTab == "treasure-tab"){
+			valid = validateTreasure();
+		}
+		else if(lastTab == "deployment-tab"){
+			valid = validateDeployment();
+		}
+		else{
+			
+		}
+		markTabValidation(lastTab, valid);
+	});
+}
+function markTabValidation(tabId, state){
+	let stateMark = "";
+	if(state){
+		stateMark = `<i class="fas fa-check-circle text-success"></i>`;
+	}
+	else{
+		stateMark = `<i class="fas fa-exclamation-circle text-warning"></i>`;
+	}
+	$("#" + tabId + " span").html(stateMark);
 }
 //utilities
 function clickLink(linkId){
@@ -509,7 +555,7 @@ function populateMemoryPicker(){
 		for(let i = 0; i < memoryFragments.length; i++){
 			content += buildMemory(memoryFragments[i], true);
 		}
-		document.getElementById("memory-list").innerHTML = content;
+		$("#memory-list").html(content);
 	}
 }
 function buildMemory(memory, clickable){
@@ -1076,7 +1122,6 @@ function calculateTieredRPoints(){
 		parts.push(getById(characterWIP.parts[i].id, dollParts));
 	}
 	//get total r-points of each tier, for each category
-	//let rPointArray = [[0,0,0],[0,0,0][0,0,0]];
 	let rPointArray = [[],[],[]];
 	let totals = getRPointTotals();
 	let bonusMut = false;
@@ -1143,7 +1188,13 @@ function calculateTieredRPoints(){
 				bestIndex = r;
 			}
 		}
-		rPointArray[c][bestIndex] *= -1;//mark as spent
+		if(bestIndex != -1){
+			rPointArray[c][bestIndex] *= -1;//mark as spent
+		}
+		else{
+			rPointsArray[c].push(0);//mark as errored
+		}
+		
 	}
 	
 	//return r-point remainder array
@@ -1513,38 +1564,9 @@ function buildDeploymentChoice(){
 	else if(characterWIP.deployment == 2){
 		limboCheck = "checked";
 	}
-	/*
-	let content = 
+	
+	let content =
 	`
-	<h4 class="necro-bar" style="z-index:100">Initial Deployment</h4>
-	<div class="bg-black rounded text-white p-1 pl-4 pr-4" style="margin-top:-16px">
-		<div class="row">
-			<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg" style="width:100%">
-				<div class="form-check">
-					<label for="ipeden" class="form-check-label">
-						<input class="form-check-input" type="radio" id="ipeden" name="initialplacement" value="option1" ${edenCheck} onclick="setDeployment(0)">Eden
-					</label>
-				</div>
-			</div>
-			<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg" style="width:100%">
-				<div class="form-check">
-					<label for="ipelysium" class="form-check-label">
-						<input class="form-check-input" type="radio" id="ipelysium" name="initialplacement" value="option2" ${elysiumCheck} onclick="setDeployment(1)">Elysium
-					</label>
-				</div>
-			</div>
-			<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg" style="width:100%">
-				<div class="form-check">
-					<label for="iplimbo" class="form-check-label">
-						<input class="form-check-input" type="radio" id="iplimbo" name="initialplacement" value="option3" ${limboCheck} onclick="setDeployment(2)">Limbo
-					</label>
-				</div>
-			</div>
-		</div>
-	</div>
-	`;
-	*/
-	let content=`
 	<h5 class="necro-box-header">Initial Deployment</h4>
 	<div class="necro-box">
 		
@@ -1581,6 +1603,95 @@ function buildDeploymentChoice(){
 function setDeployment(zoneId){
 	characterWIP.deployment = zoneId;
 	saveDoll(characterWIP);
+}
+//validation
+//name validation
+function validateName(){
+	if(characterWIP.name == null || characterWIP.name.trim() == ""){
+		return false;
+	}
+	return true;
+}
+//validate age
+function validateAge(){
+	if(characterWIP.age == null || characterWIP.age <= 7){
+		return false;
+	}
+	return true;
+}
+//validate memory fragments
+function validateMemoryFragments(){
+	if(characterWIP.fragments[0] == null || characterWIP.fragments[1] == null
+		|| characterWIP.fragments[0] == characterWIP.fragments[1]){
+		return false;
+	}
+	return true;
+}
+//validate premonition
+function validatePremonition(){
+	if(characterWIP.premonition == null || characterWIP.premonition < 0){
+		return false;
+	}
+	return true;
+}
+//validate position
+function validatePosition(){
+	if(characterWIP.classPosition == null || characterWIP.classPosition < 0 || characterWIP.skills[0] == null){
+		return false;	
+	}
+	return true;
+}
+//validate classes
+function validateClasses(){
+	//make sure both classes and all skills are non-null
+	if(characterWIP.classPrimary == null || characterWIP.classPrimary < 0
+		|| characterWIP.skills[1] == null || characterWIP.skills[2] == null
+		|| characterWIP.classSecondary == null || characterWIP.classSecondary < 0
+		|| characterWIP.skills[3] == null){
+		return false;
+	}
+	//Maybe do more in-depth validation? It's probably not possible to screw this up too badly.
+	return true;	
+}
+//validate r-points
+function validateRPoints(){
+	if(characterWIP.rpu > 0){
+		return false;
+	}
+	return true;
+}
+//validate selected parts
+function validateParts(){
+	let rPointArray = calculateTieredRPoints();
+	for(let i = 0; i < rPointArray.length; i++){
+		if(rPointArray[i] == null){
+			continue;
+		}
+		for(let t = 0; t < rPointArray[i].length; t++){
+			//no unspent points, no over-spending
+			if(rPointArray[i][t] >= 0){
+				return false;
+			}
+		}
+	}
+	return true;
+}
+//validate treasure
+function validateTreasure(){
+	if(characterWIP.treasures[0] == null){
+		return false;
+	}
+	return true;
+}
+//validate deployment
+function validateDeployment(){
+	if(characterWIP.deployment < 0){
+		return false;
+	}
+	return true;
+}
+function validateSteps(){
+	
 }
 function finishCreation(){
 	//save characterWIP to character list

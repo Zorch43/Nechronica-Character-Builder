@@ -7,7 +7,7 @@ const timings = ["Auto", "Action", "Rapid", "Check", "Damage", "See Effect"];
 const PartLocations = ["Any", "Head", "Arms", "Torso", "Legs"];
 const partTypes = ["Basic", "Armament", "Mutation", "Enhancement", "Treasure"];
 const deployments = ["Eden", "Elysium", "Limbo"];
-const fetterTargetGroups = ["Fetters", "Savant", "Neutral"];
+const fetterTargetGroups = ["Fetter", "Savant", "Neutral"];
 //filled by JSON(P)
 const premonitions = JSON.parse(dollPremonitionsJSON);
 const memoryFragments = JSON.parse(dollMemoriesJSON);
@@ -16,7 +16,7 @@ const dollClasses = JSON.parse(dollClassesJSON);
 const dollSkills = JSON.parse(dollSkillsJSON);
 const dollParts = JSON.parse(dollPartsJSON);
 const dollTreasures = JSON.parse(dollTreasuresJSON);
-const dollFetterTypes = [];
+const dollFetterTypes = JSON.parse(dollFetterTypesJSON);
 
 
 
@@ -27,9 +27,10 @@ function Doll(nextId)
 	this.created = false;//whether character creation has finished
 	this.name = "";//doll name
 	this.age = 0;//doll age
-	this.favor = 0;//current unspent favor
-	this.favorSpent = 0;//spent favor
 	this.premonition = -1;//premonition id
+	this.favor = 0;//current unspent favor
+	this.favorSpent = 0;//favor spent on parts/skills
+	this.karma = [];//list of karma items
 	this.fragments = [];//list of fragments of memory
 	this.classPosition = -1;//position class id
 	this.classPrimary = -1;//primary class id
@@ -199,18 +200,24 @@ function Fetter(){
 }
 
 //fetter type
-function FetterType(id, targetGroup, name, flavorText, flavorImage, 
+function FetterType(id, targetGroup, name, relation, flavorText, flavorImage, 
 	madName, effect,  madFlavorText,  madFlavorImage)
 	{
 	this.id = id;
 	this.targetGroup = fetterTargetGroups[targetGroup];
 	this.name = name;
+	this.relation = relation;
 	this.flavorText = flavorText;
 	this.flavorImage = flavorImage;
 	this.madName = madName;
 	this.madFlavorText = madFlavorText;
 	this.madFlavorImage = madFlavorImage;
 	this.effect = effect;
+}
+//karma (quest)
+function Karma(){
+	this.description = "";//description of karma quest
+	this.completed = false;//whether the karma has been achieved
 }
 //list query function
 function getById(id, list){
