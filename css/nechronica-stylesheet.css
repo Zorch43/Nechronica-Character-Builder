@@ -86,7 +86,7 @@
 .necro-item.active{
 	background-color: #aaaaaa;
 }
-.necro-item:hover{
+:not(.no-hover).necro-item:hover{
 	background-color: #dadada;
 }
 .class-preview{
@@ -148,6 +148,9 @@
 	margin-left: -24px;
 	margin-right: 0px;
 	margin-bottom: 10px;
+}
+.fas, .fa{
+	line-height: 1.5;
 }
 #necro-head{
 	width:134px; 

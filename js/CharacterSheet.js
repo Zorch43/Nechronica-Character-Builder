@@ -68,7 +68,7 @@ function viewDoll(id){
 		<div id="fetter-list" class="pl-3 pr-3">
 			${fetterList}
 		</div>
-		<button class="button btn-dark ml-3 mb-2" onclick="addFetter()">Add Fetter</button>
+		<button class="btn btn-dark ml-3 mb-2" onclick="addFetter()">Add Fetter</button>
 		<h5 class="necro-bar">Skills</h5>
 		<div class="row pl-3 pr-3 text-white mb-1">
 			<div class="col-lg font-weight-bold border rounded bg-black">
@@ -310,7 +310,7 @@ function buildListItem(item, type, active){
 					<div class="flex-fill">
 						<div class="mt-2">
 							<h5 class="necro-item-header">${special}${name}</h5>
-							<h5 class="mb-0"><small>
+							<h5 class="mb-0 mt-1"><small>
 								<kbd><i class='${timingIcon}'> ${timing}</i></kbd> 
 								<kbd><i class='${costIcon}'> ${cost}</i></kbd> 
 								<kbd><i class='${rangeIcon}'> ${range}</i></kbd>
@@ -394,7 +394,7 @@ function buildKarmaListItems(){
 	for(let i = 0; i < characterWIP.karma.length; i++){
 		listItems += buildKarmaListItem(characterWIP.karma[i], i);
 	}
-	listItems += `<button class="button bg-black text-white rounded" onclick="addKarma()">+ Add Karma +</button>`;
+	listItems += `<button class="btn bg-black text-white rounded" onclick="addKarma()">+ Add Karma +</button>`;
 	return listItems;
 }
 function buildKarmaListItem(item, index){
@@ -403,14 +403,14 @@ function buildKarmaListItem(item, index){
 	if(item.completed){
 		karmaCheck = 
 		`
-		<button class="button btn-success rounded border pl-3 pr-3" onclick="setKarma(${index}, false)"><i class="fas fa-check-circle"></i></button>
+		<button class="btn btn-success rounded border pl-3 pr-3" onclick="setKarma(${index}, false)"><i class="fas fa-check-circle"></i></button>
 		`;
 		karmaDone = "karma-done";
 	}
 	else{
 		karmaCheck = 
 		`
-		<button class="button btn-success rounded border pl-3 pr-3" onclick="setKarma(${index}, true)"><i class="far fa-check-circle"></i></button>
+		<button class="btn btn-success rounded border pl-3 pr-3" onclick="setKarma(${index}, true)"><i class="far fa-check-circle"></i></button>
 		`;
 	}
 	
@@ -420,7 +420,7 @@ function buildKarmaListItem(item, index){
 		<i class="fas fa-star pt-2"></i>
 		<input id="karmaDescription${index}" class="${karmaDone} form-control flex-fill ml-2 mr-2" value="${item.description}" onchange="updateKarma(${index})">
 		${karmaCheck}
-		<button class="button btn-danger rounded border pl-3 pr-3" onclick="removeKarma(${index})"><i class="fas fa-trash-alt"></i></button>
+		<button class="btn btn-danger rounded border pl-3 pr-3" onclick="removeKarma(${index})"><i class="fas fa-trash-alt"></i></button>
 	</div>
 	`;
 	
@@ -471,8 +471,8 @@ function buildDollFetter(index, editable){
 	if(editable){
 		editBar = 
 		`
-		<button type="button" class="rounded button btn-dark pl-2 pr-2 mb-2 mr-1" onclick="editFetter(${index})"><i class="fas fa-edit"></i></button>
-		<button type="button" class="rounded button btn-danger pl-2 pr-2 mb-2" onclick="deleteFetter(${index})"><i class="fas fa-trash-alt"></i></button>
+		<button type="button" class="rounded btn btn-dark pl-2 pr-2 mb-2 mr-1" onclick="editFetter(${index})"><i class="fas fa-edit"></i></button>
+		<button type="button" class="rounded btn btn-danger pl-2 pr-2 mb-2" onclick="deleteFetter(${index})"><i class="fas fa-trash-alt"></i></button>
 		`;
 	}
 	

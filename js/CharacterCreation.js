@@ -11,7 +11,7 @@ let partsPopulated = false;
 let selectedPart = null;
 let selectedPartIndex = -1;
 let treasuresPopulated = false;
-let stepViewedState = [false,false,false,false,false,false,false,false];//which tabs have been viewed
+
 //content loader
 function startCharacterCreation(){
 	//reset global variables
@@ -71,12 +71,12 @@ function startCharacterCreation(){
 				<div class="pl-3 pt-3 form-inline">
 					<label for="cc-name">Name:</label>
 					<input class="form-control mr-2 ml-2" id="cc-name" onchange="setName('cc-name')">
-					<button type="button" class="btn btn-secondary" onclick ="randomName('cc-name')">Random</button>
+					<button type="button" class="btn btn-secondary" onclick ="randomName('cc-name')"><i class="fas fa-dice"></i></button>
 				</div>
 				<div class="pl-3 pt-3 form-inline">
 					<label for="cc-age">Age:</label>
 					<input type="number" class="form-control mr-2 ml-2" style="width:70px" id="cc-age" onchange="setAge('cc-age')">
-					<button type="button" class="btn btn-secondary" onclick="randomAge('cc-age')">Random</button>
+					<button type="button" class="btn btn-secondary" onclick="randomAge('cc-age')"><i class="fas fa-dice"></i></button>
 				</div>
 				<p class="p-3">
 					"Age" refers to the age you were when you died, 
@@ -110,13 +110,13 @@ function startCharacterCreation(){
 					<label for="cc-memory-1">Memory Fragment 1</label>
 					<div class="border rounded col ml-2 mr-2" style="height:80px" id="cc-memory-1"></div>
 					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick ="pickMemory('cc-memory-1', '0')">Pick</button>
-					<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-1', '0')">Random</button>
+					<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-1', '0')"><i class="fas fa-dice"></i></button>
 				</div>
 				<div class="pl-3 pr-3 pt-3 form-inline">
 					<label for="cc-memory-2">Memory Fragment 2</label>
 					<div class="border rounded col ml-2 mr-2" style="height:80px" id="cc-memory-2"></div>
 					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick ="pickMemory('cc-memory-2', '1')">Pick</button>
-					<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-2', '1')">Random</button>
+					<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-2', '1')"><i class="fas fa-dice"></i></button>
 				</div>
 				<div class="pl-3 pr-3 pt-3 form-inline">
 					<label for="cc-premonition">Premonition</label>
@@ -124,7 +124,7 @@ function startCharacterCreation(){
 						
 					</div>
 					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#premonition-picker" onclick ="pickPremonition('premonition-picker', 'premonition-list', 'cc-premonition')">Pick</button>
-					<button type="button" class="btn btn-secondary" onclick ="randomPremonition('cc-premonition')">Random</button>
+					<button type="button" class="btn btn-secondary" onclick ="randomPremonition('cc-premonition')"><i class="fas fa-dice"></i></button>
 				</div>
 				<p class="p-3">
 					As game sessions take place, the Dolls will
@@ -364,9 +364,11 @@ function startCharacterCreation(){
 
 					</div>
 					<div class="col-8">
-						<div id="treasure" class="rounded border p-2 mb-1 text-black-50 necro-item">
+						<div id="treasure" class="rounded border p-2 mb-1 text-black-50 necro-item no-hover">
 							<div class="d-flex">
-								<img id="treasureImage" src="Content/Parts/Treasure.png" class="mr-2 rounded tile-64">
+								<object id="treasureImage" data='' type="image/png" class="tile-64 mr-2">
+									<img src='Content/Treasures/_placeholder_Treasure.png' class="tile-64">
+								</object>
 								<div class="">
 									<input id="treasureName" onchange="editTreasure()" class="form-control treasure-title mb-1">
 									<div class="form-inline">
@@ -395,8 +397,8 @@ function startCharacterCreation(){
 						</div>
 					</div>
 					<div class="col">
-						<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#treasure-picker">Pick</button>
-						<button type="button" class="btn btn-dark" onclick="pickRandomTreasure()"><i class="fas fa-dice"></i></button>
+						<button type="button" class="btn rounded btn-secondary" data-toggle="modal" data-target="#treasure-picker">Pick</button>
+						<button type="button" class="btn rounded btn-secondary" onclick="pickRandomTreasure()"><i class="fas fa-dice"></i></button>
 					</div>
 				</div>
 				<div class="d-flex justify-content-between mt-3">
@@ -711,6 +713,13 @@ function populateClassSkills(classId, isPosition){
 
 function buildSkill(skill, isPosition){
 	let imgSrc = "Content/Skills/" + skill.flavorImage;
+	
+	let skillClass = getById(skill.classId, dollClasses);
+	if(skillClass == null){
+		skillClass = getById(skill.classId, dollPositions);
+	}
+	let defaultSrc = "Content/Skills/_placeholder_" + skillClass.name + ".png";
+	
 	let effectText = "";
 	for(let i = 0; i < skill.effectText.length; i++){
 		effectText += `<p>${skill.effectText[i]}</p>`;
@@ -721,11 +730,14 @@ function buildSkill(skill, isPosition){
 		<span class="rounded bg-dark text-white pl-1 pr-1 mr-1">Special: </span>
 		`;
 	}
+	
 	content =
 	`
 	<div id="skill-${skill.id}" class="rounded border p-2 mb-1 text-black-50 necro-item" role="button" onclick="setSkill(${skill.classId},${skill.id},${isPosition})">
 		<div class="d-flex">
-			<img src=${imgSrc} class="mr-2 rounded" style="width:64px; height:64px;">
+			<object data='${imgSrc}' type="image/png" class="tile-64 mr-2">
+				<img src='${defaultSrc}' class="tile-64">
+			</object>
 			<div class="">
 				<h5>${special}${skill.name}</h5>
 				<p>Timing: ${skill.timing} /// Cost: ${skill.cost} /// Range: ${skill.range}</p>
@@ -1472,11 +1484,14 @@ function updateTreasure(){
 }
 function buildTreasure(treasure, index){
 	let imgSrc = "../Content/Treasures/" + treasure.flavorImage;
+	defaultSrc = "Content/Treasures/_placeholder_Treasure.png";
 	let content = 
 	`
 	<div class="rounded border p-2 mb-1 text-black-50 necro-item" role="button" data-dismiss="modal" onclick="pickTreasure(${index})">
 		<div class="d-flex">
-			<img src=${imgSrc} class="mr-2 rounded tile-64">
+			<object data='${imgSrc}' type="image/png" class="tile-64 mr-2">
+				<img src='${defaultSrc}' class="tile-64">
+			</object>
 			<div class="">
 				<h5>${treasure.name}</h5>
 				<p>Location: Any /// Timing: Auto /// Cost: None /// Range: None</p>
@@ -1497,7 +1512,7 @@ function pickTreasure(index){
 	//save to character
 	characterWIP.treasures[0] = treasure;
 	//update treasure display
-	$('#treasureImage').attr("src", imgSrc);
+	$('#treasureImage').attr("data", imgSrc);
 	$('#treasureName').val(treasure.name);
 	$('#treasureFlavor').val(treasure.flavorText);
 	$('#treasureLocation').val(treasure.partLocation).change();
