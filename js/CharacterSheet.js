@@ -13,7 +13,7 @@ function viewDoll(id){
 	
 	if(doll != null){
 		characterWIP = doll;
-		let premonition = buildMemoryFragmentListItem(getById(doll.premonition, premonitions));
+		let premonition = buildMemoryFragmentListItem("Premonition", getById(doll.premonition, premonitions));
 		let deployment = buildDeploymentChoice();
 		let favor = buildFavorDisplay();
 		let karma = buildKarmaList();
@@ -63,9 +63,12 @@ function viewDoll(id){
 				${deployment}
 			</div>
 		</div>
-		${fragmentList}
+		<h5 class="necro-bar">Memory Fragments</h5>
+		<div class="pr-3 pl-3 pt-1">
+			${fragmentList}
+		</div>
 		<h5 class="necro-bar">Fetters</h5>
-		<div id="fetter-list" class="pl-3 pr-3">
+		<div id="fetter-list" class="pl-3 pr-3 pt-1">
 			${fetterList}
 		</div>
 		<button class="btn btn-dark ml-3 mb-2" onclick="addFetter()">Add Fetter</button>
@@ -105,22 +108,17 @@ function viewDoll(id){
 }
 function buildMemoryFragmentList(doll){
 	let content = "";
-	content += `<h5 class="necro-bar">Memory Fragments</h5>`;
 	for(let i = 0; i < doll.fragments.length; i++){
 		let fragment = getById(doll.fragments[i], memoryFragments);
 		if(fragment != null){
-			content += buildMemoryFragmentListItem(fragment);
+			content += buildMemoryFragmentListItem("MemoryFragment", fragment);
 		}
 	}
 	return content;
 }
-function buildMemoryFragmentListItem(fragment){
-	let content = 
-	`
-	<p class="font-weight-bold border pl-1" title="" data-toggle="popover" data-trigger="hover" 
-	data-placement="bottom" data-content="${fragment.description}">${fragment.name}</p>
-	`;
-	return content;
+function buildMemoryFragmentListItem(type, fragment){
+
+	return buildFragment(type, fragment, false, true);
 }
 function buildSkillList(doll){
 	let content = "";

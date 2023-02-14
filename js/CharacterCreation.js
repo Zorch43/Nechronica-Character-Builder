@@ -108,20 +108,24 @@ function startCharacterCreation(){
 				</p>
 				<div class="pl-3 pr-3 pt-3 form-inline">
 					<label for="cc-memory-1">Memory Fragment 1</label>
-					<div class="border rounded col ml-2 mr-2" style="height:80px" id="cc-memory-1"></div>
+					<div class="fragment col ml-2 mr-2 p-0" id="cc-memory-1">
+						<div class="border rounded fragment"></div>
+					</div>
 					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick ="pickMemory('cc-memory-1', '0')">Pick</button>
 					<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-1', '0')"><i class="fas fa-dice"></i></button>
 				</div>
 				<div class="pl-3 pr-3 pt-3 form-inline">
 					<label for="cc-memory-2">Memory Fragment 2</label>
-					<div class="border rounded col ml-2 mr-2" style="height:80px" id="cc-memory-2"></div>
+					<div class="fragment col ml-2 mr-2 p-0" id="cc-memory-2">
+						<div class="border rounded fragment"></div>
+					</div>
 					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick ="pickMemory('cc-memory-2', '1')">Pick</button>
 					<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-2', '1')"><i class="fas fa-dice"></i></button>
 				</div>
 				<div class="pl-3 pr-3 pt-3 form-inline">
 					<label for="cc-premonition">Premonition</label>
-					<div class="border rounded col ml-2 mr-2" style="height:80px" id="cc-premonition">
-						
+					<div class="fragment col ml-2 mr-2 p-0" id="cc-premonition">
+						<div class="border rounded fragment"></div>
 					</div>
 					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#premonition-picker" onclick ="pickPremonition('premonition-picker', 'premonition-list', 'cc-premonition')">Pick</button>
 					<button type="button" class="btn btn-secondary" onclick ="randomPremonition('cc-premonition')"><i class="fas fa-dice"></i></button>
@@ -525,20 +529,7 @@ function populateMemoryPicker(){
 }
 function buildMemory(memory, clickable){
 	
-	let clickableCode = "";
-	if(clickable){
-		clickableCode = `role="button" onclick="setMemory(${memory.id})"`;
-	}
-	
-	let content = 
-	`
-	<div class="row" ${clickableCode}>
-		<div class="border col-3 d-flex" style="height:80px"><h4 class="my-auto mx-auto text-center font-weight-bold">${memory.name}</h4></div>
-		<div class="border pl-1 pr-1 col d-flex" style="height:80px"><p class="small font-italic my-auto">${memory.description}</p></div>
-	</div>
-	`;
-	
-	return content;
+	return buildFragment("MemoryFragment", memory, clickable, clickable);
 }
 function setMemory(memoryId){
 	//get memory object
@@ -575,18 +566,50 @@ function populatePremonitionPicker(){
 	}
 }
 function buildPremonition(premonition, clickable){
+	
+	return buildFragment("Premonition", premonition, clickable, clickable);
+}
+function buildFragment(type, data, clickable, inList){
+	let imgSrc = data.flavorImage;
+	let defaultSrc = `Content/Fragments/_placeholder_${type}.png`;
 	let clickableCode = "";
+	let noHover = "no-hover";
+	
 	if(clickable){
-		clickableCode = `role="button" onclick="setPremonition(${premonition.id})"`;
+		if(type == "Premonition"){
+			clickableCode = `role="button" onclick="setPremonition(${data.id})"`;
+		}
+		else if(type == "MemoryFragment"){
+			clickableCode = `role="button" onclick="setMemory(${data.id})"`;
+		}
+		
+		noHover = "";
 	}
+	
+	if(inList){
+		noHover = "";
+	}
+	
 	let code = 
 	`
-	<div class="row" ${clickableCode}>
-		<div class="border col-3 d-flex" style="height:80px"><h4 class="my-auto mx-auto text-center font-weight-bold">${premonition.name}</h4></div>
-		<div class="border pl-1 pr-1 col d-flex" style="height:80px"><p class="small font-italic my-auto">${premonition.description}</p></div>
+	<div class="necro-item fragment rounded border text-black-50 mb-1 ${noHover}" ${clickableCode}>
+		
+		<div class="d-flex p-2">
+			<object data='${imgSrc}' type="image/png" class="tile-64 mr-2">
+				<img src='${defaultSrc}' class="tile-64">
+			</object>
+			<div class="mt-2">
+				<h5 class="necro-item-header text-dark">${data.name}</h5>
+				<div class="border border-right-0 border-bottom-0 p-2 bg-white text-black-50 flex-fill nmt-1">
+					<p class="small font-italic my-auto">${data.description}</p>
+				</div>
+			</div>
+			
+		</div>
 	</div>
 	`;
 	return code;
+
 }
 function setPremonition(premonitionId){
 	//get premonition object
