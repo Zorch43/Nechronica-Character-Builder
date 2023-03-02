@@ -936,8 +936,6 @@ function displayClassSkills(){
 	//update display of secondary class
 	$('#selectedClass2').text(class2 != null ? class2.name : "None");
 	//update display of skills
-	//TODO: add hover description
-	//TODO: add x to remove skill
 	$('#selectedSkill1').html(createSummarySkill(skills[0]));
 	$('#selectedSkill2').html(createSummarySkill(skills[1]));
 	$('#selectedSkill3').html(createSummarySkill(skills[2]));
@@ -1013,14 +1011,17 @@ function createSummarySkill(skill){
 			skillEffect += skill.effectText[i];
 			skillEffect += " ";
 		}
-		//sanitize skill effect text
+		//choose which list to pick from
+		let isPosition = getById(skill.classId, dollPositions) != null;
 		
 		content = `
-		<div data-toggle="popover" data-trigger="hover" 
+		<div class="d-flex" data-toggle="popover" data-trigger="hover" 
 		title="Timing: ${skill.timing} /// Cost: ${skill.cost} /// Range: ${skill.range}" 
 		data-content="${skillEffect}">
-			${skill.name}
+			<div class="flex-fill">${skill.name}</div>
+			<button type="button" class="close" onclick="setSkill(${skill.classId},${skill.id}, ${isPosition})">&times;</button>
 		</div>
+		
 		`;
 	}
 	return content;
