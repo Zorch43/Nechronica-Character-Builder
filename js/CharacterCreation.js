@@ -810,7 +810,8 @@ function displayPositionSkill(){
 	
 	if(characterWIP.skills[0] != null){
 		let skill = getById(characterWIP.skills[0].id, dollSkills);
-		$("#selectedPositionSkill").text(skill.name);
+		$("#selectedPositionSkill").html(createSummarySkill(skill));
+		$('[data-toggle="popover"]').popover();
 		//disable all position skills
 		$('#position-picker .necro-item').addClass('disabled');
 		$('#position-picker .necro-item').removeClass('active');
