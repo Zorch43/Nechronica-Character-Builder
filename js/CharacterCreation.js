@@ -192,7 +192,7 @@ function startCharacterCreation(){
 								<thead>
 									<tr>
 										<th style="width:64px">Class:</th>
-										<th style="">Skill:</th>
+										<th>Skill:</th>
 									<tr>
 								</thead>
 								<tbody>
@@ -935,9 +935,12 @@ function displayClassSkills(){
 	//update display of secondary class
 	$('#selectedClass2').text(class2 != null ? class2.name : "None");
 	//update display of skills
-	$('#selectedSkill1').text(skills[0] != null ? skills[0].name : "None");
-	$('#selectedSkill2').text(skills[1] != null ? skills[1].name : "None");
-	$('#selectedSkill3').text(skills[2] != null ? skills[2].name : "None");
+	//TODO: add hover description
+	//TODO: add x to remove skill
+	$('#selectedSkill1').html(createSummarySkill(skills[0]));
+	$('#selectedSkill2').html(createSummarySkill(skills[1]));
+	$('#selectedSkill3').html(createSummarySkill(skills[2]));
+	$('[data-toggle="popover"]').popover();
 	//update total reinforcement points
 	$('#class-rpa').text((class1 != null ? class1.rpa : 0) 
 						+ (class2 != null ? class2.rpa : 0)
@@ -1000,6 +1003,26 @@ function displayClassSkills(){
 		+ '#collapse' + class1.name + ' .necro-item)')
 		.addClass('disabled');
 	}
+}
+function createSummarySkill(skill){
+	let content = "None";
+	if(skill != null){
+		let skillEffect = "";
+		for(let i = 0; i < skill.effectText.length; i++){
+			skillEffect += skill.effectText[i];
+			skillEffect += " ";
+		}
+		//sanitize skill effect text
+		
+		content = `
+		<div data-toggle="popover" data-trigger="hover" 
+		title="Timing: ${skill.timing} /// Cost: ${skill.cost} /// Range: ${skill.range}" 
+		data-content="${skillEffect}">
+			${skill.name}
+		</div>
+		`;
+	}
+	return content;
 }
 function resetClass(){
 	characterWIP.classPrimary = -1;

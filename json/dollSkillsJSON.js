@@ -288,7 +288,7 @@ const dollSkillsJSON =
 		"usable": true,
 		"range": "0-3",
 		"effectText": [
-			"Target \\"Rapid\\", \\"Damage\\", or \\"Check\\" Maneuver.",
+			"Target \'Rapid\', \'Damage\', or \'Check\' Maneuver.",
 			"Cancel the effects of one."
 		],
 		"flavorText": "It is important to know about the enemy that appeared. It also helps tactics to instantly see the enemy\'s war potential and offensive power.",
@@ -803,7 +803,7 @@ const dollSkillsJSON =
 		"usable": false,
 		"range": "Self",
 		"effectText": [
-			"You may ignore any \\"Dismember\\", \\"Explosive\\", and \\"Move\\" properties associated with an attack you\'ve been hit by",
+			"You may ignore any \'Dismember\', \'Explosive\', and \'Move\' properties associated with an attack you\'ve been hit by",
 			"This Maneuver can be used any number of times per Turn."
 		],
 		"flavorText": "Unusual body fluid flowing in a heteromorphic body. If it touches the outside air it will crystallize and harden. It will be cut and it will absorb the explosion. Indeed the body of a monster, but it is a useful body",
@@ -842,7 +842,7 @@ const dollSkillsJSON =
 		"range": "Self",
 		"effectText": [
 			"When you declare an Attack Maneuver, you may declare the use of this Skill to increase the damage by 1.",
-			"However, the \\"Dismember\\", \\"Explosive\\", \\"Chain Attack\\" and \\"Area Attack\\" properties are all lost."
+			"However, the \'Dismember\', \'Explosive\', \'Chain Attack\' and \'Area Attack\' properties are all lost."
 		],
 		"flavorText": "Imitate and reinforce your body with the original weapon attack organs and express it as a more violent weapon. The power of destruction would have increased, but its awkwardness is not an essential ratio.",
 		"flavorImage": "InstrumentOfEvil.png",
@@ -950,7 +950,7 @@ const dollSkillsJSON =
 		"usable": true,
 		"range": "Self",
 		"effectText": [
-			"You may use a \\"Rapid\\", \\"Check\\" or \\"Damage\\" maneuver that you have already used one more time."
+			"You may use a \'Rapid\', \'Check\' or \'Damage\' maneuver that you have already used one more time."
 		],
 		"flavorText": "When someone is hurt, including even yourself, you do not think you will gain a sense of amnestic uplifting.",
 		"flavorImage": "DelightInCorruption.png",
@@ -1022,7 +1022,7 @@ const dollSkillsJSON =
 		"usable": false,
 		"range": "Self",
 		"effectText": [
-			"The effect of your Jaws and Fists changes to \\"Unarmed Attack 1 + Dismember.\\""
+			"The effect of your Jaws and Fists changes to \'Unarmed Attack 1 + Dismember.\'"
 		],
 		"flavorText": "Your body specialized in predation is a body to capture the prey, to rip it, to eat it. Not to strengthen but have a deadly effect.",
 		"flavorImage": "RipAndTear.png",
@@ -1148,7 +1148,7 @@ const dollSkillsJSON =
 		"usable": true,
 		"range": "Self",
 		"effectText": [
-			"You may use an Attack Maneuver of your choice as if its Timing were \\"Rapid\\"."
+			"You may use an Attack Maneuver of your choice as if its Timing were \'Rapid\'."
 		],
 		"flavorText": "Your blow is always the prince of death. The enemies who shoot and show at exquisite times are always after you.",
 		"flavorImage": "HandOfDeath.png",
@@ -1311,7 +1311,7 @@ const dollSkillsJSON =
 		"usable": false,
 		"range": "Self",
 		"effectText": [
-			"The cost of your Basic Parts \\"Forearm\\" and \\"Foot\\" decreases by 1 (to a minimum of 0.)"
+			"The cost of your Basic Parts \'Forearm\' and \'Foot\' decreases by 1 (to a minimum of 0.)"
 		],
 		"flavorText": "Your limbs dance swiftly. If you are ready to dance together, you will have a polite ball in the middle of battle.",
 		"flavorImage": "OnesManyCharms.png",
@@ -1441,7 +1441,7 @@ const dollSkillsJSON =
 		"usable": false,
 		"range": "See Effect",
 		"effectText": [
-			"At the end of the Battle Phase, you and all of your Sisters can regenerate their damaged \\"Entrails\\" parts."
+			"At the end of the Battle Phase, you and all of your Sisters can regenerate their damaged \'Entrails\' parts."
 		],
 		"flavorText": "You do not want to imagine what kind of body this is. Your body will regenerate only the organs in a short time. Even if it hollowed out, baked or eaten.",
 		"flavorImage": "OrganDonor.png",
@@ -1461,7 +1461,7 @@ const dollSkillsJSON =
 		"effectText": [
 			"When the target takes damage, you may take that damage in her place.",
 			"You may use this Skill any number of times per Turn.",
-			"However, this cannot be used against the damage caused by the \\"Area\\" attack effect."
+			"However, this cannot be used against the damage caused by the \'Area\' attack effect."
 		],
 		"flavorText": "You are always a shield for everyone without hesitation. You can defend your sisters.",
 		"flavorImage": "Protect.png",
@@ -1535,7 +1535,7 @@ const dollSkillsJSON =
 		"range": "Self",
 		"effectText": [
 			"You may only use this Skill when you deal damage with a Melee Attack.",
-			"Add the \\"Area Attack\\" property to this damage. You do not take damage from this \\"Area Attack.\\""
+			"Add the \'Area Attack\' property to this damage. You do not take damage from this \'Area Attack.\'"
 		],
 		"flavorText": "Your existence is a tornado of death. Weapons and madness raging in places where you cut and you\'ll be drawn into a whirlpool of destruction.",
 		"flavorImage": "Calamity.png",
@@ -1666,7 +1666,7 @@ const dollSkillsJSON =
 			"As the Cost of this Skill, add a Madness Point to all of your Fetters that are not in a state of Madness.",
 			"Each being on the Stage of Battle chooses and breaks four Parts. (Legions are completely annihilated.)"
 		],
-		"flavorText": "\\"The most Terrible Thing\\" that was suppressed inside you will overflow and destroy everything that is visible to you. Even yourself.",
+		"flavorText": "\'The most Terrible Thing\' that was suppressed inside you will overflow and destroy everything that is visible to you. Even yourself.",
 		"flavorImage": "VortexOfDestruction.png",
 		"special": true,
 		"restricted": true,
