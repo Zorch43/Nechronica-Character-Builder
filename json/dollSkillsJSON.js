@@ -13,7 +13,7 @@ const dollSkillsJSON =
 			"Regardless of your current place on the Battle Map, you are instantly transported to Eden.",
 			"This is not considered to be Movement."
 		],
-		"flavorText": "You are the inhabitants of paradise, the place where you are is the paradise.",
+		"flavorText": "You are the inhabitant of paradise, the place where you are is the paradise.",
 		"flavorImage": "AngelOfEden.png",
 		"special": false,
 		"restricted": false,
@@ -418,7 +418,7 @@ const dollSkillsJSON =
 		"usable": false,
 		"range": "Self",
 		"effectText": [
-			"During the Battle Phase, when you declare a Movement Maneuver that targets yourself in the direction towards Tartarus, the Cost of the Maneuver is decreased by -1 (minimum 0.)"
+			"During the Battle Phase, when you declare a Movement Maneuver that targets yourself in the direction towards Tartarus, the Cost of the Maneuver is decreased by 1 (minimum 0.)"
 		],
 		"flavorText": "Your soul searches for darkness, for that is where you are.",
 		"flavorImage": "DrawnToTartarus.png",
@@ -854,7 +854,7 @@ const dollSkillsJSON =
 	{
 		"id": 46,
 		"classId": 6,
-		"name": "Karmic Corpe",
+		"name": "Karmic Corpse",
 		"cost": "None",
 		"timing": "Auto",
 		"usable": false,
@@ -1196,7 +1196,7 @@ const dollSkillsJSON =
 	{
 		"id": 65,
 		"classId": 8,
-		"name": "Trusted Compainion",
+		"name": "Trusted Companion",
 		"cost": 1,
 		"timing": "Rapid",
 		"usable": true,
@@ -1295,7 +1295,7 @@ const dollSkillsJSON =
 		"effectText": [
 			"All enemies that roll a Critical Failure within the same Area as you in have their damage of the resulting attack increased by 1."
 		],
-		"flavorText": "Unbelievable dance is an appropriate comedy. You can not forgive halfway abominations. You have to change it to the clown of clown that can be laughed at least.",
+		"flavorText": "Unbelievable dance is an appropriate comedy. You can not forgive halfway abominations. You have to change it to the clown of clowns that can be laughed at least.",
 		"flavorImage": "DerangedGears.png",
 		"special": false,
 		"restricted": false,
@@ -1637,13 +1637,13 @@ const dollSkillsJSON =
 	{
 		"id": 89,
 		"classId": 11,
-		"name": "Quenn of the Underworld",
+		"name": "Queen of the Underworld",
 		"cost": "None",
 		"timing": "Auto",
 		"usable": false,
 		"range": "Self",
 		"effectText": [
-			"Hinder Move\' Maneuvers used by Legions have no effect on you.",
+			"\'Hinder Move\' Maneuvers used by Legions have no effect on you.",
 			"Furthermore, Legions must roll a 7 or higher on Attack Checks made against you to hit."
 		],
 		"flavorText": "No matter how many they arrange, their dead fingers cannot even touch you.",
@@ -1761,7 +1761,7 @@ const dollSkillsJSON =
 		"usable": false,
 		"range": "Self",
 		"effectText": [
-			"You may ignore Hinder and Hinder Move effects originating from the same Area as you are in."
+			"You may ignore \'Hinder\' and \'Hinder Move\' effects originating from the same Area as you are in."
 		],
 		"flavorText": "Slightly, but your body is always floating, making sure that your body does not get caught out in movements, such as undocumented handouts.",
 		"flavorImage": "ThroneOfTheVoid.png",

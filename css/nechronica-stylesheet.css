@@ -200,6 +200,24 @@
 .full-height{
 	height: 100%;
 }
+.full-width{
+	width:100%;
+}
+.width-64{
+	width: 64px;
+}
+.width-70{
+	width: 70px;
+}
+.width-80p{
+	width: 80%;
+}
+.width-120{
+	width: 120px;
+}
+.mt--16{
+	margin-top: -16px;
+}
 .nmt-1{
 	margin-top: -10px;
 }
@@ -263,4 +281,43 @@
 .popover{
 	max-width: 600px;
 	min-width: 600px;
+}
+#headerBaroque{
+	background-image: url('../Content/Classes/preview_Baroque.png');
+}
+#headerGothic{
+	background-image: url('../Content/Classes/preview_Gothic.png');
+}
+#headerRequiem{
+	background-image: url('../Content/Classes/preview_Requiem.png');
+}
+#headerRomanesque{
+	background-image: url('../Content/Classes/preview_Romanesque.png');
+}
+#headerStacy{
+	background-image: url('../Content/Classes/preview_Stacy.png');
+}
+#headerThanatos{
+	background-image: url('../Content/Classes/preview_Thanatos.png');
+}
+#headerPsychedelic{
+	background-image: url('../Content/Classes/preview_Psychedelic.png');
+}
+#headerAlice{
+	background-image: url('../Content/Classes/preview_Alice.png');
+}
+#headerAutomaton{
+	background-image: url('../Content/Classes/preview_Automaton.png');
+}
+#headerCourt{
+	background-image: url('../Content/Classes/preview_Court.png');
+}
+#headerHolic{
+	background-image: url('../Content/Classes/preview_Holic.png');
+}
+#headerJunk{
+	background-image: url('../Content/Classes/preview_Junk.png');
+}
+#headerSorority{
+	background-image: url('../Content/Classes/preview_Sorority.png');
 }

@@ -75,7 +75,7 @@ function startCharacterCreation(){
 				</div>
 				<div class="pl-3 pt-3 form-inline">
 					<label for="cc-age">Age:</label>
-					<input type="number" class="form-control mr-2 ml-2" style="width:70px" id="cc-age" onchange="setAge('cc-age')">
+					<input type="number" class="form-control mr-2 ml-2 width-70"id="cc-age" onchange="setAge('cc-age')">
 					<button type="button" class="btn btn-secondary" onclick="randomAge('cc-age')"><i class="fas fa-dice"></i></button>
 				</div>
 				<p class="p-3">
@@ -154,8 +154,8 @@ function startCharacterCreation(){
 							<table class="table table-borderless table-dark sticky-top">
 								<thead>
 									<tr>
-										<th style="width:64px">Position:</th>
-										<th style="">Skill:</th>
+										<th class="width-64">Position:</th>
+										<>Skill:</th>
 									<tr>
 								</thead>
 								<tbody>
@@ -165,7 +165,7 @@ function startCharacterCreation(){
 									</tr>
 								</tbody>
 							</table>
-							<button class="btn btn-danger" onclick="resetPosition()" style="width:100%">Reset</button>
+							<button class="btn btn-danger full-width" onclick="resetPosition()">Reset</button>
 						</div>
 					</div>
 					<div class="col" id="position-picker">
@@ -191,7 +191,7 @@ function startCharacterCreation(){
 							<table class="table table-dark">
 								<thead>
 									<tr>
-										<th style="width:64px">Class:</th>
+										<th class="width-64">Class:</th>
 										<th>Skill:</th>
 									<tr>
 								</thead>
@@ -225,7 +225,7 @@ function startCharacterCreation(){
 									</tr>
 								</tbody>
 							</table>
-							<button class="btn btn-danger" onclick="resetClass()" style="width:100%">Reset</button>
+							<button class="btn btn-danger full-width" onclick="resetClass()">Reset</button>
 						</div>
 						
 					</div>
@@ -253,7 +253,7 @@ function startCharacterCreation(){
 						<table id="rp-allocation-table" class="table table-dark">
 							<tbody>
 								<tr>
-									<th style="width:80%">
+									<th class="width-80p">
 										Armaments:
 										<p class="font-italic small font-weight-light">
 											Weapons, guns and other offensive equipment. 
@@ -267,7 +267,7 @@ function startCharacterCreation(){
 									</td>
 								</tr>
 								<tr>
-									<th style="width:80%">
+									<th class="width-80p">
 										Mutations:
 										<p class="font-italic small font-weight-light">
 											Special bodily organs. They warp one's appearance, 
@@ -281,7 +281,7 @@ function startCharacterCreation(){
 									</td>
 								</tr>
 								<tr>
-									<th style="width:80%">
+									<th class="width-80p">
 										Enhancements:
 										<p class="font-italic small font-weight-light">
 											Mechanical parts attached to the body, 
@@ -320,7 +320,7 @@ function startCharacterCreation(){
 								<table class="table table-dark">
 									<tbody>
 										<tr>
-											<th style="width:120px">Armaments:</th>
+											<th class="width-120">Armaments:</th>
 											<td id="tiered-rpa"></td>
 										</tr>
 										<tr>
@@ -334,7 +334,7 @@ function startCharacterCreation(){
 									</tbody>
 								</table>
 							</div>
-							<button type="button" class="btn btn-danger" style="width:100%" onclick="resetParts()">Reset</button>
+							<button type="button" class="btn btn-danger full-width" onclick="resetParts()">Reset</button>
 							<div class="row mt-3">
 								<div id="partCol1" class="col">
 									
@@ -427,22 +427,22 @@ function startCharacterCreation(){
 					</div>
 					<div class="col-3">
 						<h4 class="necro-bar">Initial Deployment</h4>
-						<div class="bg-black rounded text-white p-1 pl-4 pr-4" style="margin-top:-16px">
-							<div class="bg-white rounded-lg text-dark p-2 mb-1" style="width:100%">
+						<div class="bg-black rounded text-white p-1 pl-4 pr-4 mt--16">
+							<div class="bg-white rounded-lg text-dark p-2 mb-1 full-width">
 								<div class="form-check">
 									<label for="ipeden" class="form-check-label">
 										<input class="form-check-input" type="radio" id="ipeden" name="initialplacement" value="option1" onclick="setDeployment(0)">Eden
 									</label>
 								</div>
 							</div>
-							<div class="bg-white rounded-lg text-dark p-2 mb-1" style="width:100%">
+							<div class="bg-white rounded-lg text-dark p-2 mb-1 full-width">
 								<div class="form-check">
 									<label for="ipelysium" class="form-check-label">
 										<input class="form-check-input" type="radio" id="ipelysium" name="initialplacement" value="option2" onclick="setDeployment(1)">Elysium
 									</label>
 								</div>
 							</div>
-							<div class="bg-white rounded-lg text-dark p-2 mb-1" style="width:100%">
+							<div class="bg-white rounded-lg text-dark p-2 mb-1 full-width">
 								<div class="form-check">
 									<label for="iplimbo" class="form-check-label">
 										<input class="form-check-input" type="radio" id="iplimbo" name="initialplacement" value="option3" onclick="setDeployment(2)">Limbo
@@ -666,7 +666,6 @@ function buildClass(dollClass, displayId){
 		classDescription += `<p>${dollClass.flavorText[i]}</p>`;
 	}
 	let imgSrc = "Content/Classes/" + dollClass.flavorImage;
-	let imgSrcPrev = "Content/Classes/" + "preview_" + dollClass.flavorImage;
 	let rPointContent = "";
 	let isPosition = true;
 	if(dollClass.rpa > 0 || dollClass.rpm > 0 || dollClass.rpe > 0){
@@ -695,8 +694,7 @@ function buildClass(dollClass, displayId){
 	`
 	<div class="card">
 	  <div class="card-header p-0">
-		<a class="btn btn-light col-12 text-left class-preview" 
-			style="background-image: url('${imgSrcPrev}')" 
+		<a id="header${dollClass.name}" class="btn btn-light col-12 text-left class-preview" 
 			data-toggle="collapse" href="#${collapseName}">
 		  <h4>${dollClass.name}</h4>
 		</a>
@@ -778,6 +776,7 @@ function buildSkill(skill, isPosition){
 }
 
 function setSkill(classId, skillId, isPosition){
+	dismissPopovers();
 	if(isPosition){
 		setPositionSkill(classId, skillId);
 	}
@@ -1026,6 +1025,36 @@ function createSummarySkill(skill){
 	}
 	return content;
 }
+function createSummaryPart(part){
+	let content = "None";
+	if(part != null){
+		let partEffect = "";
+		for(let i = 0; i < part.effectText.length; i++){
+			partEffect += part.effectText[i];
+			partEffect += " ";
+		}
+		let closeButton = "";
+		if(part.type != "Basic"){
+			closeButton = `<button type="button" class="close" onclick="buyPart(${part.id})">&times;</button>`;
+		}
+		content = `
+		<div class="d-flex" data-toggle="popover" data-trigger="hover" 
+		title="Timing: ${part.timing} /// Cost: ${part.cost} /// Range: ${part.range}" 
+		data-content="${partEffect}">
+			<div class="flex-fill">${part.name}</div>
+			${closeButton}
+		</div>
+		
+		`;
+	}
+	
+	return content;
+}
+
+function dismissPopovers(){
+	$('[data-toggle="popover"]').popover('hide');
+}
+
 function resetClass(){
 	characterWIP.classPrimary = -1;
 	characterWIP.classSecondary = -1;
@@ -1311,6 +1340,9 @@ function updateOwnedPartList(){
 	//display tables
 	$('#partCol1').html(colContent1);
 	$('#partCol2').html(colContent2);
+	
+	//enable part hover popovers
+	$('[data-toggle="popover"]').popover();
 }
 function getPartsInLocation(partLocation){
 	let list = [];
@@ -1342,7 +1374,8 @@ function buildPartLocation(list, partLocation){
 	return content;
 }
 function buildPartSummary(part){
-	return `<tr><td>${part.name}</td></tr>`;
+	let content = createSummaryPart(part);
+	return `<tr><td>${content}</td></tr>`;
 }
 function buildPartTiers(type){
 	let content = "";
@@ -1384,6 +1417,7 @@ function buildCategoryParts(type, tier){
 }
 function buildPart(part){
 	let imgSrc = "Content/Parts/" + part.flavorImage;
+	let defaultSrc = getPartPlaceholderIcon(part);
 	let effectText = "";
 	for(let i = 0; i < part.effectText.length; i++){
 		effectText += `<p>${part.effectText[i]}</p>`;
@@ -1392,7 +1426,9 @@ function buildPart(part){
 	`
 	<div id="part${part.id}" class="rounded border p-2 mb-1 text-black-50 necro-item" role="button" onclick="buyPart(${part.id})">
 		<div class="d-flex">
-			<img src=${imgSrc} class="mr-2 rounded" style="width:64px; height:64px;">
+			<object data='${imgSrc}' type="image/png" class="tile-64 mr-2">
+				<img src='${defaultSrc}' class="tile-64">
+			</object>
 			<div class="">
 				<h5>${part.name}</h5>
 				<p>Location: ${part.partLocation} /// Timing: ${part.timing} /// Cost: ${part.cost} /// Range: ${part.range}</p>
@@ -1407,6 +1443,18 @@ function buildPart(part){
 	</div>
 	`;
 	return content;
+}
+function getPartPlaceholderIcon(part){
+	let defaultSrc = "Content/Parts/_placeholder_";
+	
+	if(part.type == "Basic"){
+		defaultSrc += part.partLocation + ".png";
+	}
+	else{
+		defaultSrc += part.type + ".png";
+	}
+	
+	return defaultSrc;
 }
 function updateTieredRPoints(rPointsArray){
 	updateTieredRPointsCategory("tiered-rpa", rPointsArray[0]);
@@ -1454,6 +1502,7 @@ function getRPointTotals(){
 	return [rpaTotal, rpmTotal, rpeTotal];
 }
 function buyPart(partId){
+	dismissPopovers();
 	let part = getById(partId, dollParts);
 	//get the index of the owned part (if it exists)
 	let ownedIndex = -1;
@@ -1598,21 +1647,21 @@ function buildDeploymentChoice(){
 		
 		<div class="rounded bg-black text-white pt-3 pl-3 pr-3 pb-1">
 			<div class="row">
-				<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg" style="width:100%">
+				<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg full-width">
 					<div class="form-check">
 						<label for="ipeden" class="form-check-label">
 							<input class="form-check-input" type="radio" id="ipeden" name="initialplacement" value="option1" ${edenCheck} onclick="setDeployment(0)">Eden
 						</label>
 					</div>
 				</div>
-				<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg" style="width:100%">
+				<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg full-width">
 					<div class="form-check">
 						<label for="ipelysium" class="form-check-label">
 							<input class="form-check-input" type="radio" id="ipelysium" name="initialplacement" value="option2" ${elysiumCheck} onclick="setDeployment(1)">Elysium
 						</label>
 					</div>
 				</div>
-				<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg" style="width:100%">
+				<div class="bg-white rounded-lg text-dark p-2 m-1 col-lg full-width">
 					<div class="form-check">
 						<label for="iplimbo" class="form-check-label">
 							<input class="form-check-input" type="radio" id="iplimbo" name="initialplacement" value="option3" ${limboCheck} onclick="setDeployment(2)">Limbo

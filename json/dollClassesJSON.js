@@ -88,7 +88,7 @@ const dollClassesJSON =
 			"And yet they walk even now.",
 			"The specialty of this Class is immortality. They are designed foremost for the stoutness of their bodies. All the menace of the walking dead are embodied in the Stacies.",
 			"You are the wall of the Sisters. The shield that protects your hurting Sisters. You mustn’t fear being hurt. You shall stand in the Limbo, and acquire many ways to regenerate, defend, and hinder to negate the enemies’ attacks as much as possible. Also, if you gain effects that activate when you take damage, chain them to activate even stronger effects.",
-			"Of course, you may not forget that the strongest defence is an attack. You should also wield an appropriate means of attacking from what you can gather"
+			"Of course, you may not forget that the strongest defence is an attack. You should also wield an appropriate means of attacking from what you can gather."
 		],
 		"flavorImage": "Stacy.png"
 	},

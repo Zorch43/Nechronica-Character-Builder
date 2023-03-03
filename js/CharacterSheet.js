@@ -36,7 +36,7 @@ function viewDoll(id){
 		`
 		<div class="row pt-3">
 			<div class="col-8">
-				<img src="Content/Logo.png" class="mx-auto d-block" style="width:100%">
+				<img src="Content/Logo.png" class="mx-auto d-block full-width">
 				<h4 class="text-center font-weight-bold">Nechronica -The Long Long Sequel-</h4>
 				<h5 class="necro-bar">Personal Data</h5>
 				<table class="table table-sm">
@@ -226,7 +226,7 @@ function buildListItem(item, type, active){
 		else{
 			full = getById(item.id, dollParts);
 			imgSrc = "Content/Parts/" + full.flavorImage;
-			defaultSrc = "Content/Parts/_placeholder_" + item.partLocation + ".png";
+			defaultSrc = getPartPlaceholderIcon(full);
 			let damageChecked = "";
 			if(!active && item.damaged){
 				damageChecked = "checked";

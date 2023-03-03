@@ -434,7 +434,7 @@ const dollPartsJSON =
 	"cost": 0,
 	"timing": "Damage",
 	"range": "Self",
-	"effectText": ["Defend 1 + Negate \\"Explosive\\""],
+	"effectText": ["Defend 1 + Negate \'Explosive\'"],
 	"flavorText": "A reinforced case that can be used as a shield in a pinch. This can be things like guitar cases, umbrellas, etc, depending on your preference.",
 	"flavorImage": "MetalCase.png",
 	"usable": true
@@ -661,7 +661,7 @@ const dollPartsJSON =
 	"cost": 3,
 	"timing": "Action",
 	"range": "Self",
-	"effectText": ["Move 1. \\"Hinder Move\\" is ineffective against this Movement."],
+	"effectText": ["Move 1. \'Hinder Move\' is ineffective against this Movement."],
 	"flavorText": "There are claws and suction cups on your feet. Tricky movement is possible by running on walls and ceilings.",
 	"flavorImage": "AdhesivePads.png",
 	"usable": false
@@ -892,7 +892,7 @@ const dollPartsJSON =
 	"cost": 0,
 	"timing": "Rapid",
 	"range": "Self",
-	"effectText": ["You may perform one Action Maneuver of your choice as if its timing was \\"Rapid\\"."],
+	"effectText": ["You may perform one Action Maneuver of your choice as if its timing was \'Rapid\'."],
 	"flavorText": "Your arms are not two. An additional arm has been attached. It is difficult to master it, but the range of tactics widens a lot.",
 	"flavorImage": "ExtraArm.png",
 	"usable": true
@@ -1146,7 +1146,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effectText": ["When you take damage to your Arms or Legs, you may divide that damage among all your Locations as you wish. This effect does not apply to damage with the \\"Explosive\\" effect. If you need to make a Dismemberment Check, choose one location to make it for."],
+	"effectText": ["When you take damage to your Arms or Legs, you may divide that damage among all your Locations as you wish. This effect does not apply to damage with the \'Explosive\' effect. If you need to make a Dismemberment Check, choose one location to make it for."],
 	"flavorText": "You have no hands and no feet. there is no pain being shoved into your body at those missing parts.",
 	"flavorImage": "QuadrupleAmputee.png",
 	"usable": false
@@ -1319,7 +1319,7 @@ const dollPartsJSON =
 	"cost": 1,
 	"timing": "Damage",
 	"range": "Self",
-	"effectText": ["Defend 1 + Negate \\"Dismember\\""],
+	"effectText": ["Defend 1 + Negate \'Dismember\'"],
 	"flavorText": "Steel embedded in the body. Ultra reinforced metal and monomolecular fiber boasts a strong defense against slashing.",
 	"flavorImage": "SteelBones.png",
 	"usable": true
@@ -1504,7 +1504,7 @@ const dollPartsJSON =
 	"timing": "Auto",
 	"range": 0,
 	"effectText": ["When this Part is damaged in Battle Phase, a Blast 2 + Explosive + Area Attack with a Check value of 8 occurs against yourself.",
-	"However, \\"Rapid\\" and \\"Check\\" timings do not occur for this effect."],
+	"However, \'Rapid\' and \'Check\' timings do not occur for this effect."],
 	"flavorText": "A bomb charged in the body. Of course, the person alone is not pleased. However, when surrounded by many foes it can be an unexpected help.",
 	"flavorImage": "ZombieBomb.png",
 	"usable": false
@@ -1533,7 +1533,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effectText": ["The \\"Dismember\\" effect is ineffective against you."],
+	"effectText": ["The \'Dismember\' effect is ineffective against you."],
 	"flavorText": "A system that separates itself from itself. Easily dismantled, but each part moves independently and reconnects again.",
 	"flavorImage": "AutoSeparate.png",
 	"usable": false
@@ -1547,7 +1547,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effectText": ["During Damage Timing, you gain \\"Defend 1\\" for Legs only",
+	"effectText": ["During Damage Timing, you gain \'Defend 1\' for Legs only",
 	"Additionally, during battle, when your Movement Maneuver successfully moves you, you may use a Melee or Unarmed Maneuvers against one target in either your current area or in the one in which you began your movement."],
 	"flavorText": "Half the body is replaced by a multi-legged tank. In addition to armor, movement attacks due to self running ability are possible. However, you cannot deny how far from human you are now.",
 	"flavorImage": "CrabLegs.png",
@@ -1591,7 +1591,7 @@ const dollPartsJSON =
 	"cost": "None",
 	"timing": "Auto",
 	"range": "Self",
-	"effectText": ["During Damage Timing, you gain \\"Defend 1\\" for Arms only.",
+	"effectText": ["During Damage Timing, you gain \'Defend 1\' for Arms only.",
 	"Damage +1 to Melee and Unarmed Attack Maneuvers on the Arms location."],
 	"flavorText": "A gigantic and powerful steel arm. It crushes and hammers most enemies.",
 	"flavorImage": "Gauntlet.png",
@@ -1606,7 +1606,7 @@ const dollPartsJSON =
 	"cost": 2,
 	"timing": "Rapid",
 	"range": "Self",
-	"effectText": ["Move 1. \\"Hinder Move\\" Maneuvers are ineffective against this movement."],
+	"effectText": ["Move 1. \'Hinder Move\' Maneuvers are ineffective against this movement."],
 	"flavorText": "It is possible to make a dynamic avoidance and movement that can jump instantly by a strong spring put into the legs.",
 	"flavorImage": "Hopper.png",
 	"usable": true
@@ -1649,8 +1649,8 @@ const dollPartsJSON =
 	"timing": "Action",
 	"range": 0,
 	"effectText": ["Melee Attack 2", 
-	"\\"Defend\\" Maneuvers are ineffective against this attack.",
-	"If the attack hits, you may \\"Move 1\\" the target."],
+	"\'Defend\' Maneuvers are ineffective against this attack.",
+	"If the attack hits, you may \'Move 1\' the target."],
 	"flavorText": "High speed injection of the metal spike with high vibration, blows apart the defense of the enemy it punches out.",
 	"flavorImage": "Pilebunker.png",
 	"usable": false

@@ -8,7 +8,7 @@ const dollPositionsJSON =
 			"rpm": 0,
 			"rpe": 0,
 			"flavorText": [
-				"There are some Dolls that are never able to get used to fighting. Though their lives have been ones of unending battle for countlessdays, countless years, the memory of tranquil times remains in their hearts. It is for this reason that they remain human even now.",
+				"There are some Dolls that are never able to get used to fighting. Though their lives have been ones of unending battle for countless days, countless years, the memory of tranquil times remains in their hearts. It is for this reason that they remain human even now.",
 				"Your faintly remaining memories point to a completely different self and a different world. Every day is a battle. Every day is fear. However, you mustn't let the battles and fear into your heart. That is the most terrifying thing. Even if your Sisters call you a hindrance, you have to be a lovely trembling girl. Even if you have the power to fight you were not born to fight. If you let yourself be distorted by despair, isn’t there no meaning to being you?",
 				"Even if you are no help in fights, you are an important key to saving your Sisters. You mustn’t be consumed by conflict and fear. You shall continue striving for the everyday your Sisters are meant to return to."
 			],
