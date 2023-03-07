@@ -321,3 +321,23 @@
 #headerSorority{
 	background-image: url('../Content/Classes/preview_Sorority.png');
 }
+.char-sheet-plus{
+	color: #121212;
+	font-size: 26px;
+	line-height: 0;
+	margin-top: 25px;
+	margin-left: 2px;
+}
+.char-sheet-trash{
+	color: #121212;
+	font-size: 26px;
+	line-height: 0;
+	margin-left: 2px;
+	margin-right: 0px;
+	margin-top: 12px;
+	padding: 0px;
+}
+.char-sheet-spacer{
+	width: 26px;
+	margin-left: 2px;
+}

@@ -111,16 +111,16 @@ function startCharacterCreation(){
 					<div class="fragment col ml-2 mr-2 p-0" id="cc-memory-1">
 						<div class="border rounded fragment"></div>
 					</div>
-					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick ="pickMemory('cc-memory-1', '0')">Pick</button>
-					<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-1', '0')"><i class="fas fa-dice"></i></button>
+					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick="pickMemory('0')">Pick</button>
+					<button type="button" class="btn btn-secondary" onclick="randomMemory('0')"><i class="fas fa-dice"></i></button>
 				</div>
 				<div class="pl-3 pr-3 pt-3 form-inline">
 					<label for="cc-memory-2">Memory Fragment 2</label>
 					<div class="fragment col ml-2 mr-2 p-0" id="cc-memory-2">
 						<div class="border rounded fragment"></div>
 					</div>
-					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick ="pickMemory('cc-memory-2', '1')">Pick</button>
-					<button type="button" class="btn btn-secondary" onclick ="randomMemory('cc-memory-2', '1')"><i class="fas fa-dice"></i></button>
+					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#memory-picker" onclick="pickMemory('1')">Pick</button>
+					<button type="button" class="btn btn-secondary" onclick="randomMemory('1')"><i class="fas fa-dice"></i></button>
 				</div>
 				<div class="pl-3 pr-3 pt-3 form-inline">
 					<label for="cc-premonition">Premonition</label>
@@ -500,22 +500,26 @@ function setAge(ageFieldId){
 }
 
 //random memory
-function randomMemory(displayId, slotNumber){
+function randomMemory(slotNumber){
+	if(slotNumber >= 0){
+		memorySlot = slotNumber;
+	}
+	
 	let rand = memoryFragments[Math.floor(Math.random() * memoryFragments.length)];
-
-	//update data
-	characterWIP.fragments[slotNumber] = rand.id;
-	//update form
-	$("#" + displayId).html(buildMemory(rand, false));
+	setMemory(rand.id);
 }
+
 //pick memory from list
-function pickMemory(displayId, slotNumber){
+function pickMemory(slotNumber){
 	//populate modal list
 	populateMemoryPicker();
-	//set display target
-	fragmentDisplayId = displayId;
 	//set data target
-	memorySlot = slotNumber;
+	if (slotNumber >= 0){
+		memorySlot = slotNumber;
+	}
+	else{
+		memorySlot = characterWIP.fragments.length;
+	}
 }
 
 function populateMemoryPicker(){
@@ -536,8 +540,17 @@ function setMemory(memoryId){
 	let memory = getById(memoryId, memoryFragments);
 	//update data
 	characterWIP.fragments[memorySlot] = memoryId;
-	//update form
-	$("#" + fragmentDisplayId).html(buildMemory(memory, false));
+	if(memorySlot  <= 1){
+		//update character creation form
+		let slot = 1 + memorySlot/1;
+		$("#cc-memory-" + slot).html(buildMemory(memory, false));
+	}
+	else{
+		//update character sheet form
+		$('#cs-fragment-list').html(buildMemoryFragmentList(characterWIP));
+		saveDoll(characterWIP);
+	}
+	
 	//close modal
 	$("#memory-picker").modal('hide');
 }
@@ -594,13 +607,14 @@ function buildFragment(type, data, clickable, inList){
 	`
 	<div class="necro-item fragment rounded border text-black-50 mb-1 ${noHover}" ${clickableCode}>
 		
-		<div class="d-flex p-2">
+		<div class="d-flex pt-2 pb-2 pl-2 pr-0">
 			<object data='${imgSrc}' type="image/png" class="tile-64 mr-2">
 				<img src='${defaultSrc}' class="tile-64">
 			</object>
 			<div class="mt-2">
 				<h5 class="necro-item-header text-dark">${data.name}</h5>
-				<div class="border border-right-0 border-bottom-0 p-2 bg-white text-black-50 flex-fill nmt-1">
+				
+				<div class="border border-right-0 border-bottom-0 p-2 mr-2 bg-white text-black-50 flex-fill nmt-1">
 					<p class="small font-italic my-auto">${data.description}</p>
 				</div>
 			</div>

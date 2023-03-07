@@ -63,12 +63,17 @@ function viewDoll(id){
 				${deployment}
 			</div>
 		</div>
-		<h5 class="necro-bar">Memory Fragments</h5>
-		<div class="pr-3 pl-3 pt-1">
+		<!--Fragment List-->
+		<div class="d-flex">
+			<h5 class="necro-bar flex-fill">Memory Fragments</h5>
+			<i role="button" data-toggle="modal" data-target="#memory-picker" onclick="pickMemory('-1')"
+			class="fas fa-plus-square char-sheet-plus" ></i>
+		</div>
+		<div id="cs-fragment-list" class="pr-0 pl-3 pt-1">
 			${fragmentList}
 		</div>
 		<h5 class="necro-bar">Fetters</h5>
-		<div id="fetter-list" class="pl-3 pr-3 pt-1">
+		<div id="fetter-list" class="pl-3 pr-0 pt-1">
 			${fetterList}
 		</div>
 		<button class="btn btn-dark ml-3 mb-2" onclick="addFetter()">Add Fetter</button>
@@ -111,7 +116,17 @@ function buildMemoryFragmentList(doll){
 	for(let i = 0; i < doll.fragments.length; i++){
 		let fragment = getById(doll.fragments[i], memoryFragments);
 		if(fragment != null){
-			content += buildMemoryFragmentListItem("MemoryFragment", fragment);
+			let item = buildMemoryFragmentListItem("MemoryFragment", fragment);
+			let trash = `<div class="char-sheet-spacer"></div>`;
+			if(i >= 2){
+				//TODO: hook up removal code
+				trash = `<i role="button" class="fas fa-trash-alt char-sheet-trash" onclick="removeMemory(${i})"></i>`;
+			}
+			content += 
+			`<div class="d-flex">
+				${item}
+				${trash}
+			</div>`;
 		}
 	}
 	return content;
@@ -120,6 +135,9 @@ function buildMemoryFragmentListItem(type, fragment){
 
 	return buildFragment(type, fragment, false, true);
 }
+
+
+
 function buildSkillList(doll){
 	let content = "";
 	for(let i = 0; i < doll.skills.length; i++){
@@ -444,6 +462,13 @@ function updateKarma(index){
 	characterWIP.karma[index].description = description;
 	saveDoll(characterWIP);
 }
+
+function removeMemory(slotNumber){
+	characterWIP.fragments.splice(slotNumber, 1);
+	saveDoll(characterWIP);
+	$('#cs-fragment-list').html(buildMemoryFragmentList(characterWIP));
+}
+
 function buildDollFetterList(){
 	let content = "";
 	for(let i = 0; i < characterWIP.fetters.length; i++){
