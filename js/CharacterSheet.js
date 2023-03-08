@@ -6,6 +6,7 @@ const madnessTrue = `<i class="fas fa-heartbeat text-danger"></i>`;
 const madnessFalse = `<i class="fas fa-heart"></i>`;
 
 let fetterIndex = -1;
+let skillMenuPopulated = false;
 
 function viewDoll(id){
 	let data = loadData();
@@ -72,12 +73,17 @@ function viewDoll(id){
 		<div id="cs-fragment-list" class="pr-0 pl-3 pt-1">
 			${fragmentList}
 		</div>
+		<!--Fetters-->
 		<h5 class="necro-bar">Fetters</h5>
 		<div id="fetter-list" class="pl-3 pr-0 pt-1">
 			${fetterList}
 		</div>
 		<button class="btn btn-dark ml-3 mb-2" onclick="addFetter()">Add Fetter</button>
-		<h5 class="necro-bar">Skills</h5>
+		<div class="d-flex">
+			<h5 class="necro-bar flex-fill">Skills</h5>
+			<i role="button" data-toggle="modal" data-target="#skill-picker" onclick="populateSkillMenu()" class="fas fa-plus-square char-sheet-plus" ></i>
+		</div>
+		
 		<div class="row pl-3 pr-3 text-white mb-1">
 			<div class="col-lg font-weight-bold border rounded bg-black">
 				<p>Position: ${dollPosition.name}</p>
@@ -89,7 +95,7 @@ function viewDoll(id){
 				<p>Secondary Class: ${dollClass2.name}</p>
 			</div>
 		</div>
-		<div class="pl-3 pr-3">
+		<div id="cs-skill-list" class="pl-3 pr-0">
 			${skillList}
 		</div>
 		<h5 class="necro-bar">Parts</h5>
@@ -119,7 +125,6 @@ function buildMemoryFragmentList(doll){
 			let item = buildMemoryFragmentListItem("MemoryFragment", fragment);
 			let trash = `<div class="char-sheet-spacer"></div>`;
 			if(i >= 2){
-				//TODO: hook up removal code
 				trash = `<i role="button" class="fas fa-trash-alt char-sheet-trash" onclick="removeMemory(${i})"></i>`;
 			}
 			content += 
@@ -141,7 +146,18 @@ function buildMemoryFragmentListItem(type, fragment){
 function buildSkillList(doll){
 	let content = "";
 	for(let i = 0; i < doll.skills.length; i++){
-		content += buildListItem(doll.skills[i], "Skill");
+		
+		let item = buildListItem(doll.skills[i], "Skill");
+		let trash = `<div class="char-sheet-spacer"></div>`;
+		if(i >= 4){
+			trash = `<i role="button" class="fas fa-trash-alt char-sheet-trash" onclick="removeSkill(${i})"></i>`;
+		}
+		content += 
+		`<div class="d-flex">
+			${item}
+			${trash}
+		</div>`;
+		
 	}
 	return content;
 }
@@ -315,7 +331,7 @@ function buildListItem(item, type, active){
 	
 	let content = 
 	`
-	<div class="rounded border p-2 mb-1 text-dark necro-item">
+	<div class="rounded border p-2 mb-1 text-dark necro-item flex-fill">
 		<div class="row">
 			<div class="col-lg">
 				<div class="d-flex">
@@ -739,3 +755,115 @@ function setRandomFetterType(){
 	//set random option
 	$("#fetter-type").val(randOption).trigger("change");
 }
+
+function populateSkillMenu(){
+	if(!skillMenuPopulated){
+		buildSkillMenu();
+		skillMenuPopulated = true;
+	}
+	updateSkillMenu();//always update
+}
+
+function buildSkillMenu(){
+	let content = "";
+	
+	for(let i = 0; i < dollPositions.length; i++){
+		content += buildSkillSection(dollPositions[i]);
+	}
+	for(let i = 0; i < dollClasses.length; i++){
+		content += buildSkillSection(dollClasses[i]);
+	}
+		
+	$('#skill-menu-content').html(content);
+	$('#skill-menu-content .collapse').on('show.bs.collapse', function(e) {
+	  var $card = $(this).closest('.card');
+	  var $open = $($(this).data('parent')).find('.collapse.show');
+	  
+	  var additionalOffset = 0;
+	  if($card.prevAll().filter($open.closest('.card')).length !== 0)
+	  {
+			additionalOffset = $open.height();
+	  }
+	  $('#skill-picker').animate({
+		  //TODO: finesse this for better positioning
+		scrollTop: $card.position().top - additionalOffset
+	  }, 500);
+	});
+}
+
+function buildSkillSection(dollClass){
+	
+	let collapseName = "collapse" + dollClass.name;
+	let imgSrc = "Content/Classes/" + dollClass.flavorImage;
+	let classSkills = populateClassSkills(dollClass.id, "buySkill");
+	
+	let content = 
+	`
+	<div class="card">
+	  <div class="card-header p-0">
+		<a id="header${dollClass.name}" class="btn btn-light col-12 text-left class-preview" 
+			data-toggle="collapse" href="#${collapseName}">
+		  <h4>${dollClass.name}</h4>
+		</a>
+	  </div>
+		<div id=${collapseName} class="collapse" data-parent="#skill-menu-content">
+			<div class="card-body">
+				<div class="">
+					${classSkills}
+				</div>
+			</div>
+	  </div>
+	</div>
+	`;
+	return content;
+}
+
+function buySkill(classId, skillId){
+	
+	//get skill
+	let skill = getById(skillId, dollSkills);
+	//append to the appropriate list
+	characterWIP.skills.push(skill);
+	saveDoll(characterWIP);
+	//update character sheet section
+	$('#cs-skill-list').html(buildSkillList(characterWIP));
+	$("#skill-picker").modal('hide');
+}
+
+function removeSkill(index){
+	characterWIP.skills.splice(index, 1);
+	saveDoll(characterWIP);
+	$('#cs-skill-list').html(buildSkillList(characterWIP));
+}
+
+function updateSkillMenu(){
+	
+	let class1 = characterWIP.skills[1].classId;
+	let class2 = characterWIP.skills[3].classId;
+	
+	for(let i = 0; i < dollSkills.length; i++){
+		let skill = dollSkills[i];
+		//disable all non-eligable special skills
+		//disable all non-buyable skills
+		if((skill.special && !(class1 == skill.classId && class1 == class2))
+			|| skill.restricted && class1 != skill.classId && class2 != skill.classId){
+			$('#skill-' + skill.id).addClass('disabled');
+			$('#skill-' + skill.id).removeClass('active');
+		}
+		//otherwise, enable skill
+		else{
+			$('#skill-' + skill.id).addClass('active');
+			$('#skill-' + skill.id).removeClass('disabled');
+		}
+		
+	}
+	
+	//disable all bought skills
+	for(let i = 0; i < characterWIP.skills.length; i++){
+		let skill = characterWIP.skills[i];
+		$('#skill-' + skill.id).addClass('disabled');
+		$('#skill-' + skill.id).removeClass('active');
+	}
+}
+
+

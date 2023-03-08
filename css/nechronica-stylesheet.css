@@ -338,6 +338,8 @@
 	padding: 0px;
 }
 .char-sheet-spacer{
+	min-width: 26px;
+	max-width: 26px;
 	width: 26px;
 	margin-left: 2px;
 }

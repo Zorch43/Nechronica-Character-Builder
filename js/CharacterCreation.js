@@ -665,7 +665,7 @@ function populateClassSelector(displayId, classList){
 	  var additionalOffset = 0;
 	  if($card.prevAll().filter($open.closest('.card')).length !== 0)
 	  {
-			additionalOffset =  $open.height();
+			additionalOffset = $open.height();
 	  }
 	  $('html,body').animate({
 		scrollTop: $card.offset().top - additionalOffset
@@ -681,7 +681,6 @@ function buildClass(dollClass, displayId){
 	}
 	let imgSrc = "Content/Classes/" + dollClass.flavorImage;
 	let rPointContent = "";
-	let isPosition = true;
 	if(dollClass.rpa > 0 || dollClass.rpm > 0 || dollClass.rpe > 0){
 		isPosition = false;
 		rPointContent = `
@@ -703,7 +702,7 @@ function buildClass(dollClass, displayId){
 		</table>
 		`;
 	}
-	let classSkills = populateClassSkills(dollClass.id, isPosition);
+	let classSkills = populateClassSkills(dollClass.id, "setSkill");
 	let content = 
 	`
 	<div class="card">
@@ -733,20 +732,20 @@ function buildClass(dollClass, displayId){
 	return content;
 }
 
-function populateClassSkills(classId, isPosition){
+function populateClassSkills(classId, callback){
 	
 	let content = "";
 	for(let i = 0; i < dollSkills.length; i++){
 		let skill = dollSkills[i];
 		
 		if(skill.classId == classId){
-			content += buildSkill(skill, isPosition);
+			content += buildSkill(skill, callback);
 		}
 	}
 	return content;
 }
 
-function buildSkill(skill, isPosition){
+function buildSkill(skill, callback){
 	let imgSrc = "Content/Skills/" + skill.flavorImage;
 	
 	let skillClass = getById(skill.classId, dollClasses);
@@ -768,7 +767,7 @@ function buildSkill(skill, isPosition){
 	
 	content =
 	`
-	<div id="skill-${skill.id}" class="rounded border p-2 mb-1 text-black-50 necro-item" role="button" onclick="setSkill(${skill.classId},${skill.id},${isPosition})">
+	<div id="skill-${skill.id}" class="rounded border p-2 mb-1 text-black-50 necro-item" role="button" onclick="${callback}(${skill.classId},${skill.id})">
 		<div class="d-flex">
 			<object data='${imgSrc}' type="image/png" class="tile-64 mr-2">
 				<img src='${defaultSrc}' class="tile-64">
@@ -789,8 +788,9 @@ function buildSkill(skill, isPosition){
 	return content;
 }
 
-function setSkill(classId, skillId, isPosition){
+function setSkill(classId, skillId){
 	dismissPopovers();
+	let isPosition = getById(classId, dollPositions) != null;
 	if(isPosition){
 		setPositionSkill(classId, skillId);
 	}
@@ -1066,7 +1066,7 @@ function createSummaryPart(part){
 }
 
 function dismissPopovers(){
-	$('[data-toggle="popover"]').popover('hide');
+	$('.modal').modal('hide');
 }
 
 function resetClass(){
