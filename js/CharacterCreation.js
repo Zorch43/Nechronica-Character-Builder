@@ -1194,7 +1194,7 @@ function calculateTieredRPoints(){
 	let bonusEnh = false;
 	//find bonus points
 	for(let i = 0; i < characterWIP.skills.length; i++){
-		let skill = getById(characterWIP.skills[i], dollSkills);
+		let skill = getById(characterWIP.skills[i].id, dollSkills);
 		if(skill != null){
 			if(skill.extremeMutation){
 				bonusMut = true;

@@ -153,15 +153,15 @@ const dollMemoriesJSON =
 	},
 	{
 		"id": 25,
-		"name": "Funeral Service",
-		"description": "Who was it that died? Everybody is crying, mourning, inconsolable. What about you? The face in the memorial photograph that used to loom large in your memory has faded, but it was certainly a funeral for someone important to you.",
-		"flavorImage": "FuneralService.png"
-	},
-	{
-		"id": 26,
 		"name": "Party",
 		"description": "All your friends and family gathered for a wonderfully fun party. You're certain that was one of your happiest times. Recalling that happiness now only torments you.",
 		"flavorImage": "Party.png"
+	},
+	{
+		"id": 26,
+		"name": "New Life",
+		"description": "You're certain that a new life once dwelled within you. A life that shouldn't have been, though it filled you with maternal emotions. But weren't you just a girl? Could it be that your brain simply remembers viewing such a thing from the outside?",
+		"flavorImage": "NewLife.png"
 	},
 	{
 		"id": 27,
